@@ -33,7 +33,9 @@ export default class Header extends Component {
 	};
 
 	goHome = this.linkTo('/');
+	goToProduct = this.linkTo('/product');
 	goToMyProfile = this.linkTo('/profile');
+	goToRegister = this.linkTo('/register');
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -74,9 +76,17 @@ export default class Header extends Component {
 								<List.ItemIcon>home</List.ItemIcon>
 								Home
 							</List.LinkItem>
+							<List.LinkItem onClick={this.goToProduct}>
+								<List.ItemIcon>list</List.ItemIcon>
+								Product
+							</List.LinkItem>
 							<List.LinkItem onClick={this.goToMyProfile}>
 								<List.ItemIcon>account_circle</List.ItemIcon>
 								Profile
+							</List.LinkItem>
+							<List.LinkItem onClick={this.goToRegister}>
+								<List.ItemIcon>edit</List.ItemIcon>
+								Register
 							</List.LinkItem>
 						</List>
 					</Drawer.TemporaryDrawerContent>

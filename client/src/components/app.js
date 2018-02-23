@@ -5,6 +5,8 @@ import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import Login from '../routes/login';
+import Register from '../routes/register';
+import Product from '../routes/product';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -23,6 +25,8 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<Product path="/product"/>
+					<Register path="/register"/>
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 					<Login path="/login" />
