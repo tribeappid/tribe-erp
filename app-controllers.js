@@ -1,0 +1,1 @@
+entityController = require('./core/entity');

@@ -5,7 +5,16 @@ module.exports = {
         , password : 'G8XazTSgZrk82RtC'
         , host : 'localhost'
         , port : 27017
+    },
+    application: {
+        enterprise: 'TribeApp'
     }
+    , tz : {
+        defaultAnalyticsTz : 'Asia/Singapore'
+        , defaultTz : 'Asia/Singapore'
+        , defaultCountry : 'Singapore'
+        , defaultOffset : 'Singapore'
+    }    
     , authorization : {
         100 : '/'
         , 300 : '/'

@@ -1,11 +1,18 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var config = require('./config');
+express = require('express');
+__root = __dirname;
+_ = require('underscore');
+path = require('path');
+favicon = require('serve-favicon');
+logger = require('morgan');
+mongoose = require('mongoose');
+cookieParser = require('cookie-parser');
+bodyParser = require('body-parser');
+moment = require('moment-timezone');
+config = require('./config');
+qs = require('qs');
+bcrypt = require('bcrypt');
+cryptoJs = require("crypto-js");
+async = require('async');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -13,23 +20,30 @@ var finances = require('./routes/finance');
 var account = require('./routes/account');
 var app = express();
 
-mongoose.connect('mongodb://' + 
-    config.mongo.dbUser + ":" + 
-    config.mongo.password + "@" + 
-    config.mongo.host + ":" +
-    config.mongo.port + "/" +
-    config.mongo.db + 
-    "?authSource=" + config.mongo.db);
+appModels = require('./app-models');
+appHelpers = require('./app-helpers')
+appControllers = require('./app-controllers');
 
-var db = mongoose.connection;
-//mongoose.Promise = global.Promise;    
-
-// Set Log Level
-//console.log(server_config.LOG_LEVEL);
+__PUBLIC_AUTH = 0; // public user
+__GUEST_AUTH = 100; // guest user
+__USER_AUTH = 300; // uweser with subscribed services
+__SALES_AUTH = 400; // management control over a pool of selected users
+__INVENTORY_AUTH = 410; // management control over a pool of selected users
+__FINANCE_AUTH = 420; // management control over a pool of selected users
+__MANAGER_AUTH = 430; // management control over a pool of selected users
+__ENTERPRISE_ADMIN_AUTH = 440; // enterprise management control over all users belonging to enterprise
+__ENTERPRISE_SYS_ADMIN_AUTH = 450; // enterprise system management with higher CRUD control over all users belonging to enterprise
+__ADMIN_AUTH = 490; // AST admin with all CRUD control over all users in the system
+__SYS_ADMIN_AUTH = 500; // AST system management with highest of all CRUD control over all users in the system
 
 console.log('Connecting to ' + config.mongo.host + ":" + 
             config.mongo.port + "/" + 
             config.mongo.db);
+
+mainConn = mongoHelper.formatConnString(config.mongo);
+mongodb = mongoose.connect(mainConn);
+
+db = mongoose.connection;
 
 db.on('connected', function () {  
   console.log('Mongoose connected to ' + config.mongo.host);

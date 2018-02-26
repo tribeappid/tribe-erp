@@ -42,6 +42,10 @@ entitySchema = new Schema({
     , height : {type : String, default : null}
     , referred_by : { type: String, ref: 'entity'}
     , create_date : {type : Date, default : null}
+    , medias : {
+        type: Schema.Types.ObjectId
+        , ref : 'media'
+    }
 });
 
 mongoose.model('entity', entitySchema, 'entity');
