@@ -4,7 +4,25 @@ import 'preact-material-components/style.css';
 import './style';
 
 export default class Login extends Component {
-	render(){
+	state={
+		user:{
+			email: '',
+			password: ''
+		}
+	};
+
+	handleInput(term){
+		const target = term.__preactattr_.name;
+		const newUser = this.state.user;
+		this.setState({
+			user:{
+				...newUser,
+				[target]: term.value
+			}
+		});
+	}
+
+	render({},{user}){
 		return (
 			<div>
 				<LayoutGrid align="center">
@@ -18,11 +36,11 @@ export default class Login extends Component {
 									</Card.Primary>
 									<Card.Media className="mdc-typography--title">
 										<div>
-											<TextField type="text" label="Email" />
+											<TextField type="text" label="Email" name="email" value={user.email} onChange={ event => this.handleInput(event.target)} />
 										</div>
 										<br />
 										<div>
-											<TextField type="password" label="Password" />
+											<TextField type="password" label="Password" name="password" value={user.password} onChange={ event => this.handleInput(event.target)} />
 										</div>
 										<br />
 										<div className="mdc-layout-grid">

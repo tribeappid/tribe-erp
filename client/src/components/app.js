@@ -7,6 +7,7 @@ import Profile from '../routes/profile';
 import Login from '../routes/login';
 import Register from '../routes/register';
 import Product from '../routes/product';
+import Invoice from '../routes/invoice';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -25,6 +26,7 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<Invoice path="/invoice"/>
 					<Product path="/product"/>
 					<Register path="/register"/>
 					<Profile path="/profile/" user="me" />
