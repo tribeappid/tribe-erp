@@ -36,6 +36,11 @@ exports.countRes = function(req, res, err, count, callback){
 
 exports.apiRes = function(req, res, totalRows, rowsReturned, data, errorDesc, errorCode, callback){
     var error = false;
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+    res.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Max-Age", "1728000");    
     if (!totalRows) totalRows = rowsReturned;
     if (errorDesc) error = true;
     if (callback){
