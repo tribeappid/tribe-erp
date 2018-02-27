@@ -1,0 +1,29 @@
+.title{
+    border: 0px solid white;
+    box-shadow: 0px 0px 0px 0px !important;
+}
+
+.zero{
+    padding: 0px;
+}
+
+.tombol{
+    text-align: right;
+}
+
+.sub_detail{
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+.merah{
+    height: 200px;
+    width: 100%;
+    background: red;
+}
+
+.hitam{
+    height: 200px;
+    width: 100%;
+    background: black;
+}

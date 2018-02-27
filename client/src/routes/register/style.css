@@ -1,0 +1,20 @@
+.wrapper{
+    margin: 0px;
+    padding: 0px;
+}
+
+.title{
+    font-size: 20px;
+}
+
+.has_error{
+    visibility: visible;
+    position: relative;
+    opacity: 1;
+    color: red;
+}
+
+.has_valid{
+    visibility: hidden;
+    height: 0px;
+}

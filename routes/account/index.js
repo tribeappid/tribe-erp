@@ -151,6 +151,7 @@ router.post('/login', function(req, res, callback){
                     }
                 });
                 */
+                console.log(res);
                apiHelper.apiRes(req, res, null, null, [authenticatedEntity], null, null, null);
             }else{
                 // update the user's authentication attempts

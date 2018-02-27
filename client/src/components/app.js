@@ -1,5 +1,9 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import { Provider } from 'preact-redux';
+import { createStore, applyMiddleware } from 'redux';
+import promise from 'redux-promise';
+import reducers from '../reducers';
 
 import Header from './header';
 import Home from '../routes/home';
@@ -21,7 +25,10 @@ export default class App extends Component {
 	};
 
 	render() {
+		const createStoreWithMiddleWare = applyMiddleware(promise)(createStore);
+
 		return (
+			<Provider store={createStoreWithMiddleWare(reducers)}>
 			<div id="app">
 				<Header />
 				<Router onChange={this.handleRoute}>
@@ -34,6 +41,7 @@ export default class App extends Component {
 					<Login path="/login" />
 				</Router>
 			</div>
+			</Provider>
 		);
 	}
 }
