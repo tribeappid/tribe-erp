@@ -38,7 +38,7 @@ export default class App extends Component {
 					<Register path="/register"/>
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
-					<Login path="/login" />
+					<Login path="/loginnn" />
 				</Router>
 			</div>
 			</Provider>

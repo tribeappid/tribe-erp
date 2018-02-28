@@ -18,3 +18,7 @@
     visibility: hidden;
     height: 0px;
 }
+
+.register_input{
+    width: 100%;
+}

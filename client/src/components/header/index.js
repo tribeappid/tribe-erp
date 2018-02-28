@@ -37,6 +37,7 @@ export default class Header extends Component {
 	goToMyProfile = this.linkTo('/profile');
 	goToRegister = this.linkTo('/register');
 	goToInvoice = this.linkTo('/invoice');
+	goToLogin = this.linkTo('/loginnn');
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -92,6 +93,10 @@ export default class Header extends Component {
 							<List.LinkItem onClick={this.goToInvoice}>
 								<List.ItemIcon>edit</List.ItemIcon>
 								Invoice
+							</List.LinkItem>
+							<List.LinkItem onClick={this.goToLogin}>
+								<List.ItemIcon>edit</List.ItemIcon>
+								Login
 							</List.LinkItem>
 						</List>
 					</Drawer.TemporaryDrawerContent>

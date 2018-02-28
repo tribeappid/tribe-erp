@@ -2,12 +2,14 @@ import { h, Component } from 'preact';
 import { LayoutGrid, TextField, Card, Button, Elevation } from 'preact-material-components';
 import 'preact-material-components/style.css';
 import './style';
+import { login } from '../../actions';
+import { connect } from 'preact-redux';
 
-export default class Login extends Component {
+class Login extends Component {
 	state={
 		user:{
-			email: '',
-			password: ''
+			AuthenticationString: "",
+			Password: ""
 		}
 	};
 
@@ -22,7 +24,12 @@ export default class Login extends Component {
 		});
 	}
 
-	render({},{user}){
+	handleSubmit(event){
+		event.preventDefault();
+		this.props.login(this.state.user);
+	}
+
+	render({ finance },{ user }){
 		return (
 			<div>
 				<LayoutGrid align="center">
@@ -35,19 +42,15 @@ export default class Login extends Component {
 										<Card.Title className="mdc-typography--headline mdc-theme--text-primary-on-secondary">Login</Card.Title>
 									</Card.Primary>
 									<Card.Media className="mdc-typography--title">
-										<div>
-											<TextField type="text" label="Email" name="email" value={user.email} onChange={ event => this.handleInput(event.target)} />
-										</div>
-										<br />
-										<div>
-											<TextField type="password" label="Password" name="password" value={user.password} onChange={ event => this.handleInput(event.target)} />
-										</div>
-										<br />
+										<form onSubmit={this.handleSubmit.bind(this)}>
+											<TextField type="text" label="Email" name="AuthenticationString" value={user.AuthenticationString} onChange={ event => this.handleInput(event.target)} />
+											<TextField type="password" label="Password" name="Password" value={user.Password} onChange={ event => this.handleInput(event.target)} />
 										<div className="mdc-layout-grid">
-											<Button ripple raised className="mdc-theme--secondary-bg">
+											<Button type="submit" ripple raised className="mdc-theme--secondary-bg">
 												Sign In
 											</Button>
 										</div>
+										</form>
 									</Card.Media>
 								</Card>
 							</Elevation>
@@ -59,3 +62,9 @@ export default class Login extends Component {
 		);
 	}
 }
+
+function mapStateToProps(finance){
+	return { finance };
+}
+
+export default connect( mapStateToProps, { login })(Login);

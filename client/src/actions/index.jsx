@@ -8,7 +8,6 @@ const ROOT_URL = 'http://localhost:3000/';
 
 export function getFinances(){
     const req = axios.get(`${ROOT_URL}finances`);
-    console.log(req);
 
     return{
         type: FINANCE,
@@ -17,8 +16,7 @@ export function getFinances(){
 }
 
 export function login(user){
-    const req = axios.post(`${ROOT_URL}accounts/login`,user);
-    console.log(req);
+    const req = axios.post(`${ROOT_URL}accounts/login`, user);
 
     return{
         type: LOGIN,
@@ -26,22 +24,9 @@ export function login(user){
     }
 }
 
-export function logintemp(data){
-    fetch(`${ROOT_URL}login`, {
-        method: "POST",
-        body:  JSON.stringify(data)
-     })
-     .then(function(response){ 
-      return response.json();   
-     })
-     .then(function(data){ 
-     console.log(data)
-     });
-}
 
 export function register(user){
     const req = axios.post(`${ROOT_URL}accounts/register`,user);
-    console.log(req);
 
     return{
         type: REGIS,
