@@ -12,18 +12,94 @@
 }
 
 .sub_detail{
+    padding: 0px;
     border: 1px solid gray;
     border-radius: 3px;
 }
 
-.merah{
-    height: 200px;
-    width: 100%;
-    background: red;
+.invoice_add_btn{
+    padding: 10px;
 }
 
-.hitam{
-    height: 200px;
+.tombol button{
+    background: #109fb4;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.tombol button:hover{
+    background: #0d8fa2;
+    cursor: pointer;
+}
+
+.top_sec{
+    padding: 0px 0px 15px 0px;
+}
+
+.top_title{
+    font-size: 28px;
+    line-height: 45px;
+}
+
+.sd_word_grey{
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+}
+
+.distance{
+    margin-top: 10px;
+}
+
+.distance_farther{
+    margin-top: 18px;
+}
+
+.sd_word_detail{
+    font-size: 25px;
+}
+
+.sd_word_time{
+    font-size: 14px;
+}
+
+.sd_word_link{
+    text-decoration: none;
+    color: #31afc1;
+    font-size: 14px;
+}
+
+.sd_word_link:hover{
+    text-decoration: underline;
+}
+
+.input_th_sec{
+    font-size: 13px;
     width: 100%;
-    background: black;
+    border-radius: 5px;
+}
+
+.input_date{
+    width: 50%;
+}
+
+.border_left{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.border_right{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.group_of_input{
+    padding: 24px 0px;
+}
+
+.group_of_input input{
+    padding: 12px;
+    border: 1px solid gray;
 }

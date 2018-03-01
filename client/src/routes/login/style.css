@@ -1,3 +1,10 @@
-.mdc-typography--headline {
-	color: #fff;
-};
+.has_error{
+    font-size: 15px;
+    color: red;
+    margin-bottom: 15px;
+}
+
+.has_valid{
+    visibility: hidden;
+    height: 0px;
+}

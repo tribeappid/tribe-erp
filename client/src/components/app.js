@@ -33,12 +33,12 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<Invoice path="/invoice"/>
+					<Invoice path="/invoice"/>					
 					<Product path="/product"/>
 					<Register path="/register"/>
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
-					<Login path="/loginnn" />
+					<Login path="/login" />
 				</Router>
 			</div>
 			</Provider>

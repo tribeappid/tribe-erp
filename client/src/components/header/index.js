@@ -37,7 +37,7 @@ export default class Header extends Component {
 	goToMyProfile = this.linkTo('/profile');
 	goToRegister = this.linkTo('/register');
 	goToInvoice = this.linkTo('/invoice');
-	goToLogin = this.linkTo('/loginnn');
+	goToLogin = this.linkTo('/login');
 
 	toggleDarkTheme = () => {
 		this.setState(

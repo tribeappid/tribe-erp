@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { LayoutGrid, TextField, Card, Button, Elevation } from 'preact-material-components';
 import 'preact-material-components/style.css';
-import './style';
+import style from './style.css';
 import { login } from '../../actions';
 import { connect } from 'preact-redux';
 
@@ -10,7 +10,8 @@ class Login extends Component {
 		user:{
 			AuthenticationString: "",
 			Password: ""
-		}
+		},
+		submitted: false
 	};
 
 	handleInput(term){
@@ -24,12 +25,24 @@ class Login extends Component {
 		});
 	}
 
-	handleSubmit(event){
-		event.preventDefault();
-		this.props.login(this.state.user);
+	validateEmail(email){
+		return(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
 	}
 
-	render({ finance },{ user }){
+	validatePassword(password){
+		return(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password));
+		//at least contain 1 upper 1 lower and 1 number and 6 character or more
+	}
+
+	handleSubmit(event){
+		event.preventDefault();
+		this.setState({submitted: true});
+		if(this.state.user.AuthenticationString && this.state.user.Password){
+			this.props.login(this.state.user);
+		}
+	}
+
+	render({ finance },{ user, submitted }){
 		return (
 			<div>
 				<LayoutGrid align="center">
@@ -44,12 +57,18 @@ class Login extends Component {
 									<Card.Media className="mdc-typography--title">
 										<form onSubmit={this.handleSubmit.bind(this)}>
 											<TextField type="text" label="Email" name="AuthenticationString" value={user.AuthenticationString} onChange={ event => this.handleInput(event.target)} />
+											<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : ( this.validateEmail(user.AuthenticationString) ? style.has_valid : style.has_error ) }>
+												{ submitted && !user.AuthenticationString ? 'You must fill this field' : ( submitted && !this.validateEmail(user.AuthenticationString) ? 'You have input an invalid Email' : '' ) }
+											</div>
 											<TextField type="password" label="Password" name="Password" value={user.Password} onChange={ event => this.handleInput(event.target)} />
-										<div className="mdc-layout-grid">
-											<Button type="submit" ripple raised className="mdc-theme--secondary-bg">
-												Sign In
-											</Button>
-										</div>
+											<div align='left' className={ submitted && !user.Password ? style.has_error : ( this.validatePassword(user.Password) ? style.has_valid : style.has_error ) }>
+												{ submitted && !user.Password ? 'You must fill this field' : ( submitted && !this.validatePassword(user.AuthenticationString) ? 'You have input an invalid Password' : '' ) }
+											</div>
+											<div className="mdc-layout-grid">
+												<Button type="submit" ripple raised className="mdc-theme--secondary-bg">
+													Sign In
+												</Button>
+											</div>
 										</form>
 									</Card.Media>
 								</Card>

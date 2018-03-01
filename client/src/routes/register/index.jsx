@@ -40,11 +40,13 @@ class Register extends Component{
 		this.setState({chosenIndex: event.selectedIndex});
 	}
 
-	validate(email){
-		if((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))){
-			return true;
-		}
-		return false;
+	validateEmail(email){
+		return(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+	}
+
+	validatePassword(password){
+		return(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password));
+		//at least contain 1 upper 1 lower and 1 number and 6 character or more
 	}
 
 	handleSubmit(event){
@@ -70,7 +72,9 @@ class Register extends Component{
 									<Card.Media className="mdc-typography--title">
 									<form align='center' onSubmit={this.handleSubmit.bind(this)}>
 										<TextField className={style.register_input} type="text" name="AuthenticationString" label="Email" value={user.AuthenticationString} onChange={ event => this.handleInput(event.target)} />
-										<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : ( this.validate(user.AuthenticationString) ? style.has_valid : style.has_error ) }>{ submitted && !user.AuthenticationString ? 'You must fill this field' : ( submitted && !this.validate(user.AuthenticationString) ? 'You have input an invalid Email' : '' ) }</div>
+										<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : ( this.validateEmail(user.AuthenticationString) ? style.has_valid : style.has_error ) }>
+											{ submitted && !user.AuthenticationString ? 'You must fill this field' : ( submitted && !this.validateEmail(user.AuthenticationString) ? 'You have input an invalid Email' : '' ) }
+										</div>
 										{/*
 										<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : (this.validate(user.AuthenticationString) ? style.has_error : style.has_valid)}>
 											{ submitted && !user.AuthenticationString ? 'You must fill this Field' : (this.validate(user.AuthenticationString ? '' : 'You have input an invalid Email')) }
@@ -78,11 +82,15 @@ class Register extends Component{
 										*/
 										}
 										<TextField className={style.register_input} type="password" name="Password" label="Password" value={user.Password} onChange={ event => this.handleInput(event.target)} />
-										<div align='left' className={ submitted && !user.Password ? style.has_error : style.has_valid}>Error here</div>
+										<div align='left' className={ submitted && !user.Password ? style.has_error : ( this.validatePassword(user.Password) ? style.has_valid : style.has_error ) }>
+											{ submitted && !user.Password ? 'You must fill this field' : ( submitted && !this.validatePassword(user.Password) ? 'You have input an invalid Password' : '' ) }
+										</div>
 										{//<TextField type="password" name="confirmPass" label="Confirm Password" value={user.confirmPass} onChange={ event => this.handleInput(event.target)} />
 										}
 										<TextField className={style.register_input} type="text" name="Name" label="Name" value={user.Name} onChange={ event => this.handleInput(event.target)} />
-										<div align='left' className={ submitted && !user.Name ? style.has_error : style.has_valid}>{this.validate(user.AuthenticationString)}</div>
+										<div align='left' className={ submitted && !user.Name ? style.has_error : ( this.validatePassword(user.Name) ? style.has_valid : style.has_error ) }>
+											{ submitted && !user.Name ? 'You must fill this field' : '' }
+										</div>
                                         {
 										/*
 										<Select name="role" label="Role" hintText="Select a Role" selectedIndex={this.state.chosenIndex} onChange={e => this.handleOptions(e)}>

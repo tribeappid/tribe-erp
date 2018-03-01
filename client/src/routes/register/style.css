@@ -8,14 +8,12 @@
 }
 
 .has_error{
-    visibility: visible;
-    position: relative;
-    opacity: 1;
+    font-size: 15px;
     color: red;
+    margin-bottom: 15px;
 }
 
 .has_valid{
-    visibility: hidden;
     height: 0px;
 }
 
