@@ -12,6 +12,7 @@ import Login from '../routes/login';
 import Register from '../routes/register';
 import Product from '../routes/product';
 import Invoice from '../routes/invoice';
+import AddInvoice from '../routes/invoice_add';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -33,7 +34,8 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<Invoice path="/invoice"/>					
+					<Invoice path="/invoice"/>
+					<AddInvoice path="/invoice/add"/>		
 					<Product path="/product"/>
 					<Register path="/register"/>
 					<Profile path="/profile/" user="me" />

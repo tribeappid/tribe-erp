@@ -1,24 +1,32 @@
-import { Component, h } from 'preact';
-import { LayoutGrid, Card, TextField, Tabs } from 'preact-material-components';
+import { h, Component } from 'preact';
 import { route } from 'preact-router';
+import { LayoutGrid, Card } from 'preact-material-components';
 import 'preact-material-components/style.css';
-import style from './style.css';
-import Home from '../home';
+import style from './style';
 
-export default class Invoice extends Component{
-    goToAddInvoice(){
-        this.setState({
-            addInvoice:{
-                clicked: true
-            }
-        })
-        
-        if(this.state.addInvoice.clicked){
-            route('/invoice/add');
+export default class AddInvoice extends Component{
+    state={
+        btn: {
+            clicked: false
         }
     }
 
-    render({}, {}){
+    goToHome(){
+        this.setState({clicked: true});
+        if(this.state.clicked){
+            route('/');
+        }
+    }
+
+    showDetail(){
+        this.setState({
+            btn:{
+                clicked: ( this.state.btn.clicked ? false : true )
+            }
+        })
+    }
+
+    render({},{}){
         return(
             <LayoutGrid>
                 <LayoutGrid.Inner>
@@ -29,10 +37,23 @@ export default class Invoice extends Component{
                                 <LayoutGrid className={style.zero}>
                                     <LayoutGrid.Inner>
                                         <LayoutGrid.Cell cols='8'>
-                                            <Card.Title className={style.top_title}>Invoices</Card.Title>
+                                            <Card.Title className={style.top_title}>New Invoices</Card.Title>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell className={style.tombol}>
-                                            <button onClick={this.goToAddInvoice.bind(this)}>Create an Invoice</button>
+                                            <button>Save and Continue</button>
+                                            <button>></button>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                </LayoutGrid>
+                            </Card.Primary>
+                            <Card.Primary className={style.btn_sec}>
+                                <button onClick={this.showDetail.bind(this)} className={style.top_dropdown_btn}>Business Address and Contact Details, Title, Summary, and Logo</button>
+                            </Card.Primary>
+                            <Card.Primary className={ this.state.btn.clicked ? style.btn_detail : style.btn_detail_hidden }>
+                                <LayoutGrid className={style.zero}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell>
+                                            HelloWorld
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
@@ -41,29 +62,7 @@ export default class Invoice extends Component{
                                 <LayoutGrid>
                                     <LayoutGrid.Inner>
                                         <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_grey}>OVERDUE</a></div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_grey}>COMING DUE WITHIN 30 DAYS</a></div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_grey}>AVERAGE TIME TO GET PAID</a></div>
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                    <LayoutGrid.Inner className={style.distance}>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_detail}>Rp0.00</a> <a className={style.sd_word_grey}>IDR</a></div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_detail}>Rp0.00</a> <a className={style.sd_word_grey}>IDR</a></div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div><a className={style.sd_word_detail}>0</a> <a className={style.sd_word_grey}>DAYS</a></div>
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                    <LayoutGrid.Inner className={style.distance_farther}>
-                                        <LayoutGrid.Cell cols='12'>
-                                            <div><a className={style.sd_word_time}>Last updated: 22 minutes ago.</a> <a className={style.sd_word_link} href="#">Refresh</a></div>
+                                           DETAIL HEREEEE
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
@@ -103,6 +102,6 @@ export default class Invoice extends Component{
                     </LayoutGrid.Cell>
                 </LayoutGrid.Inner>
             </LayoutGrid>
-        );
+        )
     }
 }
