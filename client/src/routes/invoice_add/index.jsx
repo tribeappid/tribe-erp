@@ -6,22 +6,26 @@ import style from './style';
 
 export default class AddInvoice extends Component{
     state={
-        btn: {
+        btn_top: {
+            clicked: false
+        },
+        btn_bot: {
             clicked: false
         }
     }
 
-    goToHome(){
-        this.setState({clicked: true});
-        if(this.state.clicked){
-            route('/');
-        }
+    showDetailTop(){
+        this.setState({
+            btn_top:{
+                clicked: ( this.state.btn_top.clicked ? false : true )
+            }
+        })
     }
 
-    showDetail(){
+    showDetailBot(){
         this.setState({
-            btn:{
-                clicked: ( this.state.btn.clicked ? false : true )
+            btn_bot:{
+                clicked: ( this.state.btn_bot.clicked ? false : true )
             }
         })
     }
@@ -32,24 +36,68 @@ export default class AddInvoice extends Component{
                 <LayoutGrid.Inner>
                     <LayoutGrid.Cell cols='1' />
                     <LayoutGrid.Cell cols='10'>
-                        <Card className={style.title}>
-                            <Card.Primary className={style.top_sec}>
+                        <Card className={style.invoice_add_title}>
+                            <Card.Primary className={style.invoice_add_title_content}>
                                 <LayoutGrid className={style.zero}>
                                     <LayoutGrid.Inner>
                                         <LayoutGrid.Cell cols='8'>
-                                            <Card.Title className={style.top_title}>New Invoices</Card.Title>
+                                            <Card.Title className={style.invoice_add_title_content_title}>New Invoices</Card.Title>
                                         </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell className={style.tombol}>
+                                        <LayoutGrid.Cell className={style.invoice_add_title_content_btn}>
                                             <button>Save and Continue</button>
                                             <button>></button>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
                             </Card.Primary>
-                            <Card.Primary className={style.btn_sec}>
-                                <button onClick={this.showDetail.bind(this)} className={style.top_dropdown_btn}>Business Address and Contact Details, Title, Summary, and Logo</button>
+                            <Card.Primary className={style.zero}>
+                                <button onClick={this.showDetailTop.bind(this)} className={style.invoice_add_open_content_detail_btn}>Business Address and Contact Details, Title, Summary, and Logo</button>
                             </Card.Primary>
-                            <Card.Primary className={ this.state.btn.clicked ? style.btn_detail : style.btn_detail_hidden }>
+                            <Card.Primary className={ this.state.btn_top.clicked ? style.invoice_add_open_btn_detail : style.invoice_add_close_btn_detail }>
+                                <LayoutGrid className={style.zero}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell desktopCols='6'>
+                                            <button>Image Button</button>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell desktopCols='6'>
+                                            <div><input type="text"/></div>
+                                            <div><input type="text"/></div>
+                                            <div><a>Text here</a></div>
+                                            <div><a>Text here</a></div>
+                                            <div><a>Text here</a></div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                </LayoutGrid>
+                            </Card.Primary>
+                            <Card.Primary className={style.invoice_add_second_content} >
+                                <LayoutGrid className={style.zero}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='6'>
+                                           <button>Image</button>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell className={style.invoice_add_second_content_input_group} cols='6'>
+                                            <a>Invoice Number </a><input type='text' />
+                                            <br/>
+                                            <a>P.O./S.O. Number </a><input type='text' />
+                                            <br/>
+                                            <a>Invoice Date </a><input type='text' />
+                                            <br/>
+                                            <a>Payment Due </a><input type='text' />
+                                            <br/>
+                                            <div align='right'>
+                                                <div className={style.invoice_add_second_content_hint}>On Receipt</div>
+                                            </div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='12'>
+                                            <div>CONTENT</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                </LayoutGrid>
+                            </Card.Primary>
+                            <Card.Primary className={style.zero}>
+                                <button onClick={this.showDetailBot.bind(this)} className={style.invoice_add_open_content_detail_btn}>Footer</button>
+                            </Card.Primary>
+                            <Card.Primary className={ this.state.btn_bot.clicked ? style.invoice_add_open_btn_detail : style.invoice_add_close_btn_detail }>
                                 <LayoutGrid className={style.zero}>
                                     <LayoutGrid.Inner>
                                         <LayoutGrid.Cell>
@@ -58,46 +106,6 @@ export default class AddInvoice extends Component{
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
                             </Card.Primary>
-                            <Card.Primary className={style.sub_detail} >
-                                <LayoutGrid>
-                                    <LayoutGrid.Inner>
-                                        <LayoutGrid.Cell cols='4'>
-                                           DETAIL HEREEEE
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                </LayoutGrid>
-                            </Card.Primary>
-                            <Card.Primary className={style.zero}>
-                                <LayoutGrid className={style.group_of_input}>
-                                    <LayoutGrid.Inner>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <input className={style.input_th_sec} type="text" />
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='2'>
-                                            <input className={style.input_th_sec} type="text" />
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='4'>
-                                            <div>
-                                                <input className={style.input_date+' '+style.border_right} type="date" />
-                                                <input className={style.input_date+' '+style.border_left} type="date" />
-                                            </div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='2'>
-                                            <input className={style.input_th_sec} type="text" />
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                </LayoutGrid>
-                            </Card.Primary>
-                            {/*
-                            <Card.Primary>
-                                <Tabs>
-                                    <Tabs.Tab onClick={e => {console.log(e)}} active>Tab Pertama</Tabs.Tab>
-                                    <Tabs.Tab onClick={e => {console.log(e)}}>Tab Kedua</Tabs.Tab>
-                                    <Tabs.Tab onClick={e => {console.log(e)}}>Tab Ketiga</Tabs.Tab>
-                                    <Tabs.Tab onClick={e => {console.log(e)}}>Tab Keempat</Tabs.Tab>
-                                </Tabs>
-                            </Card.Primary>*/
-                            }
                         </Card> 
                     </LayoutGrid.Cell>
                 </LayoutGrid.Inner>

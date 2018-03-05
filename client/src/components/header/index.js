@@ -10,6 +10,7 @@ import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
 import 'preact-material-components/List/style.css';
 import 'preact-material-components/Toolbar/style.css';
+import style from './style';
 // import style from './style';
 
 export default class Header extends Component {
@@ -71,7 +72,8 @@ export default class Header extends Component {
 						</Toolbar.Section>
 					</Toolbar.Row>
 				</Toolbar>
-				<Drawer.TemporaryDrawer ref={this.drawerRef}>
+				<Drawer.TemporaryDrawer className={style.contohh} ref={this.drawerRef}>
+					<div className={style.contoh}>Show Detail</div>
 					<Drawer.TemporaryDrawerContent>
 						<List>
 							<List.LinkItem onClick={this.goHome}>

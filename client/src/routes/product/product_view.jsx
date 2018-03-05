@@ -13,7 +13,7 @@ export default class ProductView extends Component{
         return(
             <LayoutGrid.Cell className={style.kotak} desktopCols="3" tabletCols="4" phoneCols="4">
                 <Card>
-                    <Card.Primary className={style.contohh}>
+                    <Card.Primary className={style.zero}>
                         <Card.MediaItem className={style.panjang} src={imgUrl} x="1dot5"/>
                         <Card.Title large className={style.title}>{productName}</Card.Title>
                         <Card.Media className={style.sub}>
