@@ -1,4 +1,28 @@
-.contohh nav{
+.contohhhh nav{
     overflow: visible !important;
 }
 
+.contohh{
+    width: 320px;
+    height: 24px;
+    float: left;
+}
+
+.contohhh{
+    width: 150px;
+    height: 300px;
+    float: left;
+    background: blue;
+}
+
+.contohhh_hidden{
+    opacity: 0;
+    visibility: hidden;
+    height: 0px;
+}
+
+.contoh{
+    width: 600px;
+    height: 24px;
+    overflow: visible;
+}

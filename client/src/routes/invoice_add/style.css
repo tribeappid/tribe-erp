@@ -38,6 +38,10 @@
     height: 100%;
     padding: 10px 20px;
     text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #4c5357;
 }
 
 .invoice_add_open_btn_detail{
@@ -50,6 +54,30 @@
     height: 0px;
     overflow: hidden;
     opacity: 0;
+}
+
+.invoice_add_first_content button{
+    width: 302px;
+    height: 170px;
+    margin: 15px 0px 20px 15px;
+}
+
+.invoice_add_first_content_detail{
+    text-align: right;
+    padding: 10px 10px 0px 0px;
+}
+
+.invoice_add_first_content_input_group input{
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 75%;
+    height: 35px;
+    margin: 5px 0px;
+    padding: 0px 4px;
+}
+
+.invoice_add_first_content_detail_group{
+    padding: 15px 0px 0px 0px;
 }
 
 .invoice_add_second_content{
@@ -82,4 +110,14 @@
     width: 182px;
     margin: 0px;
     font-size: 14px;
+}
+
+.invoice_add_third_content_footer{
+    resize: none;
+    border: none;
+    padding: 7px;
+    height: 89px;
+    line-height: 24px;
+    font-size: 16px;
+    width: 100%;
 }

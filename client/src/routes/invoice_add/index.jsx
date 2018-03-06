@@ -55,16 +55,20 @@ export default class AddInvoice extends Component{
                             </Card.Primary>
                             <Card.Primary className={ this.state.btn_top.clicked ? style.invoice_add_open_btn_detail : style.invoice_add_close_btn_detail }>
                                 <LayoutGrid className={style.zero}>
-                                    <LayoutGrid.Inner>
+                                    <LayoutGrid.Inner className={style.invoice_add_first_content}>
                                         <LayoutGrid.Cell desktopCols='6'>
                                             <button>Image Button</button>
                                         </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell desktopCols='6'>
-                                            <div><input type="text"/></div>
-                                            <div><input type="text"/></div>
-                                            <div><a>Text here</a></div>
-                                            <div><a>Text here</a></div>
-                                            <div><a>Text here</a></div>
+                                        <LayoutGrid.Cell className={style.invoice_add_first_content_detail} desktopCols='6'>
+                                            <div className={style.invoice_add_first_content_input_group}>
+                                                <div><input type="text"/></div>
+                                                <div><input type="text"/></div>
+                                            </div>
+                                            <div className={style.invoice_add_first_content_detail_group}>
+                                                <div>Tribe App</div>
+                                                <div>Indonesia</div>
+                                                <div>Edit Your Business Address and Contact Details</div>
+                                            </div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
@@ -100,8 +104,8 @@ export default class AddInvoice extends Component{
                             <Card.Primary className={ this.state.btn_bot.clicked ? style.invoice_add_open_btn_detail : style.invoice_add_close_btn_detail }>
                                 <LayoutGrid className={style.zero}>
                                     <LayoutGrid.Inner>
-                                        <LayoutGrid.Cell>
-                                            HelloWorld
+                                        <LayoutGrid.Cell cols='12'>
+                                            <textarea className={style.invoice_add_third_content_footer} placeholder='Enter a footer for this invoice (e.g. tax information, thank you note)'></textarea>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>

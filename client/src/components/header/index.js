@@ -72,8 +72,11 @@ export default class Header extends Component {
 						</Toolbar.Section>
 					</Toolbar.Row>
 				</Toolbar>
-				<Drawer.TemporaryDrawer className={style.contohh} ref={this.drawerRef}>
-					<div className={style.contoh}>Show Detail</div>
+				<Drawer.TemporaryDrawer className={style.contohhhh} ref={this.drawerRef}>
+					<div className={style.contoh}>
+						<button className={style.contohh}>Show Detail</button>
+						<div className={style.contohhh_hidden}>Detail Contain</div>
+					</div>
 					<Drawer.TemporaryDrawerContent>
 						<List>
 							<List.LinkItem onClick={this.goHome}>
