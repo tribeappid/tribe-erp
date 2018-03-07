@@ -1,7 +1,9 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
-import { LayoutGrid, Card } from 'preact-material-components';
-import 'preact-material-components/style.css';
+import LayoutGrid from 'preact-material-components/LayoutGrid';
+import Card from 'preact-material-components/Card';
+import 'preact-material-components/Card/style.css';
+import 'preact-material-components/LayoutGrid/style.css';
 import style from './style';
 
 export default class AddInvoice extends Component{

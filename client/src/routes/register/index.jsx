@@ -1,6 +1,14 @@
 import { Component, h } from 'preact';
-import { Select, LayoutGrid, TextField, Card, Button, Elevation } from 'preact-material-components';
-import 'preact-material-components/style.css';
+import LayoutGrid from 'preact-material-components/LayoutGrid';
+import TextField from 'preact-material-components/TextField';
+import Card from 'preact-material-components/Card';
+import Button from 'preact-material-components/Button';
+import Elevation from 'preact-material-components/Elevation';
+import 'preact-material-components/Card/style.css';
+import 'preact-material-components/TextField/style.css';
+import 'preact-material-components/Elevation/style.css';
+import 'preact-material-components/Button/style.css';
+import 'preact-material-components/LayoutGrid/style.css';
 import style from './style';
 import { connect } from 'preact-redux';
 import { register } from '../../actions';

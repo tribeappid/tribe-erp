@@ -1,6 +1,8 @@
 import { Component, h } from 'preact';
-import { LayoutGrid, Elevation } from 'preact-material-components';
-import 'preact-material-components/style.css';
+import LayoutGrid from 'preact-material-components/LayoutGrid';
+import Elevation from 'preact-material-components/Elevation';
+import 'preact-material-components/LayoutGrid/style.css';
+import 'preact-material-components/Elevation/style.css';
 import style from './style';
 import ProductView from './product_view.jsx';
 

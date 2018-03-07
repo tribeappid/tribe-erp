@@ -16,12 +16,15 @@ import style from './style';
 export default class Header extends Component {
 	closeDrawer() {
 		this.drawer.MDComponent.open = false;
-		this.state = {
-			darkThemeEnabled: false
-		};
 	}
 
-	openDrawer = () => (this.drawer.MDComponent.open = true);
+	openDetail(){
+		this.setState({
+			btn_open: ( this.state.btn_open ? false : true )
+		});
+	}
+
+	openDrawer = () => this.drawer.MDComponent.open = true;
 
 	openSettings = () => this.dialog.MDComponent.show();
 
@@ -56,7 +59,7 @@ export default class Header extends Component {
 		);
 	}
 
-	render() {
+	render({}, {}) {
 		return (
 			<div>
 				<Toolbar className="toolbar">
@@ -74,8 +77,10 @@ export default class Header extends Component {
 				</Toolbar>
 				<Drawer.TemporaryDrawer className={style.contohhhh} ref={this.drawerRef}>
 					<div className={style.contoh}>
-						<button className={style.contohh}>Show Detail</button>
-						<div className={style.contohhh_hidden}>Detail Contain</div>
+						<button className={style.contohh} onClick={this.openDetail.bind(this)}>Show Detail</button>
+						<div className={ true ? (this.state.btn_open ? style.contohhh : style.contohhh_hidden) : this.setState({ btn_open: false })}>
+							<button>Detail Contain</button>
+						</div>
 					</div>
 					<Drawer.TemporaryDrawerContent>
 						<List>

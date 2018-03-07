@@ -1,6 +1,10 @@
 import { Component, h } from 'preact';
-import { Card, LayoutGrid, TextField} from 'preact-material-components';
-import 'preact-material-components/style.css';
+import Card from 'preact-material-components/Card';
+import LayoutGrid from 'preact-material-components/LayoutGrid';
+import TextField from 'preact-material-components/TextField';
+import 'preact-material-components/Card/style.css';
+import 'preact-material-components/LayoutGrid/style.css';
+import 'preact-material-components/TextField/style.css';
 import style from './style';
 
 export default class ProductView extends Component{
@@ -22,8 +26,8 @@ export default class ProductView extends Component{
                             </TextField>
                         </Card.Media>
                     </Card.Primary>
-                    <Card.Actions >
-                        <Card.Action >MORE</Card.Action>
+                    <Card.Actions>
+                        <Card.Action>MORE</Card.Action>
                     </Card.Actions>
                 </Card>
             </LayoutGrid.Cell>
