@@ -16,7 +16,7 @@ export default class Invoice extends Component{
         })
         
         if(this.state.addInvoice.clicked){
-            route('/invoice/add');
+            route('/accounting');
         }
     }
 

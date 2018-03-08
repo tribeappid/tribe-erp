@@ -18,6 +18,10 @@ export default class Header extends Component {
 		this.drawer.MDComponent.open = false;
 	}
 
+	touch(){
+		console.log('You have Touch');
+	}
+
 	openDetail(){
 		this.setState({
 			btn_open: ( this.state.btn_open ? false : true )
@@ -36,12 +40,12 @@ export default class Header extends Component {
 		this.closeDrawer();
 	};
 
-	goHome = this.linkTo('/');
-	goToProduct = this.linkTo('/product');
-	goToMyProfile = this.linkTo('/profile');
-	goToRegister = this.linkTo('/register');
-	goToInvoice = this.linkTo('/invoice');
-	goToLogin = this.linkTo('/login');
+	goToDashboard = this.linkTo('/');
+	goToStaffManage = this.linkTo('/staff/management');
+	goToProductManager = this.linkTo('/manager/product');
+	goToSalesManage = this.linkTo('/sales/management');
+	goToPurchaseManage = this.linkTo('/purchase/management');
+	goToAccounting = this.linkTo('/accounting');
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -79,34 +83,34 @@ export default class Header extends Component {
 					<div className={style.contoh}>
 						<button className={style.contohh} onClick={this.openDetail.bind(this)}>Show Detail</button>
 						<div className={ true ? (this.state.btn_open ? style.contohhh : style.contohhh_hidden) : this.setState({ btn_open: false })}>
-							<button>Detail Contain</button>
+							<button onTouch={this.touch} >Detail Contain</button>
 						</div>
 					</div>
 					<Drawer.TemporaryDrawerContent>
 						<List>
-							<List.LinkItem onClick={this.goHome}>
+							<List.LinkItem onClick={this.goToDashboard}>
 								<List.ItemIcon>home</List.ItemIcon>
-								Home
+								Dashboard
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToProduct}>
+							<List.LinkItem onClick={this.goToStaffManage}>
 								<List.ItemIcon>list</List.ItemIcon>
-								Product
+								Staff Management
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToMyProfile}>
+							<List.LinkItem onClick={this.goToProductManager}>
 								<List.ItemIcon>account_circle</List.ItemIcon>
-								Profile
+								Product Manager
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToRegister}>
+							<List.LinkItem onClick={this.goToSalesManage}>
 								<List.ItemIcon>edit</List.ItemIcon>
-								Register
+								Sales Management
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToInvoice}>
+							<List.LinkItem onClick={this.goToPurchaseManage}>
 								<List.ItemIcon>edit</List.ItemIcon>
-								Invoice
+								Purchase Management
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToLogin}>
+							<List.LinkItem onClick={this.goToAccounting}>
 								<List.ItemIcon>edit</List.ItemIcon>
-								Login
+								Accounting
 							</List.LinkItem>
 						</List>
 					</Drawer.TemporaryDrawerContent>

@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { route } from 'preact-router';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Card from 'preact-material-components/Card';
 import 'preact-material-components/Card/style.css';
