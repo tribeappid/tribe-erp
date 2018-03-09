@@ -5,21 +5,22 @@ import Drawer from 'preact-material-components/Drawer';
 import List from 'preact-material-components/List';
 import Dialog from 'preact-material-components/Dialog';
 import Switch from 'preact-material-components/Switch';
+import Menu from 'preact-material-components/Menu';
 import 'preact-material-components/Switch/style.css';
 import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
 import 'preact-material-components/List/style.css';
 import 'preact-material-components/Toolbar/style.css';
+import 'preact-material-components/Menu/style.css';
 import style from './style';
-// import style from './style';
 
 export default class Header extends Component {
 	closeDrawer() {
 		this.drawer.MDComponent.open = false;
 	}
 
-	touch(){
-		console.log('You have Touch');
+	closeProfileDetail(){
+		this.menu.MDComponent.open = false;
 	}
 
 	openDetail(){
@@ -28,16 +29,22 @@ export default class Header extends Component {
 		});
 	}
 
+	openProfileDetail = () => {
+		this.menu.MDComponent.open = true;
+	}
+
 	openDrawer = () => this.drawer.MDComponent.open = true;
 
 	openSettings = () => this.dialog.MDComponent.show();
 
 	drawerRef = drawer => (this.drawer = drawer);
 	dialogRef = dialog => (this.dialog = dialog);
+	menuRef = menu => (this.menu = menu);
 
 	linkTo = path => () => {
 		route(path);
 		this.closeDrawer();
+		this.closeProfileDetail();
 	};
 
 	goToDashboard = this.linkTo('/');
@@ -66,7 +73,7 @@ export default class Header extends Component {
 	render({}, {}) {
 		return (
 			<div>
-				<Toolbar className="toolbar">
+				<Toolbar>
 					<Toolbar.Row>
 						<Toolbar.Section align-start>
 							<Toolbar.Icon menu onClick={this.openDrawer}>
@@ -79,14 +86,17 @@ export default class Header extends Component {
 						</Toolbar.Section>
 					</Toolbar.Row>
 				</Toolbar>
-				<Drawer.TemporaryDrawer className={style.contohhhh} ref={this.drawerRef}>
-					<div className={style.contoh}>
-						<button className={style.contohh} onClick={this.openDetail.bind(this)}>Show Detail</button>
-						<div className={ true ? (this.state.btn_open ? style.contohhh : style.contohhh_hidden) : this.setState({ btn_open: false })}>
-							<button onTouch={this.touch} >Detail Contain</button>
-						</div>
-					</div>
-					<Drawer.TemporaryDrawerContent>
+				<Drawer.TemporaryDrawer className={style.navbar_drawer} ref={this.drawerRef}>
+					<Menu.Anchor>
+         				<button className={style.profile_toggle} onClick={this.openProfileDetail}>
+						 	<div><List.ItemIcon>home</List.ItemIcon></div>
+							<div><a>Click for menu</a></div>
+          				</button>
+          				<Menu className={style.profile_detail} ref={this.menuRef}>
+            				Detail
+          				</Menu>
+        			</Menu.Anchor>
+					<Drawer.TemporaryDrawerContent className={style.menu_list}>
 						<List>
 							<List.LinkItem onClick={this.goToDashboard}>
 								<List.ItemIcon>home</List.ItemIcon>

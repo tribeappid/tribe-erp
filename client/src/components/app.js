@@ -14,6 +14,7 @@ import Product from '../routes/product';
 import Invoice from '../routes/invoice';
 import AddInvoice from '../routes/invoice_add';
 import StaffManage from '../routes/staff_management';
+import Accounting from '../routes/accounting';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -36,7 +37,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Invoice path="/sales/management"/>
-					<AddInvoice path="/accounting"/>	
+					<Accounting path="/accounting"/>	
 					<Product path="/manager/product"/>
 					<StaffManage path="/staff/management"/>
 					<Profile path="/profile/" user="me" />
