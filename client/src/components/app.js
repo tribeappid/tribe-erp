@@ -37,6 +37,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Invoice path="/sales/management"/>
+					<AddInvoice path='/sales/management/add'/>
 					<Accounting path="/accounting"/>	
 					<Product path="/manager/product"/>
 					<StaffManage path="/staff/management"/>
@@ -44,6 +45,7 @@ export default class App extends Component {
 					<Profile path="/profile/:user" />
 					<Login path="/purchase/management" />
 					<Register path='/register'/>
+					<Login path='/login'/>
 				</Router>
 			</div>
 			</Provider>

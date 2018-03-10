@@ -78,7 +78,7 @@ export default class AddInvoice extends Component{
                                 <LayoutGrid className={style.zero}>
                                     <LayoutGrid.Inner>
                                         <LayoutGrid.Cell cols='6'>
-                                           <button>Image</button>
+                                           <button className={style.img_btn}>Image</button>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell className={style.invoice_add_second_content_input_group} cols='6'>
                                             <a>Invoice Number </a><input type='text' />
@@ -94,7 +94,89 @@ export default class AddInvoice extends Component{
                                             </div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='12'>
-                                            <div>CONTENT</div>
+                                            <div>
+                                                <div style={`margin-left: 40px`}>Edit columns</div>
+                                                <div>
+                                                    <table className={style.table_detail}>
+                                                        <ColGroup/>
+                                                        <thead>
+                                                            <tr>
+                                                                <td colSpan='1'/>
+                                                                <th colSpan='1'>Items</th>
+                                                                <td colSpan='1'/>
+                                                                <th colSpan='1'>Quantity</th>
+                                                                <th colSpan='1'>Price</th>
+                                                                <th className={style.table_amount} colSpan='1'>Amount</th>
+                                                                <td colSpan='1'/>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colSpan='7'>
+                                                                    <table>
+                                                                        <ColGroup/>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style={`vertical-align: middle; text-align: center`} colSpan='1'>i</td>
+                                                                                <td colSpan='1'>
+                                                                                    <span>
+                                                                                        <div>
+                                                                                            <input className={style.input_box} style={{height: 40+'px',width: 100+'%'}}/>
+                                                                                            <div className={style.hide_error_mes}>Error Message</div>
+                                                                                        </div>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td colSpan='1'>
+                                                                                    <textarea className={style.input_box} style={{width: 100+'%',height: 40+'px'}} placeholder='Enter a descriptions'/>
+                                                                                </td>
+                                                                                <td colSpan='1'>
+                                                                                    <div>
+                                                                                        <input className={style.input_box} style={{width: 100+'%'}} type='number'/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td colSpan='1'>
+                                                                                    <div>
+                                                                                        <input className={style.input_box} style={{width: 100+'%'}} type='number' maxLength='11'/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td className={style.table_amount} colSpan='1'>
+                                                                                    <span>Rp0.00</span>
+                                                                                </td>
+                                                                                <td colSpan='1'>
+                                                                                    <i/>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colSpan='1'/>
+                                                                                <td className={style.edit_income} colSpan='1'>Edit Income Account</td>
+                                                                                <td className={style.table_amount} colSpan='1'>Tax</td>
+                                                                                <td colSpan='2'><input className={`${style.input_box} ${style.tax_input}`}/></td>
+                                                                                <td className={style.table_amount} colSpan='1'>--</td>
+                                                                                <td colSpan='1'/>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colSpan='7'>
+                                                                    <button style={`width: 100%;height: 40px`}>ADD</button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <div>Untuk SubTotal</div>
+                                                        <div>Untuk Total</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <span>NOTES</span>
+                                                    <textarea/>
+                                                </div>
+                                            </div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                 </LayoutGrid>
@@ -115,6 +197,22 @@ export default class AddInvoice extends Component{
                     </LayoutGrid.Cell>
                 </LayoutGrid.Inner>
             </LayoutGrid>
+        )
+    }
+}
+
+class ColGroup extends Component{
+    render(){
+        return(
+            <colgroup>
+                <col style={{width: 40+"px"}}/>
+                <col style={{width: 200+"px"}}/>
+                <col style={{width: 342+"px"}}/>
+                <col style={{width: 90+"px"}}/>
+                <col style={{width: 90+"px"}}/>
+                <col style={{width: 140+"px"}}/>
+                <col style={{width: 40+"px"}}/>
+            </colgroup>
         )
     }
 }

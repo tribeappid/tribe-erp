@@ -87,7 +87,7 @@
     border-radius: 3px;
 }
 
-.invoice_add_second_content button{
+.img_btn{
     margin-top: 10px;
     width: 380px;
     height: 160px;
@@ -120,4 +120,43 @@
     line-height: 24px;
     font-size: 16px;
     width: 100%;
+}
+
+.tax_sec{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+.table_detail td, .table_detail th{
+    text-align: left;
+    vertical-align: top;
+    padding: 2px;
+}
+
+.table_amount{
+    vertical-align: middle !important;
+    text-align: right !important;
+}
+
+.hide_error_mes{
+    height: 0px;
+    visibility: hidden;
+}
+
+.input_box{
+    border-radius: 5px;
+    resize: none;
+    border: 1px solid gray;
+    height: 42px;
+    padding: 10px 10px;
+    margin: 5px 0px;
+}
+
+.tax_input{
+    width: 100%;
+}
+
+.edit_income{
+    vertical-align: middle !important;
 }
