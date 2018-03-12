@@ -46,7 +46,9 @@ class Login extends Component {
 		event.preventDefault();
 		this.setState({submitted: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password){
-			this.props.login(this.state.user);
+			if(this.validateEmail(this.state.user.AuthenticationString) && this.validatePassword(this.state.user.Password)){
+				this.props.login(this.state.user);
+			}
 		}
 	}
 

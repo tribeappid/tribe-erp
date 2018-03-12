@@ -2,3 +2,19 @@ table, th, td{
     border: 0px;
     text-align: center;
 }
+
+.even{
+    background: gray;
+}
+
+.odd{
+    background: brown;
+}
+
+.title_row{
+    background: yellow;
+}
+
+.add_row{
+    background: greenyellow;
+}

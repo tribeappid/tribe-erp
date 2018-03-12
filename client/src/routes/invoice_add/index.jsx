@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import LayoutGrid from 'preact-material-components/LayoutGrid';
+import LayoutGrid, { LayoutGridInner } from 'preact-material-components/LayoutGrid';
 import Card from 'preact-material-components/Card';
 import 'preact-material-components/Card/style.css';
 import 'preact-material-components/LayoutGrid/style.css';
@@ -76,7 +76,7 @@ export default class AddInvoice extends Component{
                             </Card.Primary>
                             <Card.Primary className={style.invoice_add_second_content} >
                                 <LayoutGrid className={style.zero}>
-                                    <LayoutGrid.Inner>
+                                    <LayoutGrid.Inner className={style.invoice_add_second_content_top_detail}>
                                         <LayoutGrid.Cell cols='6'>
                                            <button className={style.img_btn}>Image</button>
                                         </LayoutGrid.Cell>
@@ -93,6 +93,8 @@ export default class AddInvoice extends Component{
                                                 <div className={style.invoice_add_second_content_hint}>On Receipt</div>
                                             </div>
                                         </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner>
                                         <LayoutGrid.Cell cols='12'>
                                             <div>
                                                 <div style={`margin-left: 40px`}>Edit columns</div>

@@ -46,14 +46,14 @@ export default class StaffManage extends Component{
                                 <td>adminpertama</td>
                                 <td>Admin Pertama</td>
                                 <td>Administration</td>
-                                <td><button>tombol</button><button>tombol</button></td>
+                                <td><button>tombol</button><br/><button>tombol</button></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>supplierpertama</td>
                                 <td>Supplier Pertama</td>
                                 <td>Supplier</td>
-                                <td><button>tombol</button><button>tombol</button></td>
+                                <td><button>tombol</button><br/><button>tombol</button></td>
                             </tr>
                         </table>
                     </LayoutGrid.Cell>

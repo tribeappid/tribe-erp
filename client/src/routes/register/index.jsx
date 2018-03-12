@@ -61,7 +61,9 @@ class Register extends Component{
 		event.preventDefault();
 		this.setState({submitted: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
-			this.props.register(this.state.user);
+			if(this.validateEmail(this.state.user.AuthenticationString) && this.validatePassword(this.state.user.Password)){
+				this.props.register(this.state.user);
+			}
 		}
 	}
 

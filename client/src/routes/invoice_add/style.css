@@ -81,7 +81,7 @@
 }
 
 .invoice_add_second_content{
-    padding: 10px;
+    padding: 0px;
     margin: 10px 0px 10px 0px;
     border: 1px solid gray;
     border-radius: 3px;
@@ -159,4 +159,8 @@
 
 .edit_income{
     vertical-align: middle !important;
+}
+
+.invoice_add_second_content_top_detail{
+    padding: 10px 10px 30px 10px;
 }
