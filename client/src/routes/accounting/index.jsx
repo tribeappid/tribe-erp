@@ -35,19 +35,23 @@ export default class Accounting extends Component{
     }
 
     oneRowData(){
-        var i = 0;
+        var dataRow = 0;
         return _.map(this.state.data, data => {
             return(
-                <tr className={ i%2==0 ? style.even : style.odd }>
+                <tr className={ dataRow%2==0 ? style.even : style.odd }>
                     <td>{data.nama}</td>
                     <td>{data.detail}</td>
                     <td>{data.role}</td>
                     <td>{data.date}</td>
-                    <td><button>edit</button></td>
-                    <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{i++}</div>
+                    <td><button name={dataRow} onClick={this.handleEvent}>edit</button></td>
+                    <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{dataRow++}</div>
                 </tr>
             );
         })
+    }
+
+    handleEvent(event){
+        console.log(event);
     }
 
     addData(){

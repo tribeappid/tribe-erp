@@ -3,8 +3,44 @@ import { route } from 'preact-router';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import 'preact-material-components/LayoutGrid/style';
 import style from './style';
+import _ from 'lodash';
 
 export default class StaffManage extends Component{
+    state={
+        data:[
+            {
+                no: 1,
+                usernama: 'adminpertama',
+                name: 'Admin Pertama',
+                role: 'Administration',
+            },
+            {
+                no: 2,
+                usernama: 'adminkedua',
+                name: 'Admin Kedua',
+                role: 'Administration',
+            }
+        ]
+    }
+
+    loadData(){
+        return _.map(this.state.data, data => {
+            return(
+                <tr>
+                    <td>{data.no}</td>
+                    <td>{data.usernama}</td>
+                    <td>{data.name}</td>
+                    <td>{data.role}</td>
+                    <td><button onClick={this.goToViewData}>view</button><button>edit</button></td>
+                </tr>
+            )
+        })
+    }
+
+    goToViewData(){
+        console.log("okk")
+    }
+
     goToAddStaff(){
         this.setState({
             btn:{
@@ -15,6 +51,10 @@ export default class StaffManage extends Component{
         if(this.state.btn.clicked){
             route('/register');
         }
+    }
+    
+    handleEvent(event){
+        console.log(event);
     }
 
     render( {}, {} ){
@@ -41,20 +81,7 @@ export default class StaffManage extends Component{
                                 <th>Role</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>adminpertama</td>
-                                <td>Admin Pertama</td>
-                                <td>Administration</td>
-                                <td><button>tombol</button><br/><button>tombol</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>supplierpertama</td>
-                                <td>Supplier Pertama</td>
-                                <td>Supplier</td>
-                                <td><button>tombol</button><br/><button>tombol</button></td>
-                            </tr>
+                            {this.loadData()}
                         </table>
                     </LayoutGrid.Cell>
                 </LayoutGrid.Inner>
