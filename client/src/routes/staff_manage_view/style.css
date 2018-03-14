@@ -1,0 +1,106 @@
+.content_body{
+    padding: 4% 8%;
+}
+
+.page_info{
+    line-height: 36px;
+    font-weight: bold;
+    color: gray;
+    font-size: 20px;
+}
+
+.edit_button{
+    float:right;
+    font-weight: bold;
+    padding: 8px 24px;
+    background: #f98162;
+    color: white;
+    border-radius: 6px;
+}
+
+.edit_button_word{
+    font-size: 1.2rem;
+    padding-left: 10px;
+}
+
+.second_content{
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.image_setting{
+    background: white;
+    border-radius: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+.image_place{
+    background: gray;
+    width: 160px;
+    height: 160px;
+}
+
+.second_content_people_name{
+    font-weight: 700;
+    font-size: 30px;
+    padding-bottom: 12px;
+}
+
+.second_content_row{
+    padding: 5px 0px;
+}
+
+.row_title{
+    font-weight: bold;
+}
+
+.divider{
+    margin: 3% 0px;
+    height: 1px;
+    width: 100%;
+    background: #ededed;
+}
+
+.divider_table{
+    margin: 0px 2%;
+    height: 1px;
+    width: 96%;
+    background: #ededed;
+}
+
+.program_table th, .program_table td{
+    padding: 2% 2%;
+    text-align: left;
+}
+
+.program_table th{
+    background: #ededed;
+}
+
+.program_table table{
+    border: 1px solid #ededed;
+    
+}
+
+.program_table{
+    margin: 15px 0px 30px 0px;
+}
+
+.button_back{
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+    background: #25bc9d;
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}
+
+.contoh{
+    font-size: 1rem;
+}
+
+.last_content{
+    margin-bottom: 5%;
+}

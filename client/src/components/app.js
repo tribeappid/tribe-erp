@@ -16,6 +16,7 @@ import AddInvoice from '../routes/invoice_add';
 import StaffManage from '../routes/staff_management';
 import Accounting from '../routes/accounting';
 import StaffManageView from '../routes/staff_manage_view';
+import ItemProductView from '../routes/product_item_view';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -48,6 +49,7 @@ export default class App extends Component {
 					<Register path='/register'/>
 					<Login path='/login'/>
 					<StaffManageView path='/staff/management/:id'/>
+					<ItemProductView path='/item/product/:id'/>
 				</Router>
 			</div>
 			</Provider>
