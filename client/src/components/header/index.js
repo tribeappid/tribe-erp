@@ -53,6 +53,7 @@ export default class Header extends Component {
 	goToSalesManage = this.linkTo('/sales/management');
 	goToPurchaseManage = this.linkTo('/purchase/management');
 	goToAccounting = this.linkTo('/accounting');
+	goToBranches = this.linkTo('/branches');
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -98,29 +99,33 @@ export default class Header extends Component {
         			</Menu.Anchor>
 					<Drawer.TemporaryDrawerContent className={style.menu_list}>
 						<List>
+							<List.LinkItem onClick={this.goToAccounting}>
+								<List.ItemIcon>edit</List.ItemIcon>
+								Accounting
+							</List.LinkItem>
+							<List.LinkItem onClick={this.goToBranches}>
+								<List.ItemIcon>edit</List.ItemIcon>
+								Branches
+							</List.LinkItem>
 							<List.LinkItem onClick={this.goToDashboard}>
 								<List.ItemIcon>home</List.ItemIcon>
 								Dashboard
-							</List.LinkItem>
-							<List.LinkItem onClick={this.goToStaffManage}>
-								<List.ItemIcon>list</List.ItemIcon>
-								Staff Management
 							</List.LinkItem>
 							<List.LinkItem onClick={this.goToProductManager}>
 								<List.ItemIcon>account_circle</List.ItemIcon>
 								Product Manager
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToSalesManage}>
-								<List.ItemIcon>edit</List.ItemIcon>
-								Sales Management
-							</List.LinkItem>
 							<List.LinkItem onClick={this.goToPurchaseManage}>
 								<List.ItemIcon>edit</List.ItemIcon>
 								Purchase Management
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToAccounting}>
+							<List.LinkItem onClick={this.goToSalesManage}>
 								<List.ItemIcon>edit</List.ItemIcon>
-								Accounting
+								Sales Management
+							</List.LinkItem>
+							<List.LinkItem onClick={this.goToStaffManage}>
+								<List.ItemIcon>list</List.ItemIcon>
+								Staff Management
 							</List.LinkItem>
 						</List>
 					</Drawer.TemporaryDrawerContent>

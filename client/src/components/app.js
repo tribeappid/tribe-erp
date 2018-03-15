@@ -17,6 +17,9 @@ import StaffManage from '../routes/staff_management';
 import Accounting from '../routes/accounting';
 import StaffManageView from '../routes/staff_manage_view';
 import ItemProductView from '../routes/product_item_view';
+import AddStaff from '../routes/add_staff_management';
+import Branches from '../routes/branches';
+import BranchView from '../routes/branches_view';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -48,8 +51,11 @@ export default class App extends Component {
 					<Login path="/purchase/management" />
 					<Register path='/register'/>
 					<Login path='/login'/>
-					<StaffManageView path='/staff/management/:id'/>
+					<StaffManageView path='/staff/management/view/:id'/>
 					<ItemProductView path='/item/product/:id'/>
+					<AddStaff path='/staff/management/add'/>
+					<Branches path='/branches'/>
+					<BranchView path='/branches/view/:id'/>
 				</Router>
 			</div>
 			</Provider>

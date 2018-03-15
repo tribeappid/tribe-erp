@@ -9,7 +9,7 @@ import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
 import style from './style.css'
 
-class StaffManageView extends Component{
+class BranchView extends Component{
     handleChange(event){
         console.log(event);
     }
@@ -21,7 +21,7 @@ class StaffManageView extends Component{
             }
         })
         if(this.state.back_to_staff.clicked){
-            route('/staff/management');
+            route('/branches');
         }
     }
 
@@ -35,7 +35,7 @@ class StaffManageView extends Component{
                             <div className={style.content_body}>
                                 <LayoutGrid.Inner>
                                     <LayoutGrid.Cell cols='6'>
-                                        <a className={style.page_info}>View Staff</a>
+                                        <a className={style.page_info}>View Branch</a>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='6'>
                                         <button className={style.edit_button}>
@@ -44,59 +44,24 @@ class StaffManageView extends Component{
                                         </button>
                                     </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
-                                <LayoutGrid.Inner className={style.second_content}>
-                                    <LayoutGrid.Cell cols='3'>
-                                        <div className={style.image_place}>
-                                            <div className={style.image_setting}></div>
-                                        </div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='9'>
-                                        <div className={style.second_content_people_name}>People Name</div>
-                                        <LayoutGrid.Inner>
-                                            <LayoutGrid.Cell cols='5'>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Email
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Birthday
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Mobile Number
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                            <LayoutGrid.Cell cols='7'>
-                                                <div className={style.second_content_row}>
-                                                    xxxxxx@gmail.com
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xxxx-xx-xx
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xxxxxxxx1234
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                        </LayoutGrid.Inner>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <LayoutGrid.Inner>
+                                
+                                <LayoutGrid.Inner style={`margin-top: 20px;`}>
                                     <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
+                                        <div className={style.second_content_row + ' ' + style.row_title}>Branch Name</div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Role Detail</div>
+                                        <div className={style.second_content_row}>Branch Detail</div>
                                 </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
                                 <div className={style.divider}/>
                                 <LayoutGrid.Inner className={style.last_content}>
                                     <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
+                                        <div className={style.second_content_row + ' ' + style.row_title}>Address</div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Role Detail</div>
-                                        <div className={style.second_content_row}>Role Detail</div>
+                                        <div className={style.second_content_row}>Address Detail</div>
                                     </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
-                                {/*
                                 <div className={style.divider}/>
                                 <LayoutGrid.Inner>
                                     <LayoutGrid.Cell cols='12'>
@@ -104,8 +69,7 @@ class StaffManageView extends Component{
                                         <ProgramTable/>
                                         <ProgramTable/>
                                     </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>*/
-                                }
+                                </LayoutGrid.Inner>
                                 <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
                             </div>
                         </Card>
@@ -116,8 +80,8 @@ class StaffManageView extends Component{
     }
 }
 
-export default connect('','')(StaffManageView);
-{/*
+export default connect('','')(BranchView);
+
 class ProgramTable extends Component{
     render({}, {}){
         return(
@@ -156,5 +120,4 @@ class ProgramTable extends Component{
             </div>
         )
     }
-}*/
 }

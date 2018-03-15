@@ -11,26 +11,26 @@ import 'preact-material-components/Dialog/style';
 import style from './style';
 import _ from 'lodash';
 
-export default class StaffManage extends Component{
+export default class Branches extends Component{
     state={
         data:[
             {
                 no: 1,
-                usernama: 'adminpertama',
-                name: 'Admin Pertama',
-                role: 'Administration',
+                branchName: 'adminpertama',
+                address: 'Address Pertama',
+                classroom: '1',
             },
             {
                 no: 2,
-                usernama: 'adminkedua',
-                name: 'Admin Kedua',
-                role: 'Administration',
+                branchName: 'adminkedua',
+                address: 'Address Kedua',
+                classroom: '2',
             },
             {
                 no: 3,
-                usernama: 'adminketiga',
-                name: 'Admin Ketiga',
-                role: 'Administration',
+                branchName: 'adminketiga',
+                address: 'Address Ketiga',
+                classroom: '3',
             }
         ]
     }
@@ -45,9 +45,9 @@ export default class StaffManage extends Component{
             return(
                 <tr id={data.no} className={ dataRow%2==0 ? style.even : '' }>
                     <td>{data.no}</td>
-                    <td className={style.data_table}>{data.usernama}</td>
-                    <td className={style.data_table}>{data.name}</td>
-                    <td className={style.data_table}>{data.role}</td>
+                    <td className={style.data_table}>{data.branchName}</td>
+                    <td className={style.data_table}>{data.address}</td>
+                    <td >{data.classroom}</td>
                     <td className={style.data_table}>
                         <Icon className={style.icon_design} id={data.no} onClick={this.goToViewData.bind(this)}>visibility</Icon>
                         <Icon className={style.icon_design} id={data.no} onClick={this.openSettings}>delete</Icon>
@@ -65,7 +65,7 @@ export default class StaffManage extends Component{
             }
         })
         if(this.state.view_btn.clicked){
-            route(`/staff/management/view/${event.target.id}`);
+            route(`/branches/view/${event.target.id}`);
         }
     }
 
@@ -98,7 +98,7 @@ export default class StaffManage extends Component{
                     <LayoutGrid.Cell cols='10'>
                         <button onClick={this.goToAddStaff.bind(this)} className={style.add_button}>
                             <Icon>add</Icon>
-                            <a>Add Staff</a>
+                            <a>Add Branch</a>
                         </button>
                     </LayoutGrid.Cell>
                     <LayoutGrid.Cell cols='1'/>
@@ -109,10 +109,10 @@ export default class StaffManage extends Component{
                                 <ColGroup/>
                                 <tbody>
                                     <tr style={style.even}>
-                                        <th>No</th>
-                                        <th className={style.data_table}>Username</th>
-                                        <th className={style.data_table}>Name</th>
-                                        <th className={style.data_table}>Role</th>
+                                        <th>S/N</th>
+                                        <th className={style.data_table}>Branch Name</th>
+                                        <th className={style.data_table}>Address</th>
+                                        <th>Classroom</th>
                                         <th className={style.data_table}>Actions</th>
                                     </tr>
                                     {this.loadData()}
@@ -141,10 +141,10 @@ class ColGroup extends Component{
         return(
             <colgroup>
                 <col style={{width: 4+"%"}}/>
-                <col style={{width: 32+"%"}}/>
-                <col style={{width: 32+"%"}}/>
-                <col style={{width: 18+"%"}}/>
-                <col style={{width: 18+"%"}}/>
+                <col style={{width: 15+"%"}}/>
+                <col style={{width: 59+"%"}}/>
+                <col style={{width: 10+"%"}}/>
+                <col style={{width: 12+"%"}}/>
             </colgroup>
         )
     }
