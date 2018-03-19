@@ -26,6 +26,7 @@ entitySchema = new Schema({
     , last_change_password : {type :Date, default :null}
     , authentication_attempts : {type : Number, default :null}
     , authorization_level : {type : Number, default :null}
+    , permission : { type: String, ref: 'permission'}
     , first_name : {type : String, default : null}
     , last_name : {type : String, default : null}
     , name : {type : String, default : null}

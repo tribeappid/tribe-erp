@@ -21,6 +21,10 @@ enterpriseSchema = new Schema({
     , description : {type: String, default : null}
     , create_date : {type: Date, default : null}
     , last_update : {type: Date, default : null}
+    , branches : [{
+        type: String
+        , ref : 'branch'
+    }]    
     , entities : [{
         type: String
         , ref : 'entity'
