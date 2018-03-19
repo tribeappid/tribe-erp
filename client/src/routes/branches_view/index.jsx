@@ -45,13 +45,13 @@ class BranchView extends Component{
                                     </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
                                 
-                                <LayoutGrid.Inner style={`margin-top: 20px;`}>
+                                <LayoutGrid.Inner style={`margin-top: 50px;`}>
                                     <LayoutGrid.Cell cols='2'>
                                         <div className={style.second_content_row + ' ' + style.row_title}>Branch Name</div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='10'>
                                         <div className={style.second_content_row}>Branch Detail</div>
-                                </LayoutGrid.Cell>
+                                    </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
                                 <div className={style.divider}/>
                                 <LayoutGrid.Inner className={style.last_content}>
@@ -60,6 +60,15 @@ class BranchView extends Component{
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='10'>
                                         <div className={style.second_content_row}>Address Detail</div>
+                                    </LayoutGrid.Cell>
+                                </LayoutGrid.Inner>
+                                <div className={style.divider}/>
+                                <LayoutGrid.Inner className={style.last_content}>
+                                    <LayoutGrid.Cell cols='2'>
+                                        <div className={style.second_content_row + ' ' + style.row_title}>Phone</div>
+                                    </LayoutGrid.Cell>
+                                    <LayoutGrid.Cell cols='10'>
+                                        <div className={style.second_content_row}>Phone Number</div>
                                     </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
                                 <div className={style.divider}/>

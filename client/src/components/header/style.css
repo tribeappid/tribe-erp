@@ -34,3 +34,10 @@
 .menu_list ul{
     padding: 0px 0px 8px 0px;
 }
+
+.hided{
+    visibility: hidden;
+    opacity: 0px;
+    font-size: 30px;
+    height: 0px;
+}

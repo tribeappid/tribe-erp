@@ -20,6 +20,7 @@ import ItemProductView from '../routes/product_item_view';
 import AddStaff from '../routes/add_staff_management';
 import Branches from '../routes/branches';
 import BranchView from '../routes/branches_view';
+import AddBranch from '../routes/add_branch';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -56,6 +57,7 @@ export default class App extends Component {
 					<AddStaff path='/staff/management/add'/>
 					<Branches path='/branches'/>
 					<BranchView path='/branches/view/:id'/>
+					<AddBranch path='/branches/add'/>
 				</Router>
 			</div>
 			</Provider>

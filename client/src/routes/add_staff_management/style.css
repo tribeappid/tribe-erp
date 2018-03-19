@@ -36,3 +36,24 @@
     font-weight: bold;
     color: gray;
 }
+
+.back_button{
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+    background: #25bc9d;
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}
+
+.add_button{
+    font-weight: bold;
+    float: right;
+    color: white;
+    font-size: 1em;
+    background: #25bc9d;
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}

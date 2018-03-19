@@ -69,14 +69,14 @@ export default class Branches extends Component{
         }
     }
 
-    goToAddStaff(){
+    goToAddBranch(){
         this.setState({
             add_btn:{
                 clicked: true
             }
         })
         if(this.state.add_btn.clicked){
-            route('/staff/management/add');
+            route('/branches/add');
         }
     }
     
@@ -96,7 +96,7 @@ export default class Branches extends Component{
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='10'>
-                        <button onClick={this.goToAddStaff.bind(this)} className={style.add_button}>
+                        <button onClick={this.goToAddBranch.bind(this)} className={style.add_button}>
                             <Icon>add</Icon>
                             <a>Add Branch</a>
                         </button>
@@ -123,12 +123,13 @@ export default class Branches extends Component{
                 </LayoutGrid.Inner>
             </LayoutGrid>
             <Dialog ref={this.dialogRef}>
-				<Dialog.Header>Settings</Dialog.Header>
+				<Dialog.Header>Delete Branch</Dialog.Header>
 				<Dialog.Body>
-					Example
+					Are you sure want to delete this branch?
 				</Dialog.Body>
 				<Dialog.Footer>
-					<Dialog.FooterButton accept>okay</Dialog.FooterButton>
+					<Dialog.FooterButton accept>Yes</Dialog.FooterButton>
+                    <Dialog.FooterButton cancel>No</Dialog.FooterButton>
 				</Dialog.Footer>
 			</Dialog>
             </div>

@@ -13,21 +13,19 @@ import _ from 'lodash';
 
 export default class StaffManage extends Component{
     state={
+        searchTerm: "",
         data:[
             {
-                no: 1,
                 usernama: 'adminpertama',
                 name: 'Admin Pertama',
                 role: 'Administration',
             },
             {
-                no: 2,
                 usernama: 'adminkedua',
                 name: 'Admin Kedua',
                 role: 'Administration',
             },
             {
-                no: 3,
                 usernama: 'adminketiga',
                 name: 'Admin Ketiga',
                 role: 'Administration',
@@ -39,22 +37,24 @@ export default class StaffManage extends Component{
 
     openSettings = () => this.dialog.MDComponent.show();
 
-    loadData(){
-        var dataRow = 0;
+    loadData(dataWanted){
+        var dataRow = 1;
         return _.map(this.state.data, data => {
-            return(
-                <tr id={data.no} className={ dataRow%2==0 ? style.even : '' }>
-                    <td>{data.no}</td>
-                    <td className={style.data_table}>{data.usernama}</td>
-                    <td className={style.data_table}>{data.name}</td>
-                    <td className={style.data_table}>{data.role}</td>
-                    <td className={style.data_table}>
-                        <Icon className={style.icon_design} id={data.no} onClick={this.goToViewData.bind(this)}>visibility</Icon>
-                        <Icon className={style.icon_design} id={data.no} onClick={this.openSettings}>delete</Icon>
-                    </td>
-                    <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{dataRow++}</div>
-                </tr>
-            )
+            if(data.usernama.indexOf(dataWanted.toLowerCase())>-1){
+                return(
+                    <tr id={dataRow} className={ dataRow%2==1 ? style.even : '' }>
+                        <td>{[dataRow]}</td>
+                        <td className={style.data_table}>{data.usernama}</td>
+                        <td className={style.data_table}>{data.name}</td>
+                        <td className={style.data_table}>{data.role}</td>
+                        <td className={style.data_table}>
+                            <Icon className={style.icon_design} id={dataRow} onClick={this.goToViewData.bind(this)}>visibility</Icon>
+                            <Icon className={style.icon_design} id={dataRow} onClick={this.openSettings}>delete</Icon>
+                        </td>
+                        <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{dataRow++}</div>
+                    </tr>
+                )
+            }
         })
     }
 
@@ -80,6 +80,11 @@ export default class StaffManage extends Component{
         }
     }
     
+    handleInput(term){
+        event.preventDefault();
+		this.setState({searchTerm: term.value})
+	}
+
     handleEvent(event){
         console.log(event);
     }
@@ -91,7 +96,7 @@ export default class StaffManage extends Component{
                 <LayoutGrid.Inner>
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='10'>
-                        <div className={style.search_bar}>Search : <input type='text'/></div>
+                        <div className={style.search_bar}>Search : <input value={this.state.searchTerm} onChange={ event => this.handleInput(event.target) } type='text'/></div>
                     </LayoutGrid.Cell>
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='1'/>
@@ -115,7 +120,7 @@ export default class StaffManage extends Component{
                                         <th className={style.data_table}>Role</th>
                                         <th className={style.data_table}>Actions</th>
                                     </tr>
-                                    {this.loadData()}
+                                    {this.loadData(this.state.searchTerm)}
                                 </tbody>
                             </table>
                         </Card>
@@ -123,12 +128,13 @@ export default class StaffManage extends Component{
                 </LayoutGrid.Inner>
             </LayoutGrid>
             <Dialog ref={this.dialogRef}>
-				<Dialog.Header>Settings</Dialog.Header>
+				<Dialog.Header>Delete Staff</Dialog.Header>
 				<Dialog.Body>
-					Example
+					Are you sure want to delete this staff ?
 				</Dialog.Body>
 				<Dialog.Footer>
-					<Dialog.FooterButton accept>okay</Dialog.FooterButton>
+					<Dialog.FooterButton accept>Yes</Dialog.FooterButton>
+                    <Dialog.FooterButton cancel>No</Dialog.FooterButton>
 				</Dialog.Footer>
 			</Dialog>
             </div>
