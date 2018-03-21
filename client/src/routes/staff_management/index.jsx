@@ -8,10 +8,12 @@ import 'preact-material-components/LayoutGrid/style';
 import 'preact-material-components/Icon/style';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/Dialog/style';
+import { connect } from 'preact-redux';
+import { getAccountList } from '../../actions';
 import style from './style';
 import _ from 'lodash';
 
-export default class StaffManage extends Component{
+class StaffManage extends Component{
     state={
         searchTerm: "",
         data:[
@@ -89,7 +91,7 @@ export default class StaffManage extends Component{
         console.log(event);
     }
 
-    render( {}, {} ){
+    render( {finance}, {} ){
         return(
             <div>
             <LayoutGrid>
@@ -155,3 +157,9 @@ class ColGroup extends Component{
         )
     }
 }
+
+function mapStateToProps(finance){
+    return { finance };
+}
+
+export default connect( mapStateToProps,{ getAccountList })(StaffManage);

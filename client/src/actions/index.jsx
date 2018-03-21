@@ -3,6 +3,8 @@ import axios from 'axios';
 export const FINANCE = 'finances';
 export const LOGIN = 'login';
 export const REGIS = 'register';
+export const ACCOUNT_LIST = 'accounts_data_list';
+export const ACCOUNT_DATA = 'accounts_personal_data';
 
 const ROOT_URL = 'http://localhost:3000/';
 
@@ -30,6 +32,24 @@ export function register(user){
 
     return{
         type: REGIS,
+        payload: req
+    }
+}
+
+export function getAccountList(){
+    const req = axios.get(`${ROOT_URL}accounts/list`);
+    
+    return{
+        type: ACCOUNT_LIST,
+        payload: req
+    }
+}
+
+export function getAccountData(entity_id){
+    const req = axios.get(`${ROOT_URL}accounts/profile?EntityId=${entity_id}`);
+
+    return{
+        type: ACCOUNT_DATA,
         payload: req
     }
 }

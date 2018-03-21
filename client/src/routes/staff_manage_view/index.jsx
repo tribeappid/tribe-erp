@@ -7,6 +7,7 @@ import 'preact-material-components/LayoutGrid/style.css';
 import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
+import { getAccountData } from '../../actions';
 import style from './style.css'
 
 class StaffManageView extends Component{
@@ -25,7 +26,7 @@ class StaffManageView extends Component{
         }
     }
 
-    render({}, {}){
+    render({finance}, {}){
         return(
             <LayoutGrid>
                 <LayoutGrid.Inner>
@@ -116,7 +117,11 @@ class StaffManageView extends Component{
     }
 }
 
-export default connect('','')(StaffManageView);
+function mapStateToProps(finance){
+    return { finance };
+}
+
+export default connect(mapStateToProps,{getAccountData})(StaffManageView);
 {/*
 class ProgramTable extends Component{
     render({}, {}){

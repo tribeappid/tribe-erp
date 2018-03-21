@@ -6,12 +6,14 @@ import List from 'preact-material-components/List';
 import Dialog from 'preact-material-components/Dialog';
 import Switch from 'preact-material-components/Switch';
 import Menu from 'preact-material-components/Menu';
+import Icon from 'preact-material-components/Icon';
 import 'preact-material-components/Switch/style.css';
 import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
 import 'preact-material-components/List/style.css';
 import 'preact-material-components/Toolbar/style.css';
 import 'preact-material-components/Menu/style.css';
+import 'preact-material-components/Icon/style.css';
 import style from './style';
 
 export default class Header extends Component {
@@ -132,7 +134,7 @@ export default class Header extends Component {
 				<Drawer.TemporaryDrawer className={style.navbar_drawer} ref={this.drawerRef}>
 					<Menu.Anchor>
          				<div className={style.profile_toggle} onClick={this.openProfileDetail}>
-						 	<div><List.ItemIcon>home</List.ItemIcon></div>
+						 	<div><Icon>home</Icon></div>
 							<div><a>Click for menu</a></div>
           				</div>
           				<Menu className={style.profile_detail} ref={this.menuRef}>
@@ -142,37 +144,37 @@ export default class Header extends Component {
 					<Drawer.TemporaryDrawerContent className={style.menu_list}>
 						<List>
 							<List.LinkItem name="accounting" onClick={this.dropDownToggle.bind(this)}>
-								<List.ItemIcon>edit</List.ItemIcon>
+								<Icon>edit</Icon>
 								Accounting
 							</List.LinkItem>
 							<div className={this.state.dropdown.accounting.clicked ? '' : style.hided} onClick={this.goToAccounting}>
 								Contoh<br/><br/><br/><br/>
 							</div>
 							<List.LinkItem onClick={this.goToBranches}>
-								<List.ItemIcon>edit</List.ItemIcon>
+								<Icon>edit</Icon>
 								Branches
 							</List.LinkItem>
 							<List.LinkItem onClick={this.goToDashboard}>
-								<List.ItemIcon>home</List.ItemIcon>
+								<Icon>home</Icon>
 								Dashboard
 							</List.LinkItem>
 							<List.LinkItem name="product" onClick={this.dropDownToggle.bind(this)}>
-								<List.ItemIcon>account_circle</List.ItemIcon>
+								<Icon>account_circle</Icon>
 								Product Manager
 							</List.LinkItem>
 							<div className={this.state.dropdown.product.clicked ? '' : style.hided} onClick={this.goToProductManager}>
 								Contoh<br/><br/><br/><br/>
 							</div>
 							<List.LinkItem onClick={this.goToPurchaseManage}>
-								<List.ItemIcon>edit</List.ItemIcon>
+								<Icon>edit</Icon>
 								Purchase Management
 							</List.LinkItem>
 							<List.LinkItem onClick={this.goToSalesManage}>
-								<List.ItemIcon>edit</List.ItemIcon>
+								<Icon>edit</Icon>
 								Sales Management
 							</List.LinkItem>
 							<List.LinkItem onClick={this.goToStaffManage}>
-								<List.ItemIcon>list</List.ItemIcon>
+								<Icon>list</Icon>
 								Staff Management
 							</List.LinkItem>
 						</List>
