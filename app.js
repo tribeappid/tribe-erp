@@ -19,6 +19,7 @@ var users = require('./routes/users');
 var finances = require('./routes/finance');
 var account = require('./routes/account');
 var admin = require('./routes/admin');
+var product = require('./routes/product');
 var app = express();
 
 appModels = require('./app-models');
@@ -83,6 +84,7 @@ app.use('/users', users);
 app.use('/finances', finances);
 app.use('/accounts', account);
 app.use('/admin', admin);
+app.use('/products', product);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

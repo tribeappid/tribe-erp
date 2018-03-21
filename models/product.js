@@ -16,7 +16,8 @@
 
 var Schema = mongoose.Schema;
 productSchema = new Schema({
-    name : { type: String, default : null }
+    _id: { type: String }
+    , name : { type: String, default : null }
     , description : { type : String, default : null }
     , height : { type : Number, default : null }
     , width : { type : Number, default : null }
@@ -33,11 +34,12 @@ productSchema = new Schema({
     , code5 : { type : String, default : null }
     , create_date : { type: Date, default : null }
     , last_update : { type: Date, default : null }
+    , publish_update : { type: Date, default : null }
     , ecommerce_code : { type : String, default : null }
     , entity : { type: String, ref: 'entity'}
-    , region : { type: Schema.Types.ObjectId , ref : 'lookup_value' }
-    , class : { type: Schema.Types.ObjectId , ref : 'lookup_value' }
-    , w_config : { type: Schema.Types.ObjectId , ref : 'lookup_value' }
+    , category : { type: String , ref : 'category' }
+    , enterprise : { type: String , ref : 'enterprise' }
+    , branches : [{ type: String , ref : 'branch' }]
     , suppliers : [{ type: String , ref : 'enterprise' }]
     , manufacturer : { type: String , ref : 'enterprise' }
     , prices: [{ type: Schema.Types.ObjectId , ref : 'product_value' }]
