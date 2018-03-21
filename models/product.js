@@ -19,6 +19,7 @@ productSchema = new Schema({
     _id: { type: String }
     , name : { type: String, default : null }
     , description : { type : String, default : null }
+    , length : { type : Number, default : null }
     , height : { type : Number, default : null }
     , width : { type : Number, default : null }
     , weight : { type : Number, default : null }

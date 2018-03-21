@@ -130,6 +130,11 @@ var addProduct = exports.addProduct = function(req, res, override, callback){
                 if (req.body.LastUpdate) addParms.last_update = req.body.LastUpdate;
                 if (req.body.PublishDate) addParms.publish_date = req.body.PublishDate;
                 if (req.body.EnterpriseId) addParms.enterprise = req.body.EnterpriseId;
+                if (req.body.Length) addParms.length = req.body.Length;
+                if (req.body.Width) addParms.width = req.body.Width;
+                if (req.body.Height) addParms.height = req.body.Height;
+                if (req.body.Weight) addParms.weight = req.body.Weight;
+                if (req.body.Code) addParms.code = req.body.Code;
 
                 console.log(req.body);
                 var newProductObj = null;
