@@ -58,6 +58,7 @@ export default class App extends Component {
 					<Branches path='/branches'/>
 					<BranchView path='/branches/view/:id'/>
 					<AddBranch path='/branches/add'/>
+					
 				</Router>
 			</div>
 			</Provider>
