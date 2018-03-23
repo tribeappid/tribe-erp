@@ -1,9 +1,9 @@
-import { FINANCE } from '../actions';
+import { ACCOUNT_DATA } from '../actions';
 
 export default function( state= [], action ){
     switch(action.type){
-        case FINANCE:
-        return state.concat([action.payload.data]);
+        case ACCOUNT_DATA:
+        return action.payload.data.Data;
         default:
         return state;
     }

@@ -52,7 +52,7 @@ export default class App extends Component {
 					<Login path="/purchase/management" />
 					<Register path='/register'/>
 					<Login path='/login'/>
-					<StaffManageView path='/staff/management/view/:id'/>
+					<StaffManageView path='/staff/management/view/profile/:id'/>
 					<ItemProductView path='/item/product/:id'/>
 					<AddStaff path='/staff/management/add'/>
 					<Branches path='/branches'/>

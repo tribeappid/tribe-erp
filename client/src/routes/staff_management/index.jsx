@@ -14,25 +14,12 @@ import style from './style';
 import _ from 'lodash';
 
 class StaffManage extends Component{
+    componentDidMount(){
+        this.props.getAccountList();
+    }
+
     state={
         searchTerm: "",
-        data:[
-            {
-                usernama: 'adminpertama',
-                name: 'Admin Pertama',
-                role: 'Administration',
-            },
-            {
-                usernama: 'adminkedua',
-                name: 'Admin Kedua',
-                role: 'Administration',
-            },
-            {
-                usernama: 'adminketiga',
-                name: 'Admin Ketiga',
-                role: 'Administration',
-            }
-        ]
     }
 
     dialogRef = dialog => (this.dialog = dialog);
@@ -41,16 +28,16 @@ class StaffManage extends Component{
 
     loadData(dataWanted){
         var dataRow = 1;
-        return _.map(this.state.data, data => {
-            if(data.usernama.indexOf(dataWanted.toLowerCase())>-1){
+        return _.map(this.props.dataReducer.accountList, accountList => {
+            if(accountList.name.toLowerCase().indexOf(dataWanted.toLowerCase())>-1){
                 return(
                     <tr id={dataRow} className={ dataRow%2==1 ? style.even : '' }>
                         <td>{[dataRow]}</td>
-                        <td className={style.data_table}>{data.usernama}</td>
-                        <td className={style.data_table}>{data.name}</td>
-                        <td className={style.data_table}>{data.role}</td>
+                        <td className={style.data_table}>{accountList.name}</td>
+                        <td className={style.data_table}>Empty</td>
+                        <td className={style.data_table}>{accountList.authorization_level==500 ? "Administration" : '' }</td>
                         <td className={style.data_table}>
-                            <Icon className={style.icon_design} id={dataRow} onClick={this.goToViewData.bind(this)}>visibility</Icon>
+                            <Icon entityId={accountList._id} className={style.icon_design} id={dataRow} onClick={this.goToViewData.bind(this)}>visibility</Icon>
                             <Icon className={style.icon_design} id={dataRow} onClick={this.openSettings}>delete</Icon>
                         </td>
                         <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{dataRow++}</div>
@@ -67,7 +54,7 @@ class StaffManage extends Component{
             }
         })
         if(this.state.view_btn.clicked){
-            route(`/staff/management/view/${event.target.id}`);
+            route(`/staff/management/view/profile/${event.target.__preactattr_.entityId}`);
         }
     }
 
@@ -91,14 +78,14 @@ class StaffManage extends Component{
         console.log(event);
     }
 
-    render( {finance}, {} ){
+    render( {dataReducer}, {} ){
         return(
             <div>
             <LayoutGrid>
                 <LayoutGrid.Inner>
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='10'>
-                        <div className={style.search_bar}>Search : <input value={this.state.searchTerm} onChange={ event => this.handleInput(event.target) } type='text'/></div>
+                        <div className={style.search_bar}><input placeholder="Search" value={this.state.searchTerm} onChange={ event => this.handleInput(event.target) } type='text'/></div>
                     </LayoutGrid.Cell>
                     <LayoutGrid.Cell cols='1'/>
                     <LayoutGrid.Cell cols='1'/>
@@ -158,8 +145,8 @@ class ColGroup extends Component{
     }
 }
 
-function mapStateToProps(finance){
-    return { finance };
+function mapStateToProps(dataReducer){
+    return { dataReducer };
 }
 
 export default connect( mapStateToProps,{ getAccountList })(StaffManage);

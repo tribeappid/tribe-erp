@@ -37,6 +37,18 @@
     color: gray;
 }
 
+.input_group select{
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    padding: 8px 12px;
+    background: white;
+    width: 100%;
+
+}
+
 .back_button{
     font-weight: bold;
     color: white;

@@ -219,7 +219,7 @@ var addBranch = exports.addBranch = function(req, res, override, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
         if (1) {
             if (
-                req.body.Name && req.body.EnterpriseId
+                req.body.Name
             ) {
                 var addParms = {};
 
@@ -230,7 +230,13 @@ var addBranch = exports.addBranch = function(req, res, override, callback){
 
                 //parameter values
                 if (req.body.BranchId) addParms._id = req.body.BranchId;
-                if (req.body.EnterpriseId) addParms.enterprise = req.body.EnterpriseId;
+                if (req.body.EnterpriseId) { 
+                    addParms.enterprise = req.body.EnterpriseId;
+                }
+                else
+                {
+                    addParms.enterprise = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
+                }
                 if (req.body.Name) addParms.name = req.body.Name;
                 if (req.body.CreateDate) addParms.create_date = req.body.CreateDate;
                 if (req.body.LastUpdate) addParms.last_update = req.body.LastUpdate;

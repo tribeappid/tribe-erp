@@ -46,7 +46,7 @@ class Login extends Component {
 		event.preventDefault();
 		this.setState({submitted: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password){
-			if(this.validateEmail(this.state.user.AuthenticationString) && this.validatePassword(this.state.user.Password)){
+			if(this.validateEmail(this.state.user.AuthenticationString) && this.state.user.Password){
 				this.props.login(this.state.user);
 			}
 		}
@@ -71,8 +71,8 @@ class Login extends Component {
 												{ submitted && !user.AuthenticationString ? 'You must fill this field' : ( submitted && !this.validateEmail(user.AuthenticationString) ? 'You have input an invalid Email' : '' ) }
 											</div>
 											<TextField type="password" label="Password" name="Password" value={user.Password} onChange={ event => this.handleInput(event.target)} />
-											<div align='left' className={ submitted && !user.Password ? style.has_error : ( this.validatePassword(user.Password) ? style.has_valid : style.has_error ) }>
-												{ submitted && !user.Password ? 'You must fill this field' : ( submitted && !this.validatePassword(user.AuthenticationString) ? 'You have input an invalid Password' : '' ) }
+											<div align='left' className={ submitted && !user.Password ? style.has_error : ( user.Password ? style.has_valid : style.has_error ) }>
+												{ submitted && !user.Password ? 'You must fill this field' : ( submitted && user.AuthenticationString ? 'You have input an invalid Password' : '' ) }
 											</div>
 											<div className="mdc-layout-grid">
 												<Button type="submit" ripple raised className="mdc-theme--secondary-bg">

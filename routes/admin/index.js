@@ -49,7 +49,7 @@ router.get('/getEnterprise', function(req, res, callback){
 router.post('/addBranch', function(req, res, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
         if (1) {
-            if (req.body.Name && req.body.EnterpriseId)
+            if (req.body.Name)
             {
                 var addBranchReq = _.clone(req);             
                 enterpriseController.addBranch(addBranchReq, res, true, function(err, data){

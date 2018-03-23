@@ -11,6 +11,18 @@ table{
     float: right;
 }
 
+.search_bar input{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.search_bar a{
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .add_button{
     padding: 7px 11px;
     float:right;

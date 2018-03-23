@@ -7,6 +7,7 @@ export const ACCOUNT_LIST = 'accounts_data_list';
 export const ACCOUNT_DATA = 'accounts_personal_data';
 
 const ROOT_URL = 'http://localhost:3000/';
+const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
 
 export function getFinances(){
     const req = axios.get(`${ROOT_URL}finances`);
@@ -27,8 +28,9 @@ export function login(user){
 }
 
 
-export function register(user){
-    const req = axios.post(`${ROOT_URL}accounts/register`,user);
+export function register(user,alertMessage){
+    const req = axios.post(`${ROOT_URL}accounts/register`,user)
+    .then(alertMessage());
 
     return{
         type: REGIS,
@@ -50,6 +52,15 @@ export function getAccountData(entity_id){
 
     return{
         type: ACCOUNT_DATA,
+        payload: req
+    }
+}
+
+export function getBranchList(){
+    const req = axios.get(`${ROOT_URL}admin/getBranch?EnterpriseId=${ENTERPRISE_ID}`);
+
+    return{
+        type: "BRANCH_LIST",
         payload: req
     }
 }

@@ -8,11 +8,15 @@ import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
 import { getAccountData } from '../../actions';
+import _ from 'lodash';
 import style from './style.css'
 
 class StaffManageView extends Component{
+    componentDidMount(){
+        this.props.getAccountData(this.props.ownProps.id);
+    }
     handleChange(event){
-        console.log(event);
+        
     }
 
     backTotaffList(){
@@ -26,7 +30,8 @@ class StaffManageView extends Component{
         }
     }
 
-    render({finance}, {}){
+    render({dataReducer, ownProps}, {}){
+        const profileInfo = _.map(dataReducer.accountData);
         return(
             <LayoutGrid>
                 <LayoutGrid.Inner>
@@ -52,7 +57,7 @@ class StaffManageView extends Component{
                                         </div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='9'>
-                                        <div className={style.second_content_people_name}>People Name</div>
+                                        <div className={style.second_content_people_name}>{ profileInfo[0] ? profileInfo[0].name : 'Loading ...' }</div>
                                         <LayoutGrid.Inner>
                                             <LayoutGrid.Cell cols='5'>
                                                 <div className={style.second_content_row + ' ' + style.row_title}>
@@ -67,7 +72,7 @@ class StaffManageView extends Component{
                                             </LayoutGrid.Cell>
                                             <LayoutGrid.Cell cols='7'>
                                                 <div className={style.second_content_row}>
-                                                    xxxxxx@gmail.com
+                                                    { profileInfo[0] ? profileInfo[0].authentication_string : 'Loading ...' }
                                                 </div>
                                                 <div className={style.second_content_row}>
                                                     xxxx-xx-xx
@@ -84,7 +89,7 @@ class StaffManageView extends Component{
                                         <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Role Detail</div>
+                                        <div className={style.second_content_row}>{ profileInfo[0] ? profileInfo[0].authorization_level == 500 ? "Adminitrasition" : '' : '' }</div>
                                 </LayoutGrid.Cell>
                                 </LayoutGrid.Inner>
                                 <div className={style.divider}/>
@@ -117,8 +122,8 @@ class StaffManageView extends Component{
     }
 }
 
-function mapStateToProps(finance){
-    return { finance };
+function mapStateToProps(dataReducer, ownProps){
+    return { dataReducer, ownProps };
 }
 
 export default connect(mapStateToProps,{getAccountData})(StaffManageView);

@@ -16,7 +16,7 @@ import { register } from '../../actions';
 class Register extends Component{
 	state={
 		user:{
-			AuthenticationString: '',
+			Username: '',
 			Password: '',
 			//confirmPass: '',
 			Name: '',
@@ -60,8 +60,8 @@ class Register extends Component{
 	handleSubmit(event){
 		event.preventDefault();
 		this.setState({submitted: true});
-		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
-			if(this.validateEmail(this.state.user.AuthenticationString) && this.validatePassword(this.state.user.Password)){
+		if(this.state.user.Username && this.state.user.Password && this.state.user.Name){
+			if(this.validateEmail(this.state.user.Username)){
 				this.props.register(this.state.user);
 			}
 		}
@@ -81,9 +81,9 @@ class Register extends Component{
 									</Card.Primary>
 									<Card.Media className="mdc-typography--title">
 									<form align='center' onSubmit={this.handleSubmit.bind(this)}>
-										<TextField className={style.register_input} type="text" name="AuthenticationString" label="Email" value={user.AuthenticationString} onChange={ event => this.handleInput(event.target)} />
-										<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : ( this.validateEmail(user.AuthenticationString) ? style.has_valid : style.has_error ) }>
-											{ submitted && !user.AuthenticationString ? 'You must fill this field' : ( submitted && !this.validateEmail(user.AuthenticationString) ? 'You have input an invalid Email' : '' ) }
+										<TextField className={style.register_input} type="text" name="Username" label="Email" value={user.Username} onChange={ event => this.handleInput(event.target)} />
+										<div align='left' className={ submitted && !user.Username ? style.has_error : ( this.validateEmail(user.Username) ? style.has_valid : style.has_error ) }>
+											{ submitted && !user.Username ? 'You must fill this field' : ( submitted && !this.validateEmail(user.Username) ? 'You have input an invalid Email' : '' ) }
 										</div>
 										{/*
 										<div align='left' className={ submitted && !user.AuthenticationString ? style.has_error : (this.validate(user.AuthenticationString) ? style.has_error : style.has_valid)}>
