@@ -38,7 +38,7 @@ var getProduct = exports.getProduct = function(req, res, override, callback, api
             if (req.query.Type) queryParms.type = req.query.Type;
             if (req.query.Category) queryParms.category = req.query.Category;
             if (req.query.EnterpriseId) queryParms.enterprise = req.query.EnterpriseId;
-            if (req.query.BranchId) queryParms.branch = req.query.BranchId;
+            if (req.query.BranchId) queryParms.branches = req.query.BranchId;
 
             //paging parameters
             if (req.query.PageSize && !isNaN(req.query.PageSize)) pageSize = parseInt(req.query.PageSize);

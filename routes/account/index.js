@@ -11,12 +11,35 @@ router.post('/register', function(req, res, callback){
                 req.body.LastName ||
                 req.body.Name)
             ) {
-                    var addEntityReq = _.clone(req);             
-                    entityController.addEntity(addEntityReq, res, true, function(err, data){
-                        if (!err){
-                            apiHelper.addRes(req, res, null, data, callback);
-                        }else{
-                            apiHelper.addRes(req, res, err, null, callback);
+                    //check if user exists
+                    async.waterfall([
+                        function(checkExistCallback) {
+                            var getEntityReq = _.clone(req);             
+                            getEntityReq.query = {};
+                            getEntityReq.query.AuthenticationString = req.body.AuthenticationString;
+                            entityController.getEntity(req, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                                if (!resGetEntityErr && resGetEntity){
+                                    checkExistCallback('User Exists');
+                                }else{
+                                    checkExistCallback();
+                                }
+                            });
+                        }
+                    ], function (err) {
+                        if (!err)
+                        {
+                            var addEntityReq = _.clone(req);             
+                            entityController.addEntity(addEntityReq, res, true, function(err, data){
+                                if (!err){
+                                    apiHelper.addRes(req, res, null, data, callback);
+                                }else{
+                                    apiHelper.addRes(req, res, err, null, callback);
+                                }
+                            });        
+                        }
+                        else
+                        {
+                            apiHelper.apiResponse(req, res, true, 500, err, null, null, null, null);
                         }
                     });
             } else {
