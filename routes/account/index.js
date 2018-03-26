@@ -112,13 +112,13 @@ router.post('/login', function(req, res, callback){
                 options.entityFields.approved = 1;
                 options.entityFields.disabled = 1;
                 options.entityFields.type = 1;
-                options.entityFields.hash = 1;
                 options.entityFields.date_established = 1;
                 options.entityFields.authorization_level = 1;
                 options.entityFields.enterprise = 1;
                 options.entityFields.referral_code = 1;
                 options.entityFields.referred_by = 1;
                 options.entityFields.authentication_attempts = 1;
+                options.entityFields.authentication_string = 1;
 
                 options.enterpriseFields = {};
                 options.enterpriseFields._id = 1;
@@ -133,9 +133,6 @@ router.post('/login', function(req, res, callback){
                 options.mediasFields = {};
                 options.mediasFields._id = 1;
                 options.mediasFields.img_url = 1;
-                options.mediasFields.img_url2 = 1;
-                options.mediasFields.img_url3 = 1;
-                options.mediasFields.img_url4 = 1;
                 options.mediasFields.media_url = 1;
 
                 entityController.getEntity(req, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
@@ -247,13 +244,13 @@ router.get('/list', function(req, res, callback){
             options.entityFields.approved = 1;
             options.entityFields.disabled = 1;
             options.entityFields.type = 1;
-            options.entityFields.hash = 1;
             options.entityFields.date_established = 1;
             options.entityFields.authorization_level = 1;
             options.entityFields.enterprise = 1;
             options.entityFields.referral_code = 1;
             options.entityFields.referred_by = 1;
             options.entityFields.authentication_attempts = 1;
+            options.entityFields.authentication_string = 1;
 
             options.enterpriseFields = {};
             options.enterpriseFields._id = 1;
