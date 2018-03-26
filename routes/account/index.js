@@ -1,5 +1,7 @@
 var router = express.Router();
 
+var upload = multer({ dest: 'upload/userprofile' });
+
 /* Register user */
 router.post('/register', function(req, res, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
@@ -273,6 +275,121 @@ router.get('/list', function(req, res, callback){
             apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, null);
         }
     //});
+});
+
+router.post('/userprofile', upload.single('image'), function(req, res){
+
+    if (req.body.EntityId && req.file)
+    {
+        var mime_type = 'image/jpeg';
+        var target_path = null;
+
+        async.waterfall([
+            function (getEntityCallback) {
+                var getEntityReq = _.clone(req);             
+                getEntityReq.query = {};
+                getEntityReq.query.EntityId = req.query.EntityId;
+                entityController.getEntity(req, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                    if (!resGetEntityErr){
+                        getEntityCallback();
+                    }else{
+                        getEntityCallback(resGetEntityErr);
+                    }
+                });        
+            },
+            function(uploadCallback) {
+                var tmp_path = req.file.path;
+                var extension = path.extname(req.file.originalname);
+                
+                mime_type = req.file.mimetype;
+                target_path = "upload/userprofile/" + req.body.EntityId + extension;
+                
+                var src = fs.createReadStream(tmp_path);
+                var dest = fs.createWriteStream(target_path);
+        
+                src.pipe(dest);
+        
+                src.on('end', function() { 
+                    fs.unlink(tmp_path);
+                    uploadCallback();
+                });
+        
+                src.on('error', function(err) { 
+                    fs.unlink(tmp_path);
+                    uploadCallback("Write File Error");
+                });        
+            }
+
+        ], function(err) {
+            var updateEntityReq = _.clone(req);             
+            updateEntityReq.body = {};
+            updateEntityReq.body.EntityId = req.body.EntityId;
+            updateEntityReq.body.Userprofile = { filename: target_path, mimetype: mime_type};
+            entityController.updateEntity(updateEntityReq, res, true, function(err, data){
+                if (!err){
+                    apiHelper.apiRes(req, res, null, null, data, null, null, null);
+                }else{
+                    apiHelper.apiResponse(req, res, true, 500, "Updating Userprofile Fail", null, null, null, null);
+                }
+            });              
+        });
+
+    }
+    else
+    {
+        apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, null);
+    }
+});
+
+router.get('/userprofile', function(req, res){
+
+    if (req.query.EntityId)
+    {
+        var entityObj = null;
+
+        async.waterfall([
+            function (getEntityCallback) {
+                var getEntityReq = _.clone(req);             
+                getEntityReq.query = {};
+                getEntityReq.query.EntityId = req.query.EntityId;
+                entityController.getEntity(req, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                    if (!resGetEntityErr){
+                        if (resGetEntity && !_.isEmpty(resGetEntity))
+                            entityObj = _.first(resGetEntity);
+                        getEntityCallback();
+                    }else{
+                        getEntityCallback(resGetEntityErr);
+                    }
+                });        
+            }
+        ], function(err) {
+            if (!err && entityObj)
+            {
+                if (entityObj.userprofile)
+                {
+                    var target_path = entityObj.userprofile.filename;
+                    var mimetype = entityObj.userprofile.mimetype;
+                    var src = fs.createReadStream(target_path);
+                    src.pipe(res);
+                }
+                else
+                {
+                    apiHelper.apiResponse(req, res, true, 500, "Userprofile Not Found", null, null, null, null);
+                }
+            }
+            else
+            {
+                apiHelper.apiResponse(req, res, true, 500, "Entity Not Found", null, null, null, null);
+            }
+        });        
+
+    }
+    else
+    {
+        apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, null);
+    }
+
+  
 });
 
 module.exports = router;

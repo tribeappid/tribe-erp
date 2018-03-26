@@ -47,6 +47,10 @@ entitySchema = new Schema({
         type: Schema.Types.ObjectId
         , ref : 'media'
     }
+    , userprofile : {
+        filename: {type: String, default: null},
+        mimetype: {type: String, default: 'image/jpeg'}
+    }
 });
 
 mongoose.model('entity', entitySchema, 'entity');

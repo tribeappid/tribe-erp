@@ -199,8 +199,8 @@ var addEntity = exports.addEntity = function(req, res, override, callback){
 };
 
 var updateEntity = exports.updateEntity = function(req, res, override, callback){
-    authorizationHelper.authorize(req, res, [__ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
-        if (authorized) {
+    //authorizationHelper.authorize(req, res, [__ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
             if (
                 req.body.EntityId ||
                 req.body.ThirdPartyId
@@ -274,6 +274,7 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                 if (req.body.LeftFinger) updateParms.left_finger = req.body.LeftFinger;
                 if (req.body.RightFinger) updateParms.right_finger = req.body.RightFinger;
                 if (req.body.FingerLastUpdate) updateParms.finger_last_update = req.body.FingerLastUpdate;
+                if (req.body.Userprofile) updateParms.userprofile = req.body.Userprofile;
                 //if (req.body.CondominiumId) updateParms.condominium = req.body.CondominiumId;
 
                 //unset features
@@ -299,7 +300,7 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                 }
 
                 var updateEntityObj = null;
-                var entityModel = mongodb.model('entity');
+                var entityModel = mongoose.model('entity');
                 async.waterfall([
                         function(updateEntityCallback){
                             //update entity
@@ -315,7 +316,8 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                                         updateEntityCallback(err);
                                     }
                                 });
-                        },
+                        }
+                        /*,
                         function(updateReferencesCallback){
                             if (
                                 req.body.Emails ||
@@ -1187,7 +1189,7 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                             }else{
                                 updateReferencesCallback();
                             }
-                        }]
+                        }*/]
                     , function (err) {
                         if (err){
                             apiHelper.updateRes(req, res, err, null, null, callback);
@@ -1198,12 +1200,12 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                         }
                     });
             } else {
-                apiHelper.apiResponse(req, res, true, 500, "Not found", null, null, null, callback);
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameters", null, null, null, callback);
             }
         } else {
-            apiHelper.apiResponse(req, res, true, 401, "Not found", null, null, null, callback);
+            apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, callback);
         }
-    });
+    //});
 };
 
 var deleteEntity = exports.deleteEntity = function(req, res, override, callback){
@@ -1215,7 +1217,7 @@ var deleteEntity = exports.deleteEntity = function(req, res, override, callback)
                 var queryParms = {};
                 if (req.body.EntityId) queryParms._id = req.body.EntityId;
 
-                var entityModel = mongodb.model('entity');
+                var entityModel = mongoose.model('entity');
                 entityModel.remove(queryParms).exec(function (err, numberRemoved) {
                     apiHelper.deleteRes(req, res, err, numberRemoved, callback);
                 });

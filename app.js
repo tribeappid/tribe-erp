@@ -13,6 +13,8 @@ qs = require('qs');
 bcrypt = require('bcrypt');
 cryptoJs = require("crypto-js");
 async = require('async');
+multer  = require('multer');
+fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
