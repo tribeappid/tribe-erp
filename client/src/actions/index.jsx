@@ -28,9 +28,8 @@ export function login(user){
 }
 
 
-export function register(user,alertMessage){
-    const req = axios.post(`${ROOT_URL}accounts/register`,user)
-    .then(alertMessage());
+export function register(user){
+    const req = axios.post(`${ROOT_URL}accounts/register`,user);
 
     return{
         type: REGIS,

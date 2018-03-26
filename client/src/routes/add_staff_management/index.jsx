@@ -19,7 +19,8 @@ class AddStaff extends Component{
             Name: '',
             AuthorizationLevel: 500
         },
-        submitted: false
+        submitted: false,
+        responseCheck: false
     }
     backStaffManage(){
         this.setState({
@@ -32,11 +33,6 @@ class AddStaff extends Component{
         }
     }
 
-    showAllert(){
-        route('/staff/management');
-        alert("Registration Finish");
-    }
-
     handleInput(term){
 		const target = term.__preactattr_.name;
         const newUser = this.state.user;
@@ -46,7 +42,7 @@ class AddStaff extends Component{
 				[target]: term.value
 			}
         });
-	}
+    }
 
     validateEmail(email){
 		return(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
@@ -69,15 +65,22 @@ class AddStaff extends Component{
 
     handleSubmit(){
         event.preventDefault();
-		this.setState({submitted: true});
+		this.setState({submitted: true,responseCheck: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
 			if(this.validateEmail(this.state.user.AuthenticationString)){
-				this.props.register(this.state.user,this.showAllert.bind(this));
-			}
+                this.props.register(this.state.user);
+            }
 		}
     }
 
-    render({dataReducer},{user, submitted}){
+    success(){
+        alert("Registration Success");
+        route('/staff/management');
+    }
+
+    render({dataReducer},{user, submitted, responseCheck}){
+        console.log(dataReducer);
+        ( responseCheck ? ( dataReducer.registerResponse[0] ? ( dataReducer.registerResponse[0].Error ? console.log("Gagal") : this.success() ) : alert("Registration Failed") ) : '' );
         return(
             <LayoutGrid>
                 <LayoutGrid.Inner>
@@ -89,7 +92,7 @@ class AddStaff extends Component{
                                 <label for='photo'>
                                     <Icon style={`font-size: 150px; padding: 5px;`}>account_circle</Icon>
                                     <input type='file' id='photo' style={`display: none;`}/><br/>
-                                    <span className={style.open_folder}>Open Folder</span>
+                                    <span className={style.open_folder}>Upload</span>
                                 </label>
                             </div>
                             <form onSubmit={this.handleSubmit.bind(this)}>
