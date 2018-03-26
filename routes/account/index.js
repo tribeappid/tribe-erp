@@ -17,8 +17,8 @@ router.post('/register', function(req, res, callback){
                             var getEntityReq = _.clone(req);             
                             getEntityReq.query = {};
                             getEntityReq.query.AuthenticationString = req.body.AuthenticationString;
-                            entityController.getEntity(req, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
-                                if (!resGetEntityErr && resGetEntity){
+                            entityController.getEntity(getEntityReq, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                                if (!resGetEntityErr && !_.isEmpty(resGetEntity)){
                                     checkExistCallback('User Exists');
                                 }else{
                                     checkExistCallback();
