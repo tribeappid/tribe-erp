@@ -112,6 +112,7 @@ router.post('/login', function(req, res, callback){
                 options.entityFields.approved = 1;
                 options.entityFields.disabled = 1;
                 options.entityFields.type = 1;
+                options.entityFields.hash = 1;
                 options.entityFields.date_established = 1;
                 options.entityFields.authorization_level = 1;
                 options.entityFields.enterprise = 1;
