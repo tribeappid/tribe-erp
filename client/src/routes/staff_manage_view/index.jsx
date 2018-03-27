@@ -7,13 +7,14 @@ import 'preact-material-components/LayoutGrid/style.css';
 import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
-import { getAccountData } from '../../actions';
+import { getAccountData, getPicture } from '../../actions';
 import _ from 'lodash';
 import style from './style.css'
 
 class StaffManageView extends Component{
     componentDidMount(){
         this.props.getAccountData(this.props.ownProps.id);
+        this.props.getPicture(this.props.ownProps.id);
     }
     handleChange(event){
         
@@ -31,6 +32,8 @@ class StaffManageView extends Component{
     }
 
     render({dataReducer, ownProps}, {}){
+        console.log(dataReducer);
+        const ROOT_URL = 'http://localhost:3000/';
         const profileInfo = _.map(dataReducer.accountData);
         return(
             <LayoutGrid>
@@ -53,7 +56,10 @@ class StaffManageView extends Component{
                                 <LayoutGrid.Inner className={style.second_content}>
                                     <LayoutGrid.Cell cols='3'>
                                         <div className={style.image_place}>
-                                            <div className={style.image_setting}></div>
+                                            {//<div className={style.image_setting}></div>
+                                            }
+                                            <img style={`width:100px;height:100px;`} src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`}/>
+                                            {console.log(`accounts/userprofile?EntityId=${ownProps.id}`)}
                                         </div>
                                     </LayoutGrid.Cell>
                                     <LayoutGrid.Cell cols='9'>
@@ -126,45 +132,4 @@ function mapStateToProps(dataReducer, ownProps){
     return { dataReducer, ownProps };
 }
 
-export default connect(mapStateToProps,{getAccountData})(StaffManageView);
-{/*
-class ProgramTable extends Component{
-    render({}, {}){
-        return(
-            <div className={style.program_table}>
-                <table>
-                    <tr>
-                        <th>Programmes ##</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Subject</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Math</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Curriculum</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Level A</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Level</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>JC 2</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        )
-    }
-}*/
-}
+export default connect(mapStateToProps,{ getAccountData, getPicture })(StaffManageView);

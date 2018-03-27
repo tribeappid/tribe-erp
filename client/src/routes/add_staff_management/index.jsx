@@ -9,7 +9,7 @@ import 'preact-material-components/Icon/style';
 import 'preact-material-components/TextField/style';
 import style from './style.css';
 import { connect } from 'preact-redux';
-import { register } from '../../actions';
+import { register, uploadPicture } from '../../actions';
 
 class AddStaff extends Component{
     state={
@@ -20,7 +20,12 @@ class AddStaff extends Component{
             AuthorizationLevel: 500
         },
         submitted: false,
-        responseCheck: false
+        responseCheck: false,
+        imagePicked: false,
+        imageData:{
+            EntityId: '',
+            image: ''
+        }
     }
     backStaffManage(){
         this.setState({
@@ -70,17 +75,60 @@ class AddStaff extends Component{
 			if(this.validateEmail(this.state.user.AuthenticationString)){
                 this.props.register(this.state.user);
             }
-		}
+        }
+        this.checkResponsed();
+    }
+
+    checkResponsed(){
+        ( this.state.responseCheck ? (this.props.dataReducer.registerResponse.RowsReturned>0 ? this.failed() : this.success() ) : console.log("false") );
     }
 
     success(){
+        console.log(this.props.dataReducer);
         alert("Registration Success");
-        route('/staff/management');
+        console.log(this.props.registerResponse);
     }
 
-    render({dataReducer},{user, submitted, responseCheck}){
+    failed(){
+        alert("Registration Failed");
+        console.log(this.props.dataReducer);
+    }
+
+    handleEvent(){
+    }
+
+    handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+        console.log(files);
+        
+    
+        var reader = new FileReader();
+    
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+                document.getElementById('userprofile').src = e.target.result;
+            };
+        })(files[0]);
+    
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(files[0]);
+
+        const data= this.state.imageData;
+        const target = event.target.value;
+        this.setState({
+            imagePicked: true,
+            imageData:{
+                ...data,
+                image: target
+            }
+        });
+        console.log(event);
+        console.log(this.state.imageData);
+    }
+
+    render({dataReducer},{user, submitted, responseCheck, background}){
         console.log(dataReducer);
-        ( responseCheck ? ( dataReducer.registerResponse[0] ? ( dataReducer.registerResponse[0].Error ? console.log("Gagal") : this.success() ) : alert("Registration Failed") ) : '' );
         return(
             <LayoutGrid>
                 <LayoutGrid.Inner>
@@ -89,9 +137,10 @@ class AddStaff extends Component{
                         <Card className={style.content_body}>
                             <a className={style.page_title}>Add Staff</a>
                             <div style={`text-align: center;margin-bottom: 40px;`}>
-                                <label for='photo'>
-                                    <Icon style={`font-size: 150px; padding: 5px;`}>account_circle</Icon>
-                                    <input type='file' id='photo' style={`display: none;`}/><br/>
+                                <label for='image'>
+                                    <Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
+                                    <img className={ this.state.imagePicked ? style.imageHolder : style.imageHidden} id="userprofile"/>
+                                    <input style={`display: none;`} onChange={this.handleFileSelect.bind(this)} type="file" id="image" name="image"/><br/>
                                     <span className={style.open_folder}>Upload</span>
                                 </label>
                             </div>
@@ -125,7 +174,7 @@ class AddStaff extends Component{
                                     <button type="submit" className={style.add_button}>Add</button>
                                 </div>
                             </form>
-                        </Card>
+                        </Card>   
                     </LayoutGrid.Cell>
                     <LayoutGrid.Cell cols='1'/>
                 </LayoutGrid.Inner>
@@ -138,4 +187,4 @@ function mapStateToProps(dataReducer){
     return { dataReducer }
 }
 
-export default connect(mapStateToProps,{ register })(AddStaff);
+export default connect(mapStateToProps,{ register, uploadPicture })(AddStaff);
