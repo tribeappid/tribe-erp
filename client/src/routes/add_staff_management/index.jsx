@@ -23,9 +23,10 @@ class AddStaff extends Component{
         responseCheck: false,
         imagePicked: false,
         imageData:{
-            EntityId: '',
-            image: ''
-        }
+            EntityId: ''
+        },
+        formData: [],
+        image: [],
     }
     backStaffManage(){
         this.setState({
@@ -73,14 +74,34 @@ class AddStaff extends Component{
 		this.setState({submitted: true,responseCheck: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
 			if(this.validateEmail(this.state.user.AuthenticationString)){
-                this.props.register(this.state.user);
+                console.log(this.state.imageData.imageFormData);
+                if(this.state.imageData.image){
+                    this.props.register(this.state.user);
+                }
+                else{
+                    alert("Please Select a Picture");
+                }
             }
         }
-        this.checkResponsed();
     }
 
     checkResponsed(){
-        ( this.state.responseCheck ? (this.props.dataReducer.registerResponse.RowsReturned>0 ? this.failed() : this.success() ) : console.log("false") );
+        if(this.state.responseCheck){
+            if(this.props.dataReducer.registerResponse.length==0){
+                
+            }
+            else{
+                console.log(this.props.dataReducer.registerResponse.Data._id);
+                const currentData = this.state.imageData;
+                const target = this.props.dataReducer.registerResponse.Data._id;
+                this.setState({imageData:{
+                    ...currentData,
+                    EntityId: target
+                },responseCheck: false})
+                console.log(this.state.imageData);
+                this.props.uploadPicture(this.state.imageData,this.state.formData);
+            }
+        }
     }
 
     success(){
@@ -100,13 +121,20 @@ class AddStaff extends Component{
     handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
         console.log(files);
-        
-    
+
+        var dataForm = new FormData();
+        dataForm.append("file", files[0]);
+        //for getting file extension name
+        //const contoh = (/[^.]+$/.exec(files[0].name));
+        //console.log(contoh[0]);
+        let target = this.state.image;
         var reader = new FileReader();
     
         // Closure to capture the file information.
         reader.onload = (function(theFile) {
             return function(e) {
+                const fileAsBase64 = reader.result.substr(reader.result.indexOf(",")+1);
+                target.push(fileAsBase64);
                 document.getElementById('userprofile').src = e.target.result;
             };
         })(files[0]);
@@ -114,20 +142,21 @@ class AddStaff extends Component{
         // Read in the image file as a data URL.
         reader.readAsDataURL(files[0]);
 
+        console.log(target);
         const data= this.state.imageData;
-        const target = event.target.value;
         this.setState({
             imagePicked: true,
             imageData:{
                 ...data,
                 image: target
-            }
+            },
+            formData: dataForm
         });
-        console.log(event);
         console.log(this.state.imageData);
     }
 
     render({dataReducer},{user, submitted, responseCheck, background}){
+        this.checkResponsed();
         console.log(dataReducer);
         return(
             <LayoutGrid>

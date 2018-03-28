@@ -279,6 +279,7 @@ router.get('/list', function(req, res, callback){
 
 router.post('/userprofile', upload.single('image'), function(req, res){
 
+    console.log(req.file);
     if (req.body.EntityId && req.file)
     {
         var mime_type = 'image/jpeg';
@@ -329,6 +330,7 @@ router.post('/userprofile', upload.single('image'), function(req, res){
                 if (!err){
                     apiHelper.apiRes(req, res, null, null, data, null, null, null);
                 }else{
+                    console.log('updating userprofile fail');
                     apiHelper.apiResponse(req, res, true, 500, "Updating Userprofile Fail", null, null, null, null);
                 }
             });              
