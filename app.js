@@ -15,6 +15,7 @@ cryptoJs = require("crypto-js");
 async = require('async');
 multer  = require('multer');
 fs = require('fs');
+cors = require('cors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -67,20 +68,24 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
 app.use(function (req,res,next) {
+  console.log('set cors header');
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
   res.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader("Access-Control-Max-Age", "1728000");
+  console.log(res.getHeaders());
   next();
 });
-
+*/
 app.use('/', routes);
 app.use('/users', users);
 app.use('/finances', finances);

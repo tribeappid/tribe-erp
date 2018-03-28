@@ -67,25 +67,19 @@ export function getBranchList(){
     }
 }
 
-export function uploadPicture(dataPicture,dataForm){
-    console.log('call uploadPicture');
-    console.log(dataPicture);
-    /*const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataPicture)
-    .catch(error => {
-        console.log(error);
-    }); */
-    //const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataPicture,dataForm);
-    const req = axios.put(`${ROOT_URL}accounts/userprofile`,dataPicture,dataForm);
-    /*const reqq = axios.post(`${ROOT_URL}accounts/userprofile`,dataPicture,{
-        headers:{
-            'Content-Type' : `multiple/form-data; boundary=${dataPicture._boundary}`
-        }
-    }); */
-    console.log(req);
+export function uploadPicture(dataEntity,dataForm){
+    dataForm.append('EntityId', dataEntity.EntityId);
+    axios.post(`${ROOT_URL}accounts/userprofile`,dataForm)
+    .then(function (res) {
+        console.log(res);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
 
     return{
-        type: POST_PICTURE,
-        payload: req
+        type: POST_PICTURE
+        //payload: req
     }
 }
 

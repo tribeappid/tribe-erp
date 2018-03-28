@@ -75,7 +75,7 @@ class AddStaff extends Component{
 		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
 			if(this.validateEmail(this.state.user.AuthenticationString)){
                 console.log(this.state.imageData.imageFormData);
-                if(this.state.imageData.image){
+                if(this.state.imageData.file){
                     this.props.register(this.state.user);
                 }
                 else{
@@ -120,39 +120,33 @@ class AddStaff extends Component{
 
     handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
-        console.log(files);
 
         var dataForm = new FormData();
-        dataForm.append("file", files[0]);
-        //for getting file extension name
-        //const contoh = (/[^.]+$/.exec(files[0].name));
-        //console.log(contoh[0]);
+        dataForm.append("image", files[0]);
         let target = this.state.image;
         var reader = new FileReader();
     
         // Closure to capture the file information.
         reader.onload = (function(theFile) {
             return function(e) {
-                const fileAsBase64 = reader.result.substr(reader.result.indexOf(",")+1);
-                target.push(fileAsBase64);
+                const fileAsBase64 = reader.result.substr(reader.result.indexOf(",")+1);                
                 document.getElementById('userprofile').src = e.target.result;
+                //target.push(fileAsBase64);
             };
         })(files[0]);
     
         // Read in the image file as a data URL.
         reader.readAsDataURL(files[0]);
 
-        console.log(target);
         const data= this.state.imageData;
         this.setState({
             imagePicked: true,
             imageData:{
                 ...data,
-                image: target
+                file: target
             },
             formData: dataForm
         });
-        console.log(this.state.imageData);
     }
 
     render({dataReducer},{user, submitted, responseCheck, background}){
