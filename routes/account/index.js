@@ -78,6 +78,57 @@ router.get('/profile', function(req, res, callback){
     //});
 });
 
+router.post('/delete', function(req, res, callback){
+    //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.EntityId
+            ) {
+                    var delEntityReq = _.clone(req);             
+                    delEntityReq.body = {};
+                    delEntityReq.body.EntityId = req.body.EntityId;
+                    entityController.deleteEntity(delEntityReq, res, true, function(resGetEntityErr, data, numberRemoved){
+                        if (!resGetEntityErr){
+                            apiHelper.apiRes(req, res, null, null, data, null, null, null);
+                        }else{
+                            apiHelper.apiRes(req, res, null, null, null, resGetEntityErr, null, null);
+                        }
+                    });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, null);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, null);
+        }
+    //});
+});
+
+router.post('/update', function(req, res, callback){
+    //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.EntityId
+            ) {
+                    var delEntityReq = _.clone(req);             
+                    delEntityReq.body.EntityId = req.body.EntityId;
+                    entityController.updateEntity(delEntityReq, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                        if (!resGetEntityErr){
+                            var numberAffected = null;
+                            if (resGetEntity) numberAffected = resGetEntity.nModified;
+                            apiHelper.apiRes(req, res, null, null, resGetEntity, null, null, null);
+                        }else{
+                            apiHelper.apiRes(req, res, null, null, null, resGetEntityErr, null, null);
+                        }
+                    });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, null);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, null);
+        }
+    //});
+});
+
 router.post('/login', function(req, res, callback){
     if (
         (req.body.AuthenticationString && req.body.Password)
