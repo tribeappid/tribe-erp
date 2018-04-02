@@ -83,30 +83,32 @@ export default class Accounting extends Component{
 
     render({},{ count }){
         return(
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <table>
-                            <tr className={style.title_row}>
-                                <th>Date</th>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th></th>
-                            </tr>
-                            {this.oneRowData()}
-                            <tr className={style.add_row}>
-                                <td><input name="nama" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.nama}/></td>
-                                <td><input name="detail" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.detail}/></td>
-                                <td><input name="role" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.role}/></td>
-                                <td><input name="date" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.date}/></td>
-                                <td><button onClick={this.addData.bind(this)}>Save</button></td>
-                            </tr>
-                        </table>
-                    </LayoutGrid.Cell>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
+            <div>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <table>
+                                <tr className={style.title_row}>
+                                    <th>Date</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th></th>
+                                </tr>
+                                {this.oneRowData()}
+                                <tr className={style.add_row}>
+                                    <td><input name="nama" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.nama}/></td>
+                                    <td><input name="detail" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.detail}/></td>
+                                    <td><input name="role" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.role}/></td>
+                                    <td><input name="date" onChange={ event => this.handleInput(event.target)} value={this.state.tempData.date}/></td>
+                                    <td><button onClick={this.addData.bind(this)}>Save</button></td>
+                                </tr>
+                            </table>
+                        </LayoutGrid.Cell>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+            </div>
         )
     }
 }

@@ -21,6 +21,7 @@ import AddStaff from '../routes/add_staff_management';
 import Branches from '../routes/branches';
 import BranchView from '../routes/branches_view';
 import AddBranch from '../routes/add_branch';
+import LoadingScreen from './loading_screen';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -39,7 +40,8 @@ export default class App extends Component {
 		return (
 			<Provider store={createStoreWithMiddleWare(reducers)}>
 			<div id="app">
-				<Header />
+				<LoadingScreen/>
+				<Header/>
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Invoice path="/sales/management"/>
@@ -58,7 +60,6 @@ export default class App extends Component {
 					<Branches path='/branches'/>
 					<BranchView path='/branches/view/:id'/>
 					<AddBranch path='/branches/add'/>
-					
 				</Router>
 			</div>
 			</Provider>

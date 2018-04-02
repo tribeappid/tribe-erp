@@ -27,64 +27,66 @@ class BranchView extends Component{
 
     render({}, {}){
         return(
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <Card>
-                            <div className={style.content_body}>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <a className={style.page_info}>View Branch</a>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <button className={style.edit_button}>
-                                                <Icon>edit</Icon>
-                                                <a>Edit</a>
-                                        </button>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                
-                                <LayoutGrid.Inner style={`margin-top: 50px;`}>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Branch Name</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Branch Detail</div>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner className={style.last_content}>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Address</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Address Detail</div>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner className={style.last_content}>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Phone</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Phone Number</div>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='12'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
-                                        <ProgramTable/>
-                                        <ProgramTable/>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
-                            </div>
-                        </Card>
-                    </LayoutGrid.Cell>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
+            <div>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <Card>
+                                <div className={style.content_body}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <a className={style.page_info}>View Branch</a>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <button className={style.edit_button}>
+                                                    <Icon>edit</Icon>
+                                                    <a>Edit</a>
+                                            </button>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    
+                                    <LayoutGrid.Inner style={`margin-top: 50px;`}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Branch Name</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Branch Detail</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Address</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Address Detail</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Phone</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Phone Number</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='12'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
+                                            <ProgramTable/>
+                                            <ProgramTable/>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
+                                </div>
+                            </Card>
+                        </LayoutGrid.Cell>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+            </div>
         )
     }
 }

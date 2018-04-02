@@ -87,51 +87,51 @@ export default class Branches extends Component{
     render( {}, {} ){
         return(
             <div>
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <div className={style.search_bar}>Search : <input type='text'/></div>
-                    </LayoutGrid.Cell>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <button onClick={this.goToAddBranch.bind(this)} className={style.add_button}>
-                            <Icon>add</Icon>
-                            <a>Add Branch</a>
-                        </button>
-                    </LayoutGrid.Cell>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <Card>
-                            <table>
-                                <ColGroup/>
-                                <tbody>
-                                    <tr style={style.even}>
-                                        <th>S/N</th>
-                                        <th className={style.data_table}>Branch Name</th>
-                                        <th className={style.data_table}>Address</th>
-                                        <th>Classroom</th>
-                                        <th className={style.data_table}>Actions</th>
-                                    </tr>
-                                    {this.loadData()}
-                                </tbody>
-                            </table>
-                        </Card>
-                    </LayoutGrid.Cell>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
-            <Dialog ref={this.dialogRef}>
-				<Dialog.Header>Delete Branch</Dialog.Header>
-				<Dialog.Body>
-					Are you sure want to delete this branch?
-				</Dialog.Body>
-				<Dialog.Footer>
-					<Dialog.FooterButton accept>Yes</Dialog.FooterButton>
-                    <Dialog.FooterButton cancel>No</Dialog.FooterButton>
-				</Dialog.Footer>
-			</Dialog>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <div className={style.search_bar}>Search : <input type='text'/></div>
+                        </LayoutGrid.Cell>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <button onClick={this.goToAddBranch.bind(this)} className={style.add_button}>
+                                <Icon>add</Icon>
+                                <a>Add Branch</a>
+                            </button>
+                        </LayoutGrid.Cell>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <Card>
+                                <table>
+                                    <ColGroup/>
+                                    <tbody>
+                                        <tr style={style.even}>
+                                            <th>S/N</th>
+                                            <th className={style.data_table}>Branch Name</th>
+                                            <th className={style.data_table}>Address</th>
+                                            <th>Classroom</th>
+                                            <th className={style.data_table}>Actions</th>
+                                        </tr>
+                                        {this.loadData()}
+                                    </tbody>
+                                </table>
+                            </Card>
+                        </LayoutGrid.Cell>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+                <Dialog ref={this.dialogRef}>
+                    <Dialog.Header>Delete Branch</Dialog.Header>
+                    <Dialog.Body>
+                        Are you sure want to delete this branch?
+                    </Dialog.Body>
+                    <Dialog.Footer>
+                        <Dialog.FooterButton accept>Yes</Dialog.FooterButton>
+                        <Dialog.FooterButton cancel>No</Dialog.FooterButton>
+                    </Dialog.Footer>
+                </Dialog>
             </div>
         )
     }

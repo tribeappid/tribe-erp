@@ -8,6 +8,7 @@ export const ACCOUNT_DATA = 'accounts_personal_data';
 export const BRANCH_LIST = 'branch_list';
 export const GET_PICTURE = 'get_picture';
 export const POST_PICTURE = 'post_picture';
+export const DELETE_ACCOUNT = 'delete_account';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -69,17 +70,11 @@ export function getBranchList(){
 
 export function uploadPicture(dataEntity,dataForm){
     dataForm.append('EntityId', dataEntity.EntityId);
-    axios.post(`${ROOT_URL}accounts/userprofile`,dataForm)
-    .then(function (res) {
-        console.log(res);
-    })
-    .catch(function(err) {
-        console.log(err);
-    });
+    const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm);
 
     return{
-        type: POST_PICTURE
-        //payload: req
+        type: POST_PICTURE,
+        payload: req
     }
 }
 
@@ -88,6 +83,15 @@ export function getPicture(entityId){
 
     return{
         type: GET_PICTURE,
+        payload: req
+    }
+}
+
+export function deleteAccount(entityId){
+    const req = axios.post(`${ROOT_URL}accounts/delete`,entityId);
+
+    return{
+        type: DELETE_ACCOUNT,
         payload: req
     }
 }

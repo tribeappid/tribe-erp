@@ -15,97 +15,99 @@ class ItemProductView extends Component{
 
     render({}, {}){
         return(
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <Card>
-                            <div className={style.content_body}>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <a className={style.page_info}>View Product</a>
+            <div>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <Card>
+                                <div className={style.content_body}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <a className={style.page_info}>View Product</a>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <button className={style.edit_button}>
+                                                    <Icon className={style.contoh}>edit</Icon>
+                                            
+                                                    <a className={style.edit_button_word}>Edit</a>
+                                            </button>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner className={style.second_content}>
+                                        <LayoutGrid.Cell cols='3'>
+                                            <div className={style.image_place}>
+                                                <div className={style.image_setting}></div>
+                                            </div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='9'>
+                                            <div className={style.second_content_people_name}>Item Name</div>
+                                            <LayoutGrid.Inner>
+                                                <LayoutGrid.Cell cols='5'>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Product Code
+                                                    </div>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Width
+                                                    </div>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Height
+                                                    </div>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Status
+                                                    </div>
+                                                </LayoutGrid.Cell>
+                                                <LayoutGrid.Cell cols='7'>
+                                                    <div className={style.second_content_row}>
+                                                        xxxxxxxxxxxxx
+                                                    </div>
+                                                    <div className={style.second_content_row}>
+                                                        xxx cm
+                                                    </div>
+                                                    <div className={style.second_content_row}>
+                                                        xx cm
+                                                    </div>
+                                                    <div className={style.second_content_row}>
+                                                        Disable
+                                                    </div>
+                                                </LayoutGrid.Cell>
+                                            </LayoutGrid.Inner>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Branches Detail</div>
                                     </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <button className={style.edit_button}>
-                                                <Icon className={style.contoh}>edit</Icon>
-                                        
-                                                <a className={style.edit_button_word}>Edit</a>
-                                        </button>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <LayoutGrid.Inner className={style.second_content}>
-                                    <LayoutGrid.Cell cols='3'>
-                                        <div className={style.image_place}>
-                                            <div className={style.image_setting}></div>
-                                        </div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='9'>
-                                        <div className={style.second_content_people_name}>Item Name</div>
-                                        <LayoutGrid.Inner>
-                                            <LayoutGrid.Cell cols='5'>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Product Code
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Width
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Height
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Status
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                            <LayoutGrid.Cell cols='7'>
-                                                <div className={style.second_content_row}>
-                                                    xxxxxxxxxxxxx
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xxx cm
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xx cm
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    Disable
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                        </LayoutGrid.Inner>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Branches Detail</div>
-                                </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner className={style.last_content}>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Product Descriptions</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Product DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct Detail</div>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                {/*
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='12'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
-                                        <ProgramTable/>
-                                        <ProgramTable/>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>*/
-                                }
-                                <button className={style.button_back}>Back</button>
-                            </div>
-                        </Card>
-                    </LayoutGrid.Cell>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Product Descriptions</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Product DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct Detail</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    {/*
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='12'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
+                                            <ProgramTable/>
+                                            <ProgramTable/>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>*/
+                                    }
+                                    <button className={style.button_back}>Back</button>
+                                </div>
+                            </Card>
+                        </LayoutGrid.Cell>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+            </div>
         )
     }
 }

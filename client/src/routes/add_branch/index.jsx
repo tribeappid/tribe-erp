@@ -11,30 +11,32 @@ import style from './style.css';
 export default class AddBranch extends Component{
     render({},{}){
         return(
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <Card className={style.content_body}>
-                            <a className={style.page_title}>Add Branch</a>
-                            <div style={`text-align: center;margin-bottom: 40px;`}>
-                                <label for='photo'>
-                                    <Icon style={`font-size: 150px; padding: 5px;`}>account_circle</Icon>
-                                    <input type='file' id='photo' style={`display: none;`}/><br/>
-                                    <span className={style.open_folder}>Open Folder</span>
-                                </label>
-                            </div>
-                            <form>
-                                <Input type='text' labelName='Email'/>
-                                <Input type='text' labelName='Name'/>
-                                <Input type='date' labelName='Birthday'/>
-                                <Input type='number' labelName='Phone Number'/>
-                            </form>
-                        </Card>
-                    </LayoutGrid.Cell>
-                    <LayoutGrid.Cell cols='1'/>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
+            <div>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <Card className={style.content_body}>
+                                <a className={style.page_title}>Add Branch</a>
+                                <div style={`text-align: center;margin-bottom: 40px;`}>
+                                    <label for='photo'>
+                                        <Icon style={`font-size: 150px; padding: 5px;`}>account_circle</Icon>
+                                        <input type='file' id='photo' style={`display: none;`}/><br/>
+                                        <span className={style.open_folder}>Open Folder</span>
+                                    </label>
+                                </div>
+                                <form>
+                                    <Input type='text' labelName='Email'/>
+                                    <Input type='text' labelName='Name'/>
+                                    <Input type='date' labelName='Birthday'/>
+                                    <Input type='number' labelName='Phone Number'/>
+                                </form>
+                            </Card>
+                        </LayoutGrid.Cell>
+                        <LayoutGrid.Cell cols='1'/>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+            </div>
         )
     }
 }

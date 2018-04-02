@@ -31,99 +31,136 @@ class StaffManageView extends Component{
         }
     }
 
+    roleInformation(data){
+        if(data==0){
+            return("Public User");
+        }else if(data==100){
+            return("Guest");
+        }
+        else if(data==300){
+            return("User Auth");
+        }
+        else if(data==400){
+            return("Sales Auth");
+        }
+        else if(data==410){
+            return("Inventory Auth");
+        }
+        else if(data==420){
+            return("Finance Auth");
+        }
+        else if(data==430){
+            return("Manager Auth");
+        }
+        else if(data==440){
+            return("Enterprise Admin Auth");
+        }
+        else if(data==450){
+            return("Enterprise Sys Admin Auth");
+        }
+        else if(data==490){
+            return("Admin Auth");
+        }
+        else{
+            return("Sys Admin Auth");
+        }
+    }
+
     render({dataReducer, ownProps}, {}){
         console.log(dataReducer);
         const ROOT_URL = 'http://localhost:3000/';
         const profileInfo = _.map(dataReducer.accountData);
         return(
-            <LayoutGrid>
-                <LayoutGrid.Inner>
-                    <LayoutGrid.Cell cols='1'/>
-                    <LayoutGrid.Cell cols='10'>
-                        <Card>
-                            <div className={style.content_body}>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <a className={style.page_info}>View Staff</a>
+            <div>
+                <LayoutGrid>
+                    <LayoutGrid.Inner>
+                        <LayoutGrid.Cell cols='1'/>
+                        <LayoutGrid.Cell cols='10'>
+                            <Card>
+                                <div className={style.content_body}>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <a className={style.page_info}>View Staff</a>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='6'>
+                                            <button className={style.edit_button}>
+                                                    <Icon>edit</Icon>
+                                                    <a>Edit</a>
+                                            </button>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner className={style.second_content}>
+                                        <LayoutGrid.Cell cols='3'>
+                                            <div className={style.image_place}>
+                                                {//<div className={style.image_setting}></div>
+                                                }
+                                                <img style={`width:100px;height:100px;`} src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`}/>
+                                                {console.log(`accounts/userprofile?EntityId=${ownProps.id}`)}
+                                            </div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='9'>
+                                            <div className={style.second_content_people_name}>{ profileInfo[0] ? profileInfo[0].name : 'Loading ...' }</div>
+                                            <LayoutGrid.Inner>
+                                                <LayoutGrid.Cell cols='5'>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Email
+                                                    </div>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Birthday
+                                                    </div>
+                                                    <div className={style.second_content_row + ' ' + style.row_title}>
+                                                        Mobile Number
+                                                    </div>
+                                                </LayoutGrid.Cell>
+                                                <LayoutGrid.Cell cols='7'>
+                                                    <div className={style.second_content_row}>
+                                                        { profileInfo[0] ? profileInfo[0].authentication_string : 'Loading ...' }
+                                                    </div>
+                                                    <div className={style.second_content_row}>
+                                                        xxxx-xx-xx
+                                                    </div>
+                                                    <div className={style.second_content_row}>
+                                                        xxxxxxxx1234
+                                                    </div>
+                                                </LayoutGrid.Cell>
+                                            </LayoutGrid.Inner>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{ profileInfo[0] ? this.roleInformation(profileInfo[0].authorization_level) : '' }</div>
                                     </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='6'>
-                                        <button className={style.edit_button}>
-                                                <Icon>edit</Icon>
-                                                <a>Edit</a>
-                                        </button>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <LayoutGrid.Inner className={style.second_content}>
-                                    <LayoutGrid.Cell cols='3'>
-                                        <div className={style.image_place}>
-                                            {//<div className={style.image_setting}></div>
-                                            }
-                                            <img style={`width:100px;height:100px;`} src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`}/>
-                                            {console.log(`accounts/userprofile?EntityId=${ownProps.id}`)}
-                                        </div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='9'>
-                                        <div className={style.second_content_people_name}>{ profileInfo[0] ? profileInfo[0].name : 'Loading ...' }</div>
-                                        <LayoutGrid.Inner>
-                                            <LayoutGrid.Cell cols='5'>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Email
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Birthday
-                                                </div>
-                                                <div className={style.second_content_row + ' ' + style.row_title}>
-                                                    Mobile Number
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                            <LayoutGrid.Cell cols='7'>
-                                                <div className={style.second_content_row}>
-                                                    { profileInfo[0] ? profileInfo[0].authentication_string : 'Loading ...' }
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xxxx-xx-xx
-                                                </div>
-                                                <div className={style.second_content_row}>
-                                                    xxxxxxxx1234
-                                                </div>
-                                            </LayoutGrid.Cell>
-                                        </LayoutGrid.Inner>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>{ profileInfo[0] ? profileInfo[0].authorization_level == 500 ? "Adminitrasition" : '' : '' }</div>
-                                </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner className={style.last_content}>
-                                    <LayoutGrid.Cell cols='2'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
-                                    </LayoutGrid.Cell>
-                                    <LayoutGrid.Cell cols='10'>
-                                        <div className={style.second_content_row}>Role Detail</div>
-                                        <div className={style.second_content_row}>Role Detail</div>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>
-                                {/*
-                                <div className={style.divider}/>
-                                <LayoutGrid.Inner>
-                                    <LayoutGrid.Cell cols='12'>
-                                        <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
-                                        <ProgramTable/>
-                                        <ProgramTable/>
-                                    </LayoutGrid.Cell>
-                                </LayoutGrid.Inner>*/
-                                }
-                                <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
-                            </div>
-                        </Card>
-                    </LayoutGrid.Cell>
-                </LayoutGrid.Inner>
-            </LayoutGrid>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>Role Detail</div>
+                                            <div className={style.second_content_row}>Role Detail</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    {/*
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner>
+                                        <LayoutGrid.Cell cols='12'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
+                                            <ProgramTable/>
+                                            <ProgramTable/>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>*/
+                                    }
+                                    <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
+                                </div>
+                            </Card>
+                        </LayoutGrid.Cell>
+                    </LayoutGrid.Inner>
+                </LayoutGrid>
+            </div>
         )
     }
 }

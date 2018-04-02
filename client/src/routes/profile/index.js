@@ -32,17 +32,19 @@ export default class Profile extends Component {
 	// Note: `user` comes from the URL, courtesy of our router
 	render({ user }, { time, count }) {
 		return (
-			<div class={style.profile}>
-				<h1>Profile: {user}</h1>
-				<p>This is the user profile for a user named { user }.</p>
+			<div>
+				<div class={style.profile}>
+					<h1>Profile: {user}</h1>
+					<p>This is the user profile for a user named { user }.</p>
 
-				<div>Current time: {new Date(time).toLocaleString()}</div>
+					<div>Current time: {new Date(time).toLocaleString()}</div>
 
-				<p>
-					<Button raised ripple onClick={this.increment}>Click Me</Button>
-					{' '}
-					Clicked {count} times.
-				</p>
+					<p>
+						<Button raised ripple onClick={this.increment}>Click Me</Button>
+						{' '}
+						Clicked {count} times.
+					</p>
+				</div>
 			</div>
 		);
 	}
