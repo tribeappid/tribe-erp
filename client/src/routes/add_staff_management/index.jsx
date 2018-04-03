@@ -21,12 +21,14 @@ class AddStaff extends Component{
         },
         submitted: false,
         responseCheck: false,
+        checkUploadPicture: false,
         imagePicked: false,
+        mistaken: false,
         imageData:{
             EntityId: ''
         },
         formData: [],
-        image: [],
+        image: []
     }
     backStaffManage(){
         this.setState({
@@ -87,11 +89,28 @@ class AddStaff extends Component{
 		this.setState({submitted: true,responseCheck: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
 			if(this.validateEmail(this.state.user.AuthenticationString)){
-                if(this.state.imageData.file){
-                    this.props.register(this.state.user);
+                this.loading();
+                this.props.register(this.state.user);
+            }
+        }
+    }
+
+    uploadPictureResponse(){
+        if(this.state.checkUploadPicture){
+            if(this.props.dataReducer.pictureData.length==0){
+                this.hideLoading();
+                console.log("The Response still Empty");
+            }
+            else{
+                if(!this.props.dataReducer.pictureData.Error){
+                    alert('Registration Success');
+                    route('/staff/management');
+                    this.hideLoading();
                 }
                 else{
-                    alert("Please Select a Picture");
+                    alert(`Photo Upload Failed\nAccount Registration Success\n${this.props.pictureData.ErrorDesc}\nYou can change the photo at Edit Page`);
+                    route('/staff/management');
+                    this.hideLoading();
                 }
             }
         }
@@ -99,35 +118,38 @@ class AddStaff extends Component{
 
     checkResponsed(){
         if(this.state.responseCheck){
-            if(this.props.dataReducer.registerResponse.length==0){
-                
-            }
-            else{
-                const currentData = this.state.imageData;
-                const target = this.props.dataReducer.registerResponse.Data._id;
-                this.setState({imageData:{
-                    ...currentData,
-                    EntityId: target
-                },responseCheck: false})
-                this.props.uploadPicture(this.state.imageData,this.state.formData);
-            }
+            
+                if(this.props.dataReducer.registerResponse.length==0){
+                    console.log("The Response still Empty");
+                }
+                else{
+                    if(!this.props.dataReducer.registerResponse.Error){
+                        this.setState({responseCheck:false,mistaken:true});
+                        if(this.state.formData.length!=0){
+                            const target = this.props.dataReducer.registerResponse.Data._id;
+                            this.setState({imageData:{
+                                EntityId: target
+                            },checkUploadPicture: true});
+                            this.props.uploadPicture(this.state.imageData,this.state.formData);
+                        }
+                        else{
+                            alert('Registration Success');
+                            route('/staff/management');
+                            this.hideLoading();
+                        }
+                    }
+                    else{
+                        alert(`Registration Failed\n${this.props.dataReducer.registerResponse.ErrorDesc}`);
+                        this.setState({responseCheck:false,mistaken:true});
+                        this.hideLoading();
+                        window.location.reload();
+                    }
+                }
         }
-    }
-
-    success(){
-        alert("Registration Success");
-    }
-
-    failed(){
-        alert("Registration Failed");
-    }
-
-    handleEvent(){
     }
 
     handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
-
         var dataForm = new FormData();
         dataForm.append("image", files[0]);
         let target = this.state.image;
@@ -149,8 +171,7 @@ class AddStaff extends Component{
         this.setState({
             imagePicked: true,
             imageData:{
-                ...data,
-                file: target
+                ...data
             },
             formData: dataForm
         });
@@ -160,8 +181,14 @@ class AddStaff extends Component{
         document.getElementById('loadingScreen').hidden = false;
     }
 
+    hideLoading(){
+        document.getElementById('loadingScreen').hidden = true;
+    }
+
+
     render({dataReducer},{user, submitted, responseCheck, background}){
         this.checkResponsed();
+        this.uploadPictureResponse();
         return(
             <div>
                 <div>
@@ -173,8 +200,9 @@ class AddStaff extends Component{
                                     <a className={style.page_title}>Add Staff</a>
                                     <div style={`text-align: center;margin-bottom: 40px;`}>
                                         <label for='image'>
-                                            <Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
-                                            <img className={ this.state.imagePicked ? style.imageHolder : style.imageHidden} id="userprofile"/>
+                                            {//<Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
+                                            }
+                                            <img src={'../../images/profile.png'} className={style.imageHolder} id="userprofile"/>
                                             <input style={`display: none;`} onChange={this.handleFileSelect.bind(this)} type="file" id="image" name="image"/><br/>
                                             <span className={style.open_folder}>Upload</span>
                                         </label>

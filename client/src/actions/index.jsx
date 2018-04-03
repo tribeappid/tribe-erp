@@ -33,7 +33,8 @@ export function login(user){
 
 
 export function register(user){
-    const req = axios.post(`${ROOT_URL}accounts/register`,user);
+    const req = axios.post(`${ROOT_URL}accounts/register`,user).then(response => {return response})
+    .catch(error => {return error.response});
 
     return{
         type: REGIS,
@@ -70,7 +71,8 @@ export function getBranchList(){
 
 export function uploadPicture(dataEntity,dataForm){
     dataForm.append('EntityId', dataEntity.EntityId);
-    const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm);
+    const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm).then(response => {return response})
+    .catch(error => {return error.response});
 
     return{
         type: POST_PICTURE,
