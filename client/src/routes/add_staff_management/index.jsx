@@ -17,13 +17,12 @@ class AddStaff extends Component{
             AuthenticationString:'',
             Password: '',
             Name: '',
-            AuthorizationLevel: 0
+            AuthorizationLevel: 1
         },
         submitted: false,
         responseCheck: false,
         checkUploadPicture: false,
         imagePicked: false,
-        mistaken: false,
         imageData:{
             EntityId: ''
         },
@@ -61,7 +60,7 @@ class AddStaff extends Component{
         this.setState({
             user:{
                 ...newUser,
-                AuthorizationLevel: ( event.target.selectedIndex == 0 ? 0 : ( 
+                AuthorizationLevel: ( event.target.selectedIndex == 0 ? 1 : ( 
                     event.target.selectedIndex == 1 ? 100 : (
                         event.target.selectedIndex == 2 ? 300 : (
                             event.target.selectedIndex == 3 ? 400 : (
@@ -124,7 +123,7 @@ class AddStaff extends Component{
                 }
                 else{
                     if(!this.props.dataReducer.registerResponse.Error){
-                        this.setState({responseCheck:false,mistaken:true});
+                        this.setState({responseCheck:false});
                         if(this.state.formData.length!=0){
                             const target = this.props.dataReducer.registerResponse.Data._id;
                             this.setState({imageData:{
@@ -140,7 +139,7 @@ class AddStaff extends Component{
                     }
                     else{
                         alert(`Registration Failed\n${this.props.dataReducer.registerResponse.ErrorDesc}`);
-                        this.setState({responseCheck:false,mistaken:true});
+                        this.setState({responseCheck:false});
                         this.hideLoading();
                         window.location.reload();
                     }

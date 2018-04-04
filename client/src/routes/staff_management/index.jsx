@@ -39,9 +39,27 @@ class StaffManage extends Component{
                 return(
                     <tr id={dataRow} className={ dataRow%2==1 ? style.even : '' }>
                         <td>{[dataRow]}</td>
+                        <td className={style.data_table}>{accountList.authentication_string}</td>
                         <td className={style.data_table}>{accountList.name}</td>
-                        <td className={style.data_table}>Empty</td>
-                        <td className={style.data_table}>{accountList.authorization_level==500 ? "Administration" : '' }</td>
+                        <td className={style.data_table}>{accountList.authorization_level==1 ? "Public User" : (
+                            accountList.authorization_level==100 ? "Guest User" : (
+                                accountList.authorization_level==300 ? "User Auth" : (
+                                    accountList.authorization_level==400 ? "Sales Auth" : (
+                                        accountList.authorization_level==410 ? "Inventory Auth" : (
+                                            accountList.authorization_level==420 ? "Finance Auth" : (
+                                                accountList.authorization_level==430 ? "Manager Auth" : (
+                                                    accountList.authorization_level==440 ? "Enterprise Admin Auth" : (
+                                                        accountList.authorization_level==450 ? "Enterprise Sys Admin Auth" : (
+                                                            accountList.authorization_level==490 ? "Admin Auth" : "Sys Admin Auth"
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ) }</td>
                         <td className={style.data_table}>
                             <Icon entityId={accountList._id} className={style.icon_design} id={dataRow} onClick={this.goToViewData.bind(this)}>visibility</Icon>
                             <Icon entityId={accountList._id} className={style.icon_design} id={dataRow} onClick={this.openSettings}>delete</Icon>

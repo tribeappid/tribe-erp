@@ -14,10 +14,6 @@ import style from './style.css'
 class StaffManageView extends Component{
     componentDidMount(){
         this.props.getAccountData(this.props.ownProps.id);
-        this.props.getPicture(this.props.ownProps.id);
-    }
-    handleChange(event){
-        
     }
 
     backTotaffList(){
@@ -32,7 +28,7 @@ class StaffManageView extends Component{
     }
 
     roleInformation(data){
-        if(data==0){
+        if(data==1){
             return("Public User");
         }else if(data==100){
             return("Guest");
@@ -61,13 +57,15 @@ class StaffManageView extends Component{
         else if(data==490){
             return("Admin Auth");
         }
-        else{
+        else if(data==500){
             return("Sys Admin Auth");
+        }
+        else{
+            return("Empty or Loading");
         }
     }
 
     render({dataReducer, ownProps}, {}){
-        console.log(dataReducer);
         const ROOT_URL = 'http://localhost:3000/';
         const profileInfo = _.map(dataReducer.accountData);
         return(
@@ -94,8 +92,7 @@ class StaffManageView extends Component{
                                             <div className={style.image_place}>
                                                 {//<div className={style.image_setting}></div>
                                                 }
-                                                <img style={`width:100px;height:100px;`} src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`}/>
-                                                {console.log(`accounts/userprofile?EntityId=${ownProps.id}`)}
+                                                <img style={`width:100px;height:100px;`} src={( profileInfo[0] ? ( profileInfo[0].userprofile.filename == null ? `../../../images/profile.png` : `${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}` ) : "Masih Kosong" ) }/>
                                             </div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='9'>
@@ -131,6 +128,7 @@ class StaffManageView extends Component{
                                             <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
+                                            {console.log(profileInfo[0])}
                                             <div className={style.second_content_row}>{ profileInfo[0] ? this.roleInformation(profileInfo[0].authorization_level) : '' }</div>
                                     </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>

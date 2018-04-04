@@ -33,6 +33,7 @@ export function login(user){
 
 
 export function register(user){
+    console.log(user)
     const req = axios.post(`${ROOT_URL}accounts/register`,user).then(response => {return response})
     .catch(error => {return error.response});
 
@@ -81,7 +82,9 @@ export function uploadPicture(dataEntity,dataForm){
 }
 
 export function getPicture(entityId){
-    const req = axios.get(`${ROOT_URL}accounts/userprofile?EntityId=${entityId}`);
+    const req = axios.get(`${ROOT_URL}accounts/userprofile?EntityId=${entityId}`).then(response => {return response}).catch(error => console.log(error));
+
+    console.log(req);
 
     return{
         type: GET_PICTURE,
