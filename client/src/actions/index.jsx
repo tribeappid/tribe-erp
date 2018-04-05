@@ -9,6 +9,7 @@ export const BRANCH_LIST = 'branch_list';
 export const GET_PICTURE = 'get_picture';
 export const POST_PICTURE = 'post_picture';
 export const DELETE_ACCOUNT = 'delete_account';
+export const UPDATE_ACCOUNT = 'update_account';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -97,6 +98,15 @@ export function deleteAccount(entityId){
 
     return{
         type: DELETE_ACCOUNT,
+        payload: req
+    }
+}
+
+export function updateProfile(user){
+    const req = axios.post(`${ROOT_URL}accounts/update`,user);
+
+    return{
+        type: UPDATE_ACCOUNT,
         payload: req
     }
 }

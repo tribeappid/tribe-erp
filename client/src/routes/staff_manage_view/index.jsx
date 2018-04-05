@@ -12,6 +12,12 @@ import _ from 'lodash';
 import style from './style.css'
 
 class StaffManageView extends Component{
+    state={
+        EntityRightNow:'a',
+        profileInfo: [],
+        isNeedToCheck: true
+    }
+    
     componentDidMount(){
         this.props.getAccountData(this.props.ownProps.id);
     }
@@ -61,13 +67,42 @@ class StaffManageView extends Component{
             return("Sys Admin Auth");
         }
         else{
-            return("Empty or Loading");
+            return("Loading");
         }
     }
 
-    render({dataReducer, ownProps}, {}){
+    dataChecking(){
+        if(this.state.isNeedToCheck){
+            if(this.props.dataReducer.accountData[0]){
+                const target = this.props.dataReducer.accountData[0]._id;
+                console.log(target);
+                console.log(this.state.EntityRightNow);
+                console.log(this.state.EntityRightNow != target);        
+                const data =  _.map(this.props.dataReducer.accountData);
+                this.setState({EntityRightNow : target,profileInfo: data,isNeedToCheck: false});
+            }
+            else{
+                console.log("Data masih Kosong");
+            }
+        }
+        else{
+            if(this.state.EntityRightNow == this.props.dataReducer.accountData[0]._id){
+
+            }
+            else{
+                this.setState({isNeedToCheck: true});
+            }
+        }
+    }
+
+    goToEdit = () => {
+        route(`/staff/management/edit/${this.props.dataReducer.accountData[0]._id}`);
+    }
+
+    render({dataReducer, ownProps}, {profileInfo}){
         const ROOT_URL = 'http://localhost:3000/';
-        const profileInfo = _.map(dataReducer.accountData);
+        this.dataChecking();
+        console.log(profileInfo);
         return(
             <div>
                 <LayoutGrid>
@@ -81,7 +116,7 @@ class StaffManageView extends Component{
                                             <a className={style.page_info}>View Staff</a>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='6'>
-                                            <button className={style.edit_button}>
+                                            <button onClick={this.goToEdit.bind(this)} className={style.edit_button}>
                                                     <Icon>edit</Icon>
                                                     <a>Edit</a>
                                             </button>
@@ -92,7 +127,7 @@ class StaffManageView extends Component{
                                             <div className={style.image_place}>
                                                 {//<div className={style.image_setting}></div>
                                                 }
-                                                <img style={`width:100px;height:100px;`} src={( profileInfo[0] ? ( profileInfo[0].userprofile.filename == null ? `../../../images/profile.png` : `${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}` ) : "Masih Kosong" ) }/>
+                                                <img style={`width:100px;height:100px;`} src={profileInfo[0] ? (profileInfo[0].userprofile.filename==null ? 'https://dummyimage.com/600x400/000/fff' : `${ROOT_URL}accounts/userprofile?EntityId=${profileInfo[0]._id}`) : 'https://dummyimage.com/600x400/000/fff'}/>
                                             </div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='9'>

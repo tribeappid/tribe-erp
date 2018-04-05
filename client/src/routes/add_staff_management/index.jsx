@@ -6,7 +6,6 @@ import Icon from 'preact-material-components/Icon';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/LayoutGrid/style';
 import 'preact-material-components/Icon/style';
-import 'preact-material-components/TextField/style';
 import style from './style.css';
 import { connect } from 'preact-redux';
 import { register, uploadPicture } from '../../actions';

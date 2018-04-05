@@ -21,6 +21,7 @@ import AddStaff from '../routes/add_staff_management';
 import Branches from '../routes/branches';
 import BranchView from '../routes/branches_view';
 import AddBranch from '../routes/add_branch';
+import EditStaff from '../routes/edit_staff_management';
 import LoadingScreen from './loading_screen';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
@@ -60,6 +61,7 @@ export default class App extends Component {
 					<Branches path='/branches'/>
 					<BranchView path='/branches/view/:id'/>
 					<AddBranch path='/branches/add'/>
+					<EditStaff path='/staff/management/edit/:id'/>
 				</Router>
 			</div>
 			</Provider>
