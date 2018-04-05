@@ -122,12 +122,15 @@ class EditStaff extends Component{
                             <LayoutGrid.Cell cols='1'/>
                             <LayoutGrid.Cell cols='10'>
                                 <Card className={style.content_body}>
-                                    <a className={style.page_title}>Add Staff</a>
+                                    <button onClick={()=>{
+                                        document.getElementById("loadingScreen").hidden = false
+                                    }}/>
+                                    <a className={style.page_title}>Update Profile</a>
                                     <div style={`text-align: center;margin-bottom: 40px;`}>
                                         <label for='image'>
                                             {//<Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
                                             }
-                                            <img src={'../../images/profile.png'} className={style.imageHolder} id="userprofile"/>
+                                            <img src={''} className={style.imageHolder} id="userprofile"/>
                                             <input style={`display: none;`} onChange={this.handleFileSelect.bind(this)} type="file" id="image" name="image"/><br/>
                                             <span className={style.open_folder}>Upload</span>
                                         </label>
@@ -155,7 +158,7 @@ class EditStaff extends Component{
                                         </div>
                                         <div>
                                             <button onClick={this.backStaffManageView.bind(this)} className={style.back_button}>Back</button>
-                                            <button type="submit" className={style.add_button}>Add</button>
+                                            <button type="submit" className={style.add_button}>Update</button>
                                         </div>
                                     </form>
                                 </Card>

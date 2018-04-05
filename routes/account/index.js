@@ -330,7 +330,6 @@ router.get('/list', function(req, res, callback){
 
 router.post('/userprofile', upload.single('image'), function(req, res){
 
-    console.log(req.file);
     if (req.body.EntityId && req.file)
     {
         var mime_type = 'image/jpeg';
@@ -418,7 +417,9 @@ router.get('/userprofile', function(req, res){
         ], function(err) {
             if (!err && entityObj)
             {
-                if (entityObj.userprofile && !_.isEmpty(entityObj.userprofile))
+		console.log(entityObj.userprofile);
+                if (entityObj.userprofile && !_.isEmpty(entityObj.userprofile) &&
+			entityObj.userprofile.filename)
                 {
                     var target_path = entityObj.userprofile.filename;
                     var mimetype = entityObj.userprofile.mimetype;
