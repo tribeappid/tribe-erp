@@ -43,6 +43,7 @@ var getEntity = exports.getEntity = function(req, res, override, callback, apiOp
             if (req.query.AuthorizationLevel) queryParms.authorization_level = req.query.AuthorizationLevel;
             if (req.query.Enterprise) queryParms.enterprise = req.query.Enterprise;
             if (req.query.ReferralCode) queryParms.referral_code = req.query.ReferralCode;
+            if (req.query.Phone) queryParms.phone = req.query.Phone;
 
             console.log(queryParms);
             //paging parameters
@@ -157,6 +158,7 @@ var addEntity = exports.addEntity = function(req, res, override, callback){
                 if (req.body.Enterprise) addParms.enterprise = req.body.Enterprise;
                 if (req.body.ReferredBy) addParms.referred_by = req.body.ReferredBy;
                 if (req.body.ReferralCode) addParms.referral_code = req.body.ReferralCode;
+                if (req.body.Phone) addParms.phone = req.body.Phone;
 
                 if (!addParms.name) addParms.name = stringHelper.toName(req, res, req.body.FirstName, req.body.LastName);
 
@@ -275,6 +277,7 @@ var updateEntity = exports.updateEntity = function(req, res, override, callback)
                 if (req.body.RightFinger) updateParms.right_finger = req.body.RightFinger;
                 if (req.body.FingerLastUpdate) updateParms.finger_last_update = req.body.FingerLastUpdate;
                 if (req.body.Userprofile) updateParms.userprofile = req.body.Userprofile;
+                if (req.body.Phone) updateParms.phone = req.body.Phone;
                 //if (req.body.CondominiumId) updateParms.condominium = req.body.CondominiumId;
 
                 //unset features

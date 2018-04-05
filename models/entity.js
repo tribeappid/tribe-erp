@@ -30,6 +30,7 @@ entitySchema = new Schema({
     , first_name : {type : String, default : null}
     , last_name : {type : String, default : null}
     , name : {type : String, default : null}
+    , phone : {type : String, default : null}
     , status : {type : String, default : null}
     , approved : {type : Boolean, default : false}
     , type : {type : String, default : null}

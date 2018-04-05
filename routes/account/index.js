@@ -427,7 +427,10 @@ router.get('/userprofile', function(req, res){
                 }
                 else
                 {
-                    apiHelper.apiResponse(req, res, true, 500, "Userprofile Not Found", null, null, null, null);
+                    var target_path = 'public/images/profile.png';
+                    var mimetype = 'image/png';
+                    var src = fs.createReadStream(target_path);
+                    src.pipe(res);
                 }
             }
             else
