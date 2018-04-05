@@ -418,7 +418,7 @@ router.get('/userprofile', function(req, res){
         ], function(err) {
             if (!err && entityObj)
             {
-                if (entityObj.userprofile)
+                if (entityObj.userprofile && !_.isEmpty(entityObj.userprofile))
                 {
                     var target_path = entityObj.userprofile.filename;
                     var mimetype = entityObj.userprofile.mimetype;
