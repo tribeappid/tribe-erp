@@ -17,9 +17,17 @@ class EditStaff extends Component{
 
     state={
         user:{
+            EntityId: '',
             Name: '',
             AuthorizationLevel: 1
-        }
+        },
+        oldData:{
+            Name: '',
+            AuthorizationLevel: 1  
+        },
+        loadDataOnce: true,
+        isNeedtoUpload: false,
+        formData: []
     }
 
     backStaffManageView(){
@@ -58,19 +66,44 @@ class EditStaff extends Component{
             imageData:{
                 ...data
             },
-            formData: dataForm
+            formData: dataForm,
+            isNeedtoUpload: true
         });
     }
 
     handleSubmit(){
         event.preventDefault();
 		this.setState({submitted: true,responseCheck: true});
-		if(this.state.user.AuthenticationString && this.state.user.Password && this.state.user.Name){
-			if(this.validateEmail(this.state.user.AuthenticationString)){
-                this.loading();
-                this.props.register(this.state.user);
-            }
+        if(this.state.user.Name != this.state.oldData.Name){
+            this.setState({isNeedtoUpload: true});
         }
+        if(this.state.user.AuthorizationLevel != this.state.oldData.AuthorizationLevel){
+            this.setState({isNeedtoUpload: true});
+        }
+        if(this.state.isNeedtoUpload){
+            const currentData= this.state.user;
+            this.setState({
+                user:{
+                    ...currentData,
+                    EntityId: this.props.ownProps.id
+                }
+            });
+            if(this.state.formData.length!=0){
+                this.props.uploadPicture(this.state.user,this.state.formData);
+            }
+            this.props.updateProfile(this.state.user,this.successCallback.bind(this),this.failCallback);
+        }
+        else{
+        }
+    }
+
+
+    successCallback = () => {
+        this.setState({success: true});
+    }
+
+    failCallback = () => {
+        this.setState({fail: true});
     }
 
     optionHandle(){
@@ -112,8 +145,76 @@ class EditStaff extends Component{
         });
     }
 
-    render({dataReducer},{user}){
-        console.log(dataReducer);
+    loadProfileData(){
+        if(this.state.loadDataOnce){
+            if(this.props.dataReducer.accountData[0]){
+                this.setState({
+                    user:{
+                        EntityId: this.props.ownProps.id,
+                        Name: this.props.dataReducer.accountData[0].name,
+                        AuthorizationLevel: this.props.dataReducer.accountData[0].authorization_level
+                    },
+                    oldData:{
+                        Name: this.props.dataReducer.accountData[0].name,
+                        AuthorizationLevel: this.props.dataReducer.accountData[0].authorization_level
+                    },
+                    loadDataOnce: false
+                })
+            }
+        }
+    }
+
+    currentIndex(data){
+        if(data == 1){
+            return 0;
+        }
+        else if(data == 100){
+            return 1;
+        }
+        else if(data == 300){
+            return 2;
+        }
+        else if(data == 400){
+            return 3;
+        }
+        else if(data == 410){
+            return 4;
+        }
+        else if(data == 420){
+            return 5;
+        }
+        else if(data == 430){
+            return 6;
+        }
+        else if(data == 440){
+            return 7;
+        }
+        else if(data == 450){
+            return 8;
+        }
+        else if(data == 490){
+            return 9;
+        }
+        else{
+            return 10;
+        }
+    }
+
+    checkingResponse(){
+        if(this.state.success){
+            alert("Success Change");
+            route(`/staff/management/view/profile/${this.props.ownProps.id}`);
+            window.location.reload();
+        }
+        else if(this.state.fail){
+            alert("Failed Update Profile");
+        }
+    }
+
+    render({dataReducer,ownProps},{user}){
+        this.loadProfileData();
+        this.checkingResponse();
+        const ROOT_URL = 'http://localhost:3000/';
         return(
             <div>
                 <div>
@@ -122,15 +223,10 @@ class EditStaff extends Component{
                             <LayoutGrid.Cell cols='1'/>
                             <LayoutGrid.Cell cols='10'>
                                 <Card className={style.content_body}>
-                                    <button onClick={()=>{
-                                        document.getElementById("loadingScreen").hidden = false
-                                    }}/>
                                     <a className={style.page_title}>Update Profile</a>
                                     <div style={`text-align: center;margin-bottom: 40px;`}>
                                         <label for='image'>
-                                            {//<Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
-                                            }
-                                            <img src={''} className={style.imageHolder} id="userprofile"/>
+                                            <img src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`} className={style.imageHolder} id="userprofile"/>
                                             <input style={`display: none;`} onChange={this.handleFileSelect.bind(this)} type="file" id="image" name="image"/><br/>
                                             <span className={style.open_folder}>Upload</span>
                                         </label>
@@ -142,7 +238,7 @@ class EditStaff extends Component{
                                         </div>
                                         <div className={style.input_group}>
                                             <label>Role</label><br/>
-                                            <select selectedIndex={2} onChange={this.optionHandle.bind(this)}>
+                                            <select selectedIndex={this.currentIndex(user.AuthorizationLevel)} onChange={this.optionHandle.bind(this)}>
                                                 <option>Public User</option>
                                                 <option>Guest</option>
                                                 <option>User Auth</option>

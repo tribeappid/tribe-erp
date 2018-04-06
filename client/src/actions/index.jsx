@@ -73,6 +73,7 @@ export function getBranchList(){
 
 export function uploadPicture(dataEntity,dataForm){
     dataForm.append('EntityId', dataEntity.EntityId);
+    console.log(dataForm);
     const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm).then(response => {return response})
     .catch(error => {return error.response});
 
@@ -102,8 +103,16 @@ export function deleteAccount(entityId){
     }
 }
 
-export function updateProfile(user){
-    const req = axios.post(`${ROOT_URL}accounts/update`,user);
+export function updateProfile(dataForm,successCallback, failCallback){
+    const req = axios.post(`${ROOT_URL}accounts/update`,dataForm).then(response => {
+        if(!response.Error){
+            successCallback();
+        }
+    }).catch(error =>{
+        if(error.response.Error){
+            failCallback();
+        }
+    });
 
     return{
         type: UPDATE_ACCOUNT,

@@ -74,15 +74,12 @@ class StaffManageView extends Component{
     dataChecking(){
         if(this.state.isNeedToCheck){
             if(this.props.dataReducer.accountData[0]){
-                const target = this.props.dataReducer.accountData[0]._id;
-                console.log(target);
-                console.log(this.state.EntityRightNow);
-                console.log(this.state.EntityRightNow != target);        
+                const target = this.props.dataReducer.accountData[0]._id;        
                 const data =  _.map(this.props.dataReducer.accountData);
                 this.setState({EntityRightNow : target,profileInfo: data,isNeedToCheck: false});
             }
             else{
-                console.log("Data masih Kosong");
+                
             }
         }
         else{
@@ -102,7 +99,6 @@ class StaffManageView extends Component{
     render({dataReducer, ownProps}, {profileInfo}){
         const ROOT_URL = 'http://localhost:3000/';
         this.dataChecking();
-        console.log(profileInfo);
         return(
             <div>
                 <LayoutGrid>
@@ -127,7 +123,7 @@ class StaffManageView extends Component{
                                             <div className={style.image_place}>
                                                 {//<div className={style.image_setting}></div>
                                                 }
-                                                <img style={`width:100px;height:100px;`} src={profileInfo[0] ? (profileInfo[0].userprofile.filename==null ? 'https://dummyimage.com/600x400/000/fff' : `${ROOT_URL}accounts/userprofile?EntityId=${profileInfo[0]._id}`) : 'https://dummyimage.com/600x400/000/fff'}/>
+                                                    <img style={`width:100px;height:100px;`} src={`${ROOT_URL}accounts/userprofile?EntityId=${ownProps.id}`}/>
                                             </div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='9'>
@@ -163,7 +159,7 @@ class StaffManageView extends Component{
                                             <div className={style.second_content_row + ' ' + style.row_title}>Role</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            {console.log(profileInfo[0])}
+                                            
                                             <div className={style.second_content_row}>{ profileInfo[0] ? this.roleInformation(profileInfo[0].authorization_level) : '' }</div>
                                     </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>

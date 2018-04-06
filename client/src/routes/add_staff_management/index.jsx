@@ -97,7 +97,6 @@ class AddStaff extends Component{
         if(this.state.checkUploadPicture){
             if(this.props.dataReducer.pictureData.length==0){
                 this.hideLoading();
-                console.log("The Response still Empty");
             }
             else{
                 if(!this.props.dataReducer.pictureData.Error){
@@ -118,7 +117,7 @@ class AddStaff extends Component{
         if(this.state.responseCheck){
             
                 if(this.props.dataReducer.registerResponse.length==0){
-                    console.log("The Response still Empty");
+                    
                 }
                 else{
                     if(!this.props.dataReducer.registerResponse.Error){
@@ -183,8 +182,8 @@ class AddStaff extends Component{
         document.getElementById('loadingScreen').hidden = true;
     }
 
-
     render({dataReducer},{user, submitted, responseCheck, background}){
+        const ROOT_URL = 'http://localhost:3000/';
         this.checkResponsed();
         this.uploadPictureResponse();
         return(
@@ -200,7 +199,7 @@ class AddStaff extends Component{
                                         <label for='image'>
                                             {//<Icon style={ this.state.imagePicked ? (`font-size:0px;`) : (`font-size: 150px; padding: 5px;`) }>account_circle</Icon>
                                             }
-                                            <img src={'../../images/profile.png'} className={style.imageHolder} id="userprofile"/>
+                                            <img src={`${ROOT_URL}images/profile.png`} className={style.imageHolder} id="userprofile"/>
                                             <input style={`display: none;`} onChange={this.handleFileSelect.bind(this)} type="file" id="image" name="image"/><br/>
                                             <span className={style.open_folder}>Upload</span>
                                         </label>
