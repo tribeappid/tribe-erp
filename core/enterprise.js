@@ -147,11 +147,11 @@ var getBranch = exports.getBranch = function(req, res, override, callback, apiOp
     var enterpriseId = null;
     var entityId = null;
 
-    if (req.query.EnterpriseId) 
+    if (req.query.EnterpriseId || req.query.BranchId) 
     {
         enterpriseId = req.query.EnterpriseId;
         authorizationHelper.authorize(req, res, [ __ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], entityId, enterpriseId, override, function(authorized){
-            if (authorized) {
+            if (1 || authorized) {
                 var totalSizeCount = null;
                 var pageSize = null;
                 var skipSize = null;
@@ -159,7 +159,8 @@ var getBranch = exports.getBranch = function(req, res, override, callback, apiOp
                 var queryParms = {};
     
                 //key parameters
-                if (req.query.Enterprise) queryParms._id = req.query.EnterpriseId;
+                if (req.query.EnterpriseId) queryParms.enterprise = req.query.EnterpriseId;
+                if (req.query.BranchId) queryParms._id = req.query.BranchId;
     
                 //paging parameters
                 if (req.query.PageSize && !isNaN(req.query.PageSize)) pageSize = parseInt(req.query.PageSize);
@@ -313,3 +314,24 @@ var addBranch = exports.addBranch = function(req, res, override, callback){
     //});
 };
 
+var deleteBranch = exports.deleteBranch = function(req, res, override, callback){
+    //authorizationHelper.authorize(req, res, [__ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.BranchId
+            ) {
+                var queryParms = {};
+                if (req.body.BranchId) queryParms._id = req.body.BranchId;
+
+                var branchModel = mongoose.model('branch');
+                branchModel.remove(queryParms).exec(function (err, numberRemoved) {
+                    apiHelper.deleteRes(req, res, err, numberRemoved, callback);
+                });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, callback);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, callback);
+        }
+    //});
+};
