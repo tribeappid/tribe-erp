@@ -17,6 +17,8 @@ branchSchema = new Schema({
     _id : { type : String }
     , name : { type : String, default : null }
     , description : {type: String, default : null}
+    , address : {type: String, default : null}
+    , phone : {type: String, default : null}
     , create_date : {type: Date, default : null}
     , last_update : {type: Date, default : null}
     , enterprise : { type: String, ref: 'enterprise'}

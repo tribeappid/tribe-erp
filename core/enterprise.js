@@ -241,6 +241,8 @@ var addBranch = exports.addBranch = function(req, res, override, callback){
                 if (req.body.CreateDate) addParms.create_date = req.body.CreateDate;
                 if (req.body.LastUpdate) addParms.last_update = req.body.LastUpdate;
                 if (req.body.Description) addParms.description = req.body.Description;
+                if (req.body.Address) addParms.address = req.body.Address;
+                if (req.body.Phone) addParms.phone = req.body.Phone;
 
                 console.log(req.body);
                 var newBranchObj = null;
