@@ -10,6 +10,7 @@ export const GET_PICTURE = 'get_picture';
 export const POST_PICTURE = 'post_picture';
 export const DELETE_ACCOUNT = 'delete_account';
 export const UPDATE_ACCOUNT = 'update_account';
+export const ADD_BRANCH = 'add_branch';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -67,6 +68,15 @@ export function getBranchList(){
 
     return{
         type: BRANCH_LIST,
+        payload: req
+    }
+}
+
+export function addBranchData(user){
+    const req = axios.post(`${ROOT_URL}admin/addBranch`,user).then(response => {return response}).catch(error => {return error.response});
+
+    return{
+        type: ADD_BRANCH,
         payload: req
     }
 }

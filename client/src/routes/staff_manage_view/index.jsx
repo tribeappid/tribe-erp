@@ -148,7 +148,7 @@ class StaffManageView extends Component{
                                                         xxxx-xx-xx
                                                     </div>
                                                     <div className={style.second_content_row}>
-                                                        xxxxxxxx1234
+                                                        { profileInfo[0] ? profileInfo[0].phone : 'Loading ...' }
                                                     </div>
                                                 </LayoutGrid.Cell>
                                             </LayoutGrid.Inner>

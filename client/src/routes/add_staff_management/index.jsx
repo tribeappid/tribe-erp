@@ -16,7 +16,8 @@ class AddStaff extends Component{
             AuthenticationString:'',
             Password: '',
             Name: '',
-            AuthorizationLevel: 1
+            AuthorizationLevel: 1,
+            Phone: ''
         },
         submitted: false,
         responseCheck: false,
@@ -40,6 +41,7 @@ class AddStaff extends Component{
     }
 
     handleInput(term){
+        console.log(term);
 		const target = term.__preactattr_.name;
         const newUser = this.state.user;
 		this.setState({
@@ -48,6 +50,7 @@ class AddStaff extends Component{
 				[target]: term.value
 			}
         });
+        console.log(this.state.user);
     }
 
     validateEmail(email){
@@ -235,6 +238,10 @@ class AddStaff extends Component{
                                                 <option>Admin Auth</option>
                                                 <option>Sys Admin Auth</option>
                                             </select>
+                                        </div>
+                                        <div className={style.input_group}>
+                                            <label>Phone</label>
+                                            <input type="text" name="Phone" value={user.Phone} onChange={ event => this.handleInput(event.target)} />
                                         </div>
                                         <div>
                                             <button onClick={this.backStaffManage.bind(this)} className={style.back_button}>Back</button>

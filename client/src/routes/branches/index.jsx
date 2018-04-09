@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
+import { getBranchList } from '../../actions';
+import { connect} from 'preact-redux';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Icon from 'preact-material-components/Icon';
 import Card from 'preact-material-components/Card';
@@ -11,50 +13,36 @@ import 'preact-material-components/Dialog/style';
 import style from './style';
 import _ from 'lodash';
 
-export default class Branches extends Component{
+class Branches extends Component{
+    componentDidMount(){
+        this.props.getBranchList();
+    }
+
     state={
-        data:[
-            {
-                no: 1,
-                branchName: 'adminpertama',
-                address: 'Address Pertama',
-                classroom: '1',
-            },
-            {
-                no: 2,
-                branchName: 'adminkedua',
-                address: 'Address Kedua',
-                classroom: '2',
-            },
-            {
-                no: 3,
-                branchName: 'adminketiga',
-                address: 'Address Ketiga',
-                classroom: '3',
-            }
-        ]
+        searchTerm: ''
     }
 
     dialogRef = dialog => (this.dialog = dialog);
 
     openSettings = () => this.dialog.MDComponent.show();
 
-    loadData(){
-        var dataRow = 0;
-        return _.map(this.state.data, data => {
-            return(
-                <tr id={data.no} className={ dataRow%2==0 ? style.even : '' }>
-                    <td>{data.no}</td>
-                    <td className={style.data_table}>{data.branchName}</td>
-                    <td className={style.data_table}>{data.address}</td>
-                    <td >{data.classroom}</td>
-                    <td className={style.data_table}>
-                        <Icon className={style.icon_design} id={data.no} onClick={this.goToViewData.bind(this)}>visibility</Icon>
-                        <Icon className={style.icon_design} id={data.no} onClick={this.openSettings}>delete</Icon>
-                    </td>
-                    <div style={`height: 0px;visibility: hidden;width: 0px; opacity: 0px`}>{dataRow++}</div>
-                </tr>
-            )
+    loadData(dataWanted){
+        var dataRow = 1;
+        return _.map(this.props.dataReducer.branchList, branchList => {
+            if(branchList.name.toLowerCase().indexOf(dataWanted.toLowerCase())>-1){
+                return(
+                    <tr id={dataRow} className={ dataRow%2==1 ? style.even : '' }>
+                        <td>{[dataRow]}</td>
+                        <td className={style.data_table}>{branchList.name}</td>
+                        <td className={style.data_table}>{branchList.address}</td>
+                        <td className={style.data_table}>{branchList.phone}</td>
+                        <td className={style.data_table}>
+                            <Icon entityId={branchList._id} className={style.icon_design} id={dataRow} onClick={''}>visibility</Icon>
+                            <Icon entityId={branchList._id} className={style.icon_design} id={dataRow++} onClick={''}>delete</Icon>
+                        </td>
+                    </tr>
+                )
+            }
         })
     }
 
@@ -79,19 +67,20 @@ export default class Branches extends Component{
             route('/branches/add');
         }
     }
-    
-    handleEvent(event){
-        console.log(event);
-    }
 
-    render( {}, {} ){
+    handleInput(term){
+        event.preventDefault();
+		this.setState({searchTerm: term.value})
+	}
+
+    render( {dataReducer}, {} ){
         return(
             <div>
                 <LayoutGrid>
                     <LayoutGrid.Inner>
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='10'>
-                            <div className={style.search_bar}>Search : <input type='text'/></div>
+                            <div className={style.search_bar}>Search : <input value={this.state.searchTerm} onChange={event => this.handleInput(event.target)} type='text'/></div>
                         </LayoutGrid.Cell>
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='1'/>
@@ -112,10 +101,10 @@ export default class Branches extends Component{
                                             <th>S/N</th>
                                             <th className={style.data_table}>Branch Name</th>
                                             <th className={style.data_table}>Address</th>
-                                            <th>Classroom</th>
+                                            <th className={style.data_table}>Phone</th>
                                             <th className={style.data_table}>Actions</th>
                                         </tr>
-                                        {this.loadData()}
+                                        {this.loadData(this.state.searchTerm)}
                                     </tbody>
                                 </table>
                             </Card>
@@ -142,11 +131,17 @@ class ColGroup extends Component{
         return(
             <colgroup>
                 <col style={{width: 4+"%"}}/>
-                <col style={{width: 15+"%"}}/>
-                <col style={{width: 59+"%"}}/>
-                <col style={{width: 10+"%"}}/>
+                <col style={{width: 20+"%"}}/>
+                <col style={{width: 34+"%"}}/>
+                <col style={{width: 20+"%"}}/>
                 <col style={{width: 12+"%"}}/>
             </colgroup>
         )
     }
 }
+
+function mapStateToProps(dataReducer){
+    return { dataReducer };
+}
+
+export default connect( mapStateToProps ,{ getBranchList })(Branches);
