@@ -214,7 +214,7 @@ var getBranch = exports.getBranch = function(req, res, override, callback, apiOp
     }
 };
 
-// Generic add method for enterprise
+// Generic add method for branch
 // Authorized - Admin, System Admin
 var addBranch = exports.addBranch = function(req, res, override, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
@@ -305,6 +305,70 @@ var addBranch = exports.addBranch = function(req, res, override, callback){
                         apiHelper.addRes(req, res, null, newBranchObj, null);
                     }
                 });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameters", null, null, null, null);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not found", null, null, null, null);
+        }
+    //});
+};
+
+var updateBranch = exports.updateBranch = function(req, res, override, callback){
+    //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.BranchId
+            ) {
+                var queryParms = {};
+                if (req.body.BranchId) queryParms._id = req.body.BranchId;
+
+                //Editing Object
+                var updateParms = {};
+                updateParms.$unset = {};
+
+                //default values
+                updateParms.last_update = dateTimeHelper.utcNow();
+
+                //key values
+                if (req.body.Name) updateParms.name = req.body.Name;
+                if (req.body.Description) updateParms.description = req.body.Description;
+                if (req.body.Address) updateParms.address = req.body.Address;
+                if (req.body.Phone) updateParms.phone = req.body.Phone;
+
+                //final check on unset to prevent errors
+                if (_.isEmpty(updateParms.$unset)) {
+                    delete updateParms.$unset;
+                }
+
+                var updateBranchObj = null;
+                var entityModel = mongoose.model('branch');
+                async.waterfall([
+                        function(updateBranchCallback){
+                            //update entity
+                            entityModel.update(
+                                queryParms
+                                , updateParms
+                                , { multi: true }
+                                , function(err, data){
+                                    if (!err && data){
+                                        updateBranchObj = data;
+                                        updateBranchCallback();
+                                    }else{
+                                        updateBranchCallback(err);
+                                    }
+                                });
+                        }
+
+                ], function (err) {
+                    if (err){
+                        apiHelper.updateRes(req, res, err, null, null, callback);
+                    }else{
+                        var numberAffected = null;
+                        if (updateBranchObj) numberAffected = updateBranchObj.nModified;
+                        apiHelper.updateRes(req, res, null, updateBranchObj, numberAffected, callback);
+                    }
+            });
             } else {
                 apiHelper.apiResponse(req, res, true, 500, "Missing Parameters", null, null, null, null);
             }
