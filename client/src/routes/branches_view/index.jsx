@@ -7,11 +7,16 @@ import 'preact-material-components/LayoutGrid/style.css';
 import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
+import { getBranchData } from '../../actions';
 import style from './style.css'
 
 class BranchView extends Component{
-    handleChange(event){
-        console.log(event);
+    componentDidMount(){
+        this.props.getBranchData(this.props.ownProps.id);
+    }
+
+    state={
+        isDataReady: false
     }
 
     backTotaffList(){
@@ -25,7 +30,16 @@ class BranchView extends Component{
         }
     }
 
-    render({}, {}){
+    goEditBranch = () => {
+        route(`/branches/edit/${this.props.ownProps.id}`);
+    }
+
+    render({dataReducer}, {isDataReady}){
+        if(dataReducer.branchData.length!=0){
+            if(!isDataReady){
+                this.setState({isDataReady: true});
+            }
+        }
         return(
             <div>
                 <LayoutGrid>
@@ -39,7 +53,7 @@ class BranchView extends Component{
                                             <a className={style.page_info}>View Branch</a>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='6'>
-                                            <button className={style.edit_button}>
+                                            <button onClick={this.goEditBranch.bind(this)} className={style.edit_button}>
                                                     <Icon>edit</Icon>
                                                     <a>Edit</a>
                                             </button>
@@ -51,7 +65,7 @@ class BranchView extends Component{
                                             <div className={style.second_content_row + ' ' + style.row_title}>Branch Name</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            <div className={style.second_content_row}>Branch Detail</div>
+                                            <div className={style.second_content_row}>{isDataReady ? dataReducer.branchData[0].name : 'Loading.....'}</div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                     <div className={style.divider}/>
@@ -60,7 +74,7 @@ class BranchView extends Component{
                                             <div className={style.second_content_row + ' ' + style.row_title}>Address</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            <div className={style.second_content_row}>Address Detail</div>
+                                            <div className={style.second_content_row}>{isDataReady ? dataReducer.branchData[0].address : 'Loading....'}</div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                     <div className={style.divider}/>
@@ -69,15 +83,7 @@ class BranchView extends Component{
                                             <div className={style.second_content_row + ' ' + style.row_title}>Phone</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            <div className={style.second_content_row}>Phone Number</div>
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                    <div className={style.divider}/>
-                                    <LayoutGrid.Inner>
-                                        <LayoutGrid.Cell cols='12'>
-                                            <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
-                                            <ProgramTable/>
-                                            <ProgramTable/>
+                                            <div className={style.second_content_row}>{isDataReady ? dataReducer.branchData[0].phone : 'Loading....'}</div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                     <button onClick={this.backTotaffList.bind(this)} className={style.button_back}>Back</button>
@@ -91,44 +97,8 @@ class BranchView extends Component{
     }
 }
 
-export default connect('','')(BranchView);
-
-class ProgramTable extends Component{
-    render({}, {}){
-        return(
-            <div className={style.program_table}>
-                <table>
-                    <tr>
-                        <th>Programmes ##</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Subject</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Math</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Curriculum</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Level A</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Level</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>JC 2</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        )
-    }
+function mapStateToProps( dataReducer, ownProps ){
+    return { dataReducer, ownProps };
 }
+
+export default connect(mapStateToProps,{ getBranchData })(BranchView);

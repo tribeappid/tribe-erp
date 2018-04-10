@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
-import { getBranchList } from '../../actions';
+import { getBranchList, deleteBranchData } from '../../actions';
 import { connect} from 'preact-redux';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Icon from 'preact-material-components/Icon';
@@ -19,12 +19,40 @@ class Branches extends Component{
     }
 
     state={
-        searchTerm: ''
+        user:{
+            BranchId: ''
+        },
+        searchTerm: '',
+        successDeleting: false
     }
 
     dialogRef = dialog => (this.dialog = dialog);
 
-    openSettings = () => this.dialog.MDComponent.show();
+    loading(){
+        document.getElementById("loadingScreen").hidden = false;
+    }
+
+    hideLoading(){
+        document.getElementById("loadingScreen").hidden = true;
+    }
+
+    openSettings = () => {
+        this.dialog.MDComponent.root_.__preactattr_.branchId= event.target.__preactattr_.branchId;
+        this.dialog.MDComponent.show();
+    }
+
+    deletingBranchData = () =>{
+        this.loading();
+        const target = this.dialog.MDComponent.root_.__preactattr_.branchId;
+        this.setState({user:{
+            BranchId: target
+        }});
+        this.props.deleteBranchData(this.state.user,this.successDeleting);
+    }
+
+    successDeleting = () =>{
+        this.setState({successDeleting: true});
+    }
 
     loadData(dataWanted){
         var dataRow = 1;
@@ -37,8 +65,8 @@ class Branches extends Component{
                         <td className={style.data_table}>{branchList.address}</td>
                         <td className={style.data_table}>{branchList.phone}</td>
                         <td className={style.data_table}>
-                            <Icon entityId={branchList._id} className={style.icon_design} id={dataRow} onClick={''}>visibility</Icon>
-                            <Icon entityId={branchList._id} className={style.icon_design} id={dataRow++} onClick={''}>delete</Icon>
+                            <Icon branchId={branchList._id} className={style.icon_design} id={dataRow} onClick={this.goToViewData.bind(this)}>visibility</Icon>
+                            <Icon branchId={branchList._id} className={style.icon_design} id={dataRow++} onClick={this.openSettings}>delete</Icon>
                         </td>
                     </tr>
                 )
@@ -53,7 +81,7 @@ class Branches extends Component{
             }
         })
         if(this.state.view_btn.clicked){
-            route(`/branches/view/${event.target.id}`);
+            route(`/branches/view/${event.target.__preactattr_.branchId}`);
         }
     }
 
@@ -71,9 +99,19 @@ class Branches extends Component{
     handleInput(term){
         event.preventDefault();
 		this.setState({searchTerm: term.value})
-	}
+    }
+
+    checkingResultDeleting(){
+        if(this.state.successDeleting){
+            console.log("success");
+            alert('Deleting Success');
+            this.hideLoading();
+            window.location.reload();
+        }
+    }
 
     render( {dataReducer}, {} ){
+        this.checkingResultDeleting();
         return(
             <div>
                 <LayoutGrid>
@@ -117,7 +155,7 @@ class Branches extends Component{
                         Are you sure want to delete this branch?
                     </Dialog.Body>
                     <Dialog.Footer>
-                        <Dialog.FooterButton accept>Yes</Dialog.FooterButton>
+                        <Dialog.FooterButton accept onClick={this.deletingBranchData}>Yes</Dialog.FooterButton>
                         <Dialog.FooterButton cancel>No</Dialog.FooterButton>
                     </Dialog.Footer>
                 </Dialog>
@@ -144,4 +182,4 @@ function mapStateToProps(dataReducer){
     return { dataReducer };
 }
 
-export default connect( mapStateToProps ,{ getBranchList })(Branches);
+export default connect( mapStateToProps ,{ getBranchList, deleteBranchData })(Branches);

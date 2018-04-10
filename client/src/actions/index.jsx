@@ -11,6 +11,9 @@ export const POST_PICTURE = 'post_picture';
 export const DELETE_ACCOUNT = 'delete_account';
 export const UPDATE_ACCOUNT = 'update_account';
 export const ADD_BRANCH = 'add_branch';
+export const DELETE_BRANCH = 'delete_branch';
+export const BRANCH_DATA = 'branch_data';
+export const UPDATE_BRANCH = 'update_branch';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -63,6 +66,32 @@ export function getAccountData(entity_id){
     }
 }
 
+export function deleteAccount(user){
+    const req = axios.post(`${ROOT_URL}accounts/delete`,user);
+
+    return{
+        type: DELETE_ACCOUNT,
+        payload: req
+    }
+}
+
+export function updateProfile(dataForm,successCallback, failCallback){
+    const req = axios.post(`${ROOT_URL}accounts/update`,dataForm).then(response => {
+        if(!response.Error){
+            successCallback();
+        }
+    }).catch(error =>{
+        if(error.response.Error){
+            failCallback();
+        }
+    });
+
+    return{
+        type: UPDATE_ACCOUNT,
+        payload: req
+    }
+}
+
 export function getBranchList(){
     const req = axios.get(`${ROOT_URL}admin/getBranch?EnterpriseId=${ENTERPRISE_ID}`);
 
@@ -77,6 +106,47 @@ export function addBranchData(user){
 
     return{
         type: ADD_BRANCH,
+        payload: req
+    }
+}
+
+export function deleteBranchData(user,successCallback){
+    const req = axios.post(`${ROOT_URL}admin/deleteBranch`,user).then(response=>{
+        if(!response.data.Error){
+            successCallback();
+        }
+    }).catch(error=>{
+        console.log(error.response);
+    });
+
+    console.log(req);
+
+    return{
+        type: DELETE_BRANCH,
+        payload: req
+    }
+}
+
+export function getBranchData(entityId){
+    const req = axios.get(`${ROOT_URL}admin/getBranch?BranchId=${entityId}`);
+
+    return{
+        type: BRANCH_DATA,
+        payload: req
+    }
+}
+
+export function updateBranch(user,successCallback,failCallback){
+    const req = axios.post(`${ROOT_URL}admin/updateBranch`,user).then(response=>{
+        if(!response.data.Error){
+            successCallback();
+        }
+    }).catch(error =>{
+        console.log(error.response);
+    });
+
+    return{
+        type: UPDATE_BRANCH,
         payload: req
     }
 }
@@ -100,32 +170,6 @@ export function getPicture(entityId){
 
     return{
         type: GET_PICTURE,
-        payload: req
-    }
-}
-
-export function deleteAccount(entityId){
-    const req = axios.post(`${ROOT_URL}accounts/delete`,entityId);
-
-    return{
-        type: DELETE_ACCOUNT,
-        payload: req
-    }
-}
-
-export function updateProfile(dataForm,successCallback, failCallback){
-    const req = axios.post(`${ROOT_URL}accounts/update`,dataForm).then(response => {
-        if(!response.Error){
-            successCallback();
-        }
-    }).catch(error =>{
-        if(error.response.Error){
-            failCallback();
-        }
-    });
-
-    return{
-        type: UPDATE_ACCOUNT,
         payload: req
     }
 }

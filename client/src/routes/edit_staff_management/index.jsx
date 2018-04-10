@@ -4,10 +4,8 @@ import { connect } from 'preact-redux';
 import style from './style';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Card from 'preact-material-components/Card';
-import Icon from 'preact-material-components/Icon';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/LayoutGrid/style';
-import 'preact-material-components/Icon/style';
 import { route } from 'preact-router';
 
 class EditStaff extends Component{
