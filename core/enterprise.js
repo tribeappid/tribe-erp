@@ -147,7 +147,7 @@ var getBranch = exports.getBranch = function(req, res, override, callback, apiOp
     var enterpriseId = null;
     var entityId = null;
 
-    if (req.query.EnterpriseId || req.query.BranchId) 
+    //if (req.query.EnterpriseId || req.query.BranchId) 
     {
         enterpriseId = req.query.EnterpriseId;
         authorizationHelper.authorize(req, res, [ __ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], entityId, enterpriseId, override, function(authorized){

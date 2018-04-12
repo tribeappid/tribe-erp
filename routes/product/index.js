@@ -50,7 +50,7 @@ router.get('/list', function(req, res, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
         if (1) {
             if (
-                req.query.BranchId
+                1//req.query.BranchId
             ) {
                     var getProductReq = _.clone(req);             
                     productController.getProduct(getProductReq, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){

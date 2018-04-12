@@ -105,6 +105,7 @@ router.post('/delete', function(req, res, callback){
 
 router.post('/update', function(req, res, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        console.log(req.body);
         if (1) {
             if (
                 req.body.EntityId
