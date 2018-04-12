@@ -15,8 +15,15 @@ import 'preact-material-components/Toolbar/style.css';
 import 'preact-material-components/Menu/style.css';
 import 'preact-material-components/Icon/style.css';
 import style from './style';
+import { connect } from 'preact-redux';
+import { getBranchList } from '../../actions';
+import _ from 'lodash';
 
-export default class Header extends Component {
+class Header extends Component {
+	componentDidMount(){
+		this.props.getBranchList();
+	}
+
 	state={
 		dropdown:{
 			accounting:{
@@ -51,7 +58,7 @@ export default class Header extends Component {
 	}
 
 	openProfileDetail = () => {
-		this.menu.MDComponent.open = true;
+		this.menu.MDComponent.open = true;                         
 		const closeDropDown = this.state.temp;
 		this.setState({
 			dropdown: closeDropDown
@@ -98,6 +105,7 @@ export default class Header extends Component {
 	goToPurchaseManage = this.linkTo('/purchase/management');
 	goToAccounting = this.linkTo('/accounting');
 	goToBranches = this.linkTo('/branches');
+	goToProductList = this.linkTo('/manager/product/list');
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -115,7 +123,34 @@ export default class Header extends Component {
 		);
 	}
 
-	render({}, {}) {
+	checkingEvent(){
+		const target = event.target.__preactattr_.branchId;
+		console.log(target);
+	}
+
+	loadingBranchData(){
+		if(this.props.dataReducer.branchList.length!=0){
+			var data = _.map(this.props.dataReducer.branchList, branchList=>{
+				return(
+					<div onClick={this.checkingEvent} branchId={branchList._id} className={style.subMenuItem}>
+						{branchList.name}
+					</div>
+				)
+			})
+			return data;
+		}
+		else{
+			return null;
+		}
+	}
+
+	render({dataReducer}, {}) {
+		
+		if(dataReducer.branchList.length !=0){
+			_.map(dataReducer.branchList, branchList=>{
+				
+			})
+		}
 		return (
 			<div>
 				<Toolbar>
@@ -147,8 +182,8 @@ export default class Header extends Component {
 								<Icon>edit</Icon>
 								Accounting
 							</List.LinkItem>
-							<div className={this.state.dropdown.accounting.clicked ? '' : style.hided} onClick={this.goToAccounting}>
-								Contoh<br/><br/><br/><br/>
+							<div className={this.state.dropdown.accounting.clicked ? '' : style.hided}>
+								{this.loadingBranchData()}
 							</div>
 							<List.LinkItem onClick={this.goToBranches}>
 								<Icon>edit</Icon>
@@ -162,8 +197,13 @@ export default class Header extends Component {
 								<Icon>account_circle</Icon>
 								Product Manager
 							</List.LinkItem>
-							<div className={this.state.dropdown.product.clicked ? '' : style.hided} onClick={this.goToProductManager}>
-								Contoh<br/><br/><br/><br/>
+							<div className={this.state.dropdown.product.clicked ? '' : style.hided}>
+								<div onClick={this.goToProductManager}>
+									Go To Product View
+								</div>
+								<div onClick={this.goToProductList}>
+									Go To Product List
+								</div>
 							</div>
 							<List.LinkItem onClick={this.goToPurchaseManage}>
 								<Icon>edit</Icon>
@@ -195,3 +235,9 @@ export default class Header extends Component {
 		);
 	}
 }
+
+function mapStateToProps(dataReducer){
+	return {dataReducer};
+}
+
+export default connect(mapStateToProps,{getBranchList})(Header);

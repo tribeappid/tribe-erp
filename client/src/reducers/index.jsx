@@ -7,6 +7,7 @@ import PostPictureReducer from './reducer_post_picture';
 import BranchListReducer from './reducer_branch_list';
 import AddBranchResponse from './reducer_add_branch';
 import BranchDataReducer from './reducer_branch_data';
+import ProductDataBranchId from './reducer_get_product_data_branch_id';
 
 const rootReducer = combineReducers({
     accountData: AccountDataReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     addBranchResponse: AddBranchResponse,
     pictureData: PostPictureReducer,
     branchList: BranchListReducer,
-    branchData: BranchDataReducer
+    branchData: BranchDataReducer,
+    productData: ProductDataBranchId
 });
 
 export default rootReducer;

@@ -1,0 +1,80 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width: 100%;
+}
+
+.search_bar{
+    float: right;
+}
+
+.search_bar input{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.search_bar a{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.add_button{
+    padding: 7px 11px;
+    float:right;
+    font-weight: bold;
+    background: #f98162;
+    color: white;
+    border-radius: 6px;
+}
+
+.add_button i{
+    vertical-align: top;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: normal;
+    position: relative;
+}
+
+.add_button a{
+    vertical-align: top;
+    font-size: 16px;
+}
+
+table, th, td{
+    border: none;
+}
+
+th, td{
+    padding: 8px 10px;
+}
+
+.data_table{
+    text-align: left !important;
+}
+
+.even{
+    background: #ededed;
+}
+
+.icon_design{
+    color: rgb(19, 202, 95);
+    padding: 0px 4px;
+}
+
+.icon_design:hover{
+    cursor: pointer;
+    color: rgb(34, 116, 21);
+}
+
+.optionSelector{
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 8px 12px;
+    background: white;
+}

@@ -14,6 +14,7 @@ export const ADD_BRANCH = 'add_branch';
 export const DELETE_BRANCH = 'delete_branch';
 export const BRANCH_DATA = 'branch_data';
 export const UPDATE_BRANCH = 'update_branch';
+export const GET_PRODUCT_DATA_BRANCH_ID = 'get_product_data_branch_id';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -170,6 +171,24 @@ export function getPicture(entityId){
 
     return{
         type: GET_PICTURE,
+        payload: req
+    }
+}
+
+export function getProductDataBranch(branchId){
+    const req = axios.get(`${ROOT_URL}products/list?BranchId=${branchId}`).then(response => {console.log(response);return response}).catch(error => {console.log(error.response);return error.response});
+
+    return{
+        type: GET_PRODUCT_DATA_BRANCH_ID,
+        payload: req
+    }
+}
+
+export function getProductAll(){
+    const req = axios.get(`${ROOT_URL}products/list`).then(response =>{console.log(response);return response}).catch(error =>{console.log(error.response);return error.response});
+
+    return{
+        type: GET_PRODUCT_DATA_BRANCH_ID,
         payload: req
     }
 }

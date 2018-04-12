@@ -18,7 +18,7 @@ export default class ProductView extends Component{
             <LayoutGrid.Cell className={style.kotak} desktopCols="3" tabletCols="4" phoneCols="4">
                 <Card>
                     <Card.Primary className={style.zero}>
-                        <Card.MediaItem className={style.panjang} src={imgUrl} x="1dot5"/>
+                        <Card.MediaItem className={style.panjang}><img  src={imgUrl} style={`width: 100%;height:100%;`}/></Card.MediaItem>
                         <Card.Title large className={style.title}>{productName}</Card.Title>
                         <Card.Media className={style.sub}>
                             <TextField className={style.tempat} textarea value={description}>
