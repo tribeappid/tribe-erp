@@ -43,6 +43,7 @@ productSchema = new Schema({
     , branches : [{ type: String , ref : 'branch' }]
     , suppliers : [{ type: String , ref : 'enterprise' }]
     , manufacturer : { type: String , ref : 'enterprise' }
+    , price : { type: Number, default: Null }
     , prices: [{ type: Schema.Types.ObjectId , ref : 'product_value' }]
     , medias : [{ type: Schema.Types.ObjectId , ref : 'media' }]
 });
