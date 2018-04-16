@@ -109,10 +109,8 @@ var getProduct = exports.getProduct = function(req, res, override, callback, api
 var addProduct = exports.addProduct = function(req, res, override, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
         if (1) {
-            if (
-                req.body.Name &&
-                req.body.BranchId
-            ) {
+            if (req.body.Name && (req.body.BranchId || req.body.AllBranch == "1" || req.body.BranchIds)) 
+            {
                 var addParms = {};
 
                 //default values
@@ -122,7 +120,22 @@ var addProduct = exports.addProduct = function(req, res, override, callback){
 
                 //parameter values
                 addParms.name = req.body.Name;
-                addParms.branches = req.body.BranchId;
+                if (req.body.AllBranch == "1")
+                {
+                    addParms.branches = [];
+                    addParms.all_branch = true;
+                }
+                else if (req.body.BranchIds)
+                {
+                    addParms.all_branch = false;
+                    addParms.branches = req.body.BranchIds;
+                }
+                else if (req.body.BranchId)
+                {
+                    addParms.all_branch = false;
+                    addParms.branches = req.body.BranchId;
+                }                
+                
                 if (req.body.ProductId) addParms._id = req.body.ProductId;
                 if (req.body.Status) addParms.status = req.body.Status;
                 if (req.body.Type) addParms.type = req.body.Type;

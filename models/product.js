@@ -41,6 +41,7 @@ productSchema = new Schema({
     , category : { type: String , ref : 'category' }
     , enterprise : { type: String , ref : 'enterprise' }
     , branches : [{ type: String , ref : 'branch' }]
+    , all_branch: {type: Boolean, default: null}
     , suppliers : [{ type: String , ref : 'enterprise' }]
     , manufacturer : { type: String , ref : 'enterprise' }
     , price : { type: Number, default: null }

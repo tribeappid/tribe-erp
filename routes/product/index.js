@@ -4,7 +4,7 @@ var router = express.Router();
 router.post('/add', function(req, res, callback){
     //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
         if (1) {
-            if (req.body.Name && req.body.BranchId)
+            if (req.body.Name && (req.body.BranchId || req.body.AllBranch == "1" || req.body.BranchIds))
             {
                 var addProductReq = _.clone(req);             
                 productController.addProduct(addProductReq, res, true, function(err, data){
