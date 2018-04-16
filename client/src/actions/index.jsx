@@ -15,6 +15,8 @@ export const DELETE_BRANCH = 'delete_branch';
 export const BRANCH_DATA = 'branch_data';
 export const UPDATE_BRANCH = 'update_branch';
 export const GET_PRODUCT_DATA_BRANCH_ID = 'get_product_data_branch_id';
+export const GET_PRODUCT_DETAIL = 'get_product_detail';
+export const ADD_PRODUCT = 'add_product';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -189,6 +191,39 @@ export function getProductAll(){
 
     return{
         type: GET_PRODUCT_DATA_BRANCH_ID,
+        payload: req
+    }
+}
+
+export function getProductDataDetail(productId){
+    const req = axios.get(`${ROOT_URL}products/get?ProductId=${productId}`).then(
+        response=>{return response}
+    ).catch(
+        error=>{return error.response}
+    );
+
+    return{
+        type: GET_PRODUCT_DETAIL,
+        payload: req
+    }
+}
+
+export function addProduct(user){
+    console.log("through this way");
+    const req = axios.post(`${ROOT_URL}products/add`,user).then(
+        response =>{
+            console.log(reponse);
+            return response;
+        }
+    ).catch(
+        error =>{
+            console.log(error.response);
+            return error.response;
+        }
+    );
+
+    return {
+        type: ADD_PRODUCT,
         payload: req
     }
 }

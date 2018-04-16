@@ -10,17 +10,25 @@
 }
 
 .edit_button{
+    padding: 7px 14px;
     float:right;
     font-weight: bold;
-    padding: 8px 24px;
     background: #f98162;
     color: white;
     border-radius: 6px;
 }
 
-.edit_button_word{
-    font-size: 1.2rem;
-    padding-left: 10px;
+.edit_button i{
+    vertical-align: top;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: normal;
+    position: relative;
+}
+
+.edit_button a{
+    vertical-align: top;
+    font-size: 16px;
 }
 
 .second_content{
@@ -95,10 +103,6 @@
     border-radius: 5px;
     width: 20%;
     padding: 10px;
-}
-
-.contoh{
-    font-size: 1rem;
 }
 
 .last_content{

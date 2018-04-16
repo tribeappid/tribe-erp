@@ -28,17 +28,17 @@ class Branches extends Component{
 
     dialogRef = dialog => (this.dialog = dialog);
 
+    openSettings = () => {
+        this.dialog.MDComponent.root_.__preactattr_.branchId= event.target.__preactattr_.branchId;
+        this.dialog.MDComponent.show();
+    }
+
     loading(){
         document.getElementById("loadingScreen").hidden = false;
     }
 
     hideLoading(){
         document.getElementById("loadingScreen").hidden = true;
-    }
-
-    openSettings = () => {
-        this.dialog.MDComponent.root_.__preactattr_.branchId= event.target.__preactattr_.branchId;
-        this.dialog.MDComponent.show();
     }
 
     deletingBranchData = () =>{

@@ -7,13 +7,28 @@ import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
 import style from './style.css'
+import { getProductDataDetail } from '../../actions';
+import { route } from 'preact-router';
 
 class ItemProductView extends Component{
-    handleChange(event){
-        console.log(event);
+    componentDidMount(){
+        this.props.getProductDataDetail(this.props.ownProps.id);
     }
 
-    render({}, {}){
+    state={
+        isDataIsReady: false
+    }
+
+    goBackToProductList = () => {
+        route('/manager/product/list');
+    }
+
+    render({dataReducer}, {isDataIsReady}){
+        if(dataReducer.productDataDetail.length!=0){
+            if(!isDataIsReady){
+                this.setState({isDataIsReady: true});
+            }
+        }
         return(
             <div>
                 <LayoutGrid>
@@ -27,81 +42,85 @@ class ItemProductView extends Component{
                                             <a className={style.page_info}>View Product</a>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='6'>
-                                            <button className={style.edit_button}>
-                                                    <Icon className={style.contoh}>edit</Icon>
-                                            
-                                                    <a className={style.edit_button_word}>Edit</a>
+                                            <button onClick={''} className={style.edit_button}>
+                                                    <Icon>edit</Icon>
+                                                    <a>Edit</a>
                                             </button>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
-                                    <LayoutGrid.Inner className={style.second_content}>
-                                        <LayoutGrid.Cell cols='3'>
-                                            <div className={style.image_place}>
-                                                <div className={style.image_setting}></div>
-                                            </div>
-                                        </LayoutGrid.Cell>
-                                        <LayoutGrid.Cell cols='9'>
-                                            <div className={style.second_content_people_name}>Item Name</div>
-                                            <LayoutGrid.Inner>
-                                                <LayoutGrid.Cell cols='5'>
-                                                    <div className={style.second_content_row + ' ' + style.row_title}>
-                                                        Product Code
-                                                    </div>
-                                                    <div className={style.second_content_row + ' ' + style.row_title}>
-                                                        Width
-                                                    </div>
-                                                    <div className={style.second_content_row + ' ' + style.row_title}>
-                                                        Height
-                                                    </div>
-                                                    <div className={style.second_content_row + ' ' + style.row_title}>
-                                                        Status
-                                                    </div>
-                                                </LayoutGrid.Cell>
-                                                <LayoutGrid.Cell cols='7'>
-                                                    <div className={style.second_content_row}>
-                                                        xxxxxxxxxxxxx
-                                                    </div>
-                                                    <div className={style.second_content_row}>
-                                                        xxx cm
-                                                    </div>
-                                                    <div className={style.second_content_row}>
-                                                        xx cm
-                                                    </div>
-                                                    <div className={style.second_content_row}>
-                                                        Disable
-                                                    </div>
-                                                </LayoutGrid.Cell>
-                                            </LayoutGrid.Inner>
-                                        </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>
-                                    <LayoutGrid.Inner>
+                                    
+                                    <LayoutGrid.Inner style={`margin-top: 50px;`}>
                                         <LayoutGrid.Cell cols='2'>
-                                            <div className={style.second_content_row + ' ' + style.row_title}>Branches</div>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Product Name</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            <div className={style.second_content_row}>Branches Detail</div>
-                                    </LayoutGrid.Cell>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].name : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
                                     <div className={style.divider}/>
                                     <LayoutGrid.Inner className={style.last_content}>
                                         <LayoutGrid.Cell cols='2'>
-                                            <div className={style.second_content_row + ' ' + style.row_title}>Product Descriptions</div>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Status</div>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='10'>
-                                            <div className={style.second_content_row}>Product DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct DetailProduct Detail</div>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].status : 'Loading....'}</div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
-                                    {/*
                                     <div className={style.divider}/>
-                                    <LayoutGrid.Inner>
-                                        <LayoutGrid.Cell cols='12'>
-                                            <div className={style.second_content_row + ' ' + style.row_title}>Programmers</div>
-                                            <ProgramTable/>
-                                            <ProgramTable/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Code</div>
                                         </LayoutGrid.Cell>
-                                    </LayoutGrid.Inner>*/
-                                    }
-                                    <button className={style.button_back}>Back</button>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].code : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Length</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].length : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Width</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].width : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Weight</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].weight : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Height</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].height : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <div className={style.divider}/>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='2'>
+                                            <div className={style.second_content_row + ' ' + style.row_title}>Description</div>
+                                        </LayoutGrid.Cell>
+                                        <LayoutGrid.Cell cols='10'>
+                                            <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].description : 'Loading....'}</div>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
+                                    <button onClick={this.goBackToProductList} className={style.button_back}>Back</button>
                                 </div>
                             </Card>
                         </LayoutGrid.Cell>
@@ -112,7 +131,11 @@ class ItemProductView extends Component{
     }
 }
 
-export default connect('','')(ItemProductView);
+function mapStateToProps( dataReducer, ownProps ){
+    return { dataReducer, ownProps };
+}
+
+export default connect(mapStateToProps,{getProductDataDetail})(ItemProductView);
 {/*
 class ProgramTable extends Component{
     render({}, {}){

@@ -25,6 +25,7 @@ import EditStaff from '../routes/edit_staff_management';
 import LoadingScreen from './loading_screen';
 import EditBranch from '../routes/edit_branch';
 import ProductList from '../routes/product_list';
+import AddProduct from '../routes/add_product';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -47,25 +48,26 @@ export default class App extends Component {
 				<Header/>
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<Invoice path="/sales/management"/>
+					<Register path='/register'/>
+					<Login path='/login'/>
 					<AddInvoice path='/sales/management/add'/>
-					<Accounting path="/accounting"/>	
-					<Product path="/manager/product"/>
-					<StaffManage path="/staff/management"/>
+					<Invoice path="/sales/management"/>
+					<Accounting path="/accounting"/>
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 					<Login path="/purchase/management" />
-					<Register path='/register'/>
-					<Login path='/login'/>
+					<StaffManage path="/staff/management"/>
 					<StaffManageView path='/staff/management/view/profile/:id'/>
-					<ItemProductView path='/item/product/:id'/>
 					<AddStaff path='/staff/management/add'/>
+					<EditStaff path='/staff/management/edit/:id'/>
 					<Branches path='/branches'/>
 					<BranchView path='/branches/view/:id'/>
 					<AddBranch path='/branches/add'/>
-					<EditStaff path='/staff/management/edit/:id'/>
 					<EditBranch path='/branches/edit/:id'/>
+					<Product path="/manager/product"/>
 					<ProductList path='/manager/product/list'/>
+					<ItemProductView path='/manager/product/view/:id'/>
+					<AddProduct path='/manager/product/add'/>
 				</Router>
 			</div>
 			</Provider>

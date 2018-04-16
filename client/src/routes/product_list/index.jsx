@@ -11,6 +11,7 @@ import 'preact-material-components/LayoutGrid/style';
 import 'preact-material-components/Icon/style';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/Dialog/style';
+import { route } from 'preact-router';
 
 class ProductList extends Component{
     componentDidMount(){
@@ -27,12 +28,25 @@ class ProductList extends Component{
     dialogRef = dialog => (this.dialog = dialog);
 
     openSettings = () => {
-        
+        this.dialog.MDComponent.root_.__preactattr_.branchId= event.target.__preactattr_.branchId;
         this.dialog.MDComponent.show();
+    }
+
+    deletingProduct = () =>{
+        console.log("Yess");
     }
 
     handleOptions(){
         this.setState({currentSelectedOptions: event.target.selectedIndex,changingData: true});
+    }
+
+    goToAddProduct = () =>{
+        route('/manager/product/add');
+    }
+
+    goToViewProductData = () => {
+        console.log(event.target.__preactattr_.entityId);
+        route(`/manager/product/view/${event.target.__preactattr_.entityId}`);
     }
 
     renderOptions(){
@@ -59,8 +73,8 @@ class ProductList extends Component{
                                 <td className={style.data_table}>Kosong</td>
                                 <td className={style.data_table}>Kosong</td>
                                 <td className={style.data_table}>
-                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow} onClick={''}>visibility</Icon>
-                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow++} onClick={''}>delete</Icon>
+                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow} onClick={this.goToViewProductData}>visibility</Icon>
+                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow++} onClick={this.openSettings}>delete</Icon>
                                 </td>
                             </tr>
                         )
@@ -117,7 +131,7 @@ class ProductList extends Component{
                                 <option>All</option>
                                 {this.renderOptions()}
                             </select>
-                            <button className={style.add_button}>
+                            <button onClick={this.goToAddProduct} className={style.add_button}>
                                 <Icon>add</Icon>
                                 <a>Add Product</a>
                             </button>
@@ -145,12 +159,12 @@ class ProductList extends Component{
                     </LayoutGrid.Inner>
                 </LayoutGrid>
                 <Dialog ref={this.dialogRef}>
-                    <Dialog.Header>Delete Staff</Dialog.Header>
+                    <Dialog.Header>Delete Product</Dialog.Header>
                     <Dialog.Body>
-                        Are you sure want to delete this staff ?
+                        Are you sure want to delete this product ?
                     </Dialog.Body>
                     <Dialog.Footer>
-                        <Dialog.FooterButton accept onClick={this.deletingAccount}>Yes</Dialog.FooterButton>
+                        <Dialog.FooterButton accept onClick={this.deletingProduct}>Yes</Dialog.FooterButton>
                         <Dialog.FooterButton cancel>No</Dialog.FooterButton>
                     </Dialog.Footer>
                 </Dialog>

@@ -1,0 +1,90 @@
+.content_body{
+    padding: 5%;
+}
+
+.page_title{
+    font-size: 25px;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 40px;
+}
+
+.open_folder{
+    border: 1px solid black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.open_folder:hover{
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+
+.input_group input[type=checkbox]{
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.input_group input{
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+.input_group label{
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.check_groupbox{
+    padding: 5px;
+}
+
+.check_groupbox input{
+    width: 15px;
+    height: 15px;
+}
+
+.check_groupbox label{
+    padding-left: 10px;
+}
+
+fieldset{
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+legend{
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.back_button{
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+    background: #25bc9d;
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}
+
+.add_button{
+    font-weight: bold;
+    float: right;
+    color: white;
+    font-size: 1em;
+    background: #25bc9d;
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}
