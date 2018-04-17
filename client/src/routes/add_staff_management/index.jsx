@@ -104,11 +104,13 @@ class AddStaff extends Component{
             else{
                 if(!this.props.dataReducer.pictureData.Error){
                     alert('Registration Success');
+                    window.location.reload();
                     route('/staff/management');
                     this.hideLoading();
                 }
                 else{
                     alert(`Photo Upload Failed\nAccount Registration Success\n${this.props.pictureData.ErrorDesc}\nYou can change the photo at Edit Page`);
+                    window.location.reload();
                     route('/staff/management');
                     this.hideLoading();
                 }
@@ -134,6 +136,7 @@ class AddStaff extends Component{
                         }
                         else{
                             alert('Registration Success');
+                            window.location.reload();
                             route('/staff/management');
                             this.hideLoading();
                         }

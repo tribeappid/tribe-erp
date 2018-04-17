@@ -41,9 +41,11 @@ export function login(user){
 
 
 export function register(user){
-    console.log(user)
-    const req = axios.post(`${ROOT_URL}accounts/register`,user).then(response => {return response})
-    .catch(error => {return error.response});
+    const req = axios.post(`${ROOT_URL}accounts/register`,user).then(
+        response => {return response}
+    ).catch(
+        error => {return error.response}
+    );
 
     return{
         type: REGIS,
@@ -79,15 +81,19 @@ export function deleteAccount(user){
 }
 
 export function updateProfile(dataForm,successCallback, failCallback){
-    const req = axios.post(`${ROOT_URL}accounts/update`,dataForm).then(response => {
-        if(!response.Error){
-            successCallback();
+    const req = axios.post(`${ROOT_URL}accounts/update`,dataForm).then(
+        response => {
+            if(!response.Error){
+                successCallback();
+            }
         }
-    }).catch(error =>{
-        if(error.response.Error){
-            failCallback();
+    ).catch(
+        error =>{
+            if(error.response.Error){
+                failCallback();
+            }
         }
-    });
+    );
 
     return{
         type: UPDATE_ACCOUNT,
@@ -105,7 +111,11 @@ export function getBranchList(){
 }
 
 export function addBranchData(user){
-    const req = axios.post(`${ROOT_URL}admin/addBranch`,user).then(response => {return response}).catch(error => {return error.response});
+    const req = axios.post(`${ROOT_URL}admin/addBranch`,user).then(
+        response => {return response}
+    ).catch(
+        error => {return error.response}
+    );
 
     return{
         type: ADD_BRANCH,
@@ -114,15 +124,17 @@ export function addBranchData(user){
 }
 
 export function deleteBranchData(user,successCallback){
-    const req = axios.post(`${ROOT_URL}admin/deleteBranch`,user).then(response=>{
-        if(!response.data.Error){
-            successCallback();
+    const req = axios.post(`${ROOT_URL}admin/deleteBranch`,user).then(
+        response=>{
+            if(!response.data.Error){
+                successCallback();
+            }
         }
-    }).catch(error=>{
-        console.log(error.response);
-    });
-
-    console.log(req);
+    ).catch(
+        error=>{
+            console.log(error.response);
+        }
+    );
 
     return{
         type: DELETE_BRANCH,
@@ -140,13 +152,17 @@ export function getBranchData(entityId){
 }
 
 export function updateBranch(user,successCallback,failCallback){
-    const req = axios.post(`${ROOT_URL}admin/updateBranch`,user).then(response=>{
-        if(!response.data.Error){
-            successCallback();
+    const req = axios.post(`${ROOT_URL}admin/updateBranch`,user).then(
+        response=>{
+            if(!response.data.Error){
+                successCallback();
+            }
         }
-    }).catch(error =>{
-        console.log(error.response);
-    });
+    ).catch(
+        error =>{
+            console.log(error.response);
+        }
+    );
 
     return{
         type: UPDATE_BRANCH,
@@ -156,9 +172,11 @@ export function updateBranch(user,successCallback,failCallback){
 
 export function uploadPicture(dataEntity,dataForm){
     dataForm.append('EntityId', dataEntity.EntityId);
-    console.log(dataForm);
-    const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm).then(response => {return response})
-    .catch(error => {return error.response});
+    const req = axios.post(`${ROOT_URL}accounts/userprofile`,dataForm).then(
+        response => {return response}
+    ).catch(
+        error => {return error.response}
+    );
 
     return{
         type: POST_PICTURE,
@@ -167,9 +185,11 @@ export function uploadPicture(dataEntity,dataForm){
 }
 
 export function getPicture(entityId){
-    const req = axios.get(`${ROOT_URL}accounts/userprofile?EntityId=${entityId}`).then(response => {return response}).catch(error => console.log(error));
-
-    console.log(req);
+    const req = axios.get(`${ROOT_URL}accounts/userprofile?EntityId=${entityId}`).then(
+        response => {return response}
+    ).catch(
+        error => console.log(error)
+    );
 
     return{
         type: GET_PICTURE,
@@ -178,7 +198,11 @@ export function getPicture(entityId){
 }
 
 export function getProductDataBranch(branchId){
-    const req = axios.get(`${ROOT_URL}products/list?BranchId=${branchId}`).then(response => {console.log(response);return response}).catch(error => {console.log(error.response);return error.response});
+    const req = axios.get(`${ROOT_URL}products/list?BranchId=${branchId}`).then(
+        response => {return response}
+    ).catch(
+        error => {return error.response}
+    );
 
     return{
         type: GET_PRODUCT_DATA_BRANCH_ID,
@@ -187,7 +211,11 @@ export function getProductDataBranch(branchId){
 }
 
 export function getProductAll(){
-    const req = axios.get(`${ROOT_URL}products/list`).then(response =>{console.log(response);return response}).catch(error =>{console.log(error.response);return error.response});
+    const req = axios.get(`${ROOT_URL}products/list`).then(
+        response =>{return response}
+    ).catch(
+        error =>{return error.response}
+    );
 
     return{
         type: GET_PRODUCT_DATA_BRANCH_ID,
@@ -208,17 +236,19 @@ export function getProductDataDetail(productId){
     }
 }
 
-export function addProduct(user){
-    console.log("through this way");
+export function addProduct(user,successCallback,failCallback){
+    console.log(user);
     const req = axios.post(`${ROOT_URL}products/add`,user).then(
         response =>{
-            console.log(reponse);
-            return response;
+            if(!response.data.Error){
+                return successCallback();
+            }
         }
     ).catch(
         error =>{
-            console.log(error.response);
-            return error.response;
+            if(error.response.data.Error){
+                return failCallback();
+            }
         }
     );
 

@@ -7,8 +7,9 @@ import Icon from 'preact-material-components/Icon';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/LayoutGrid/style';
 import 'preact-material-components/Icon/style';
-import { getBranchList, addProduct } from '../../actions';
+import { getBranchList, addProduct, GET_PRODUCT_DETAIL } from '../../actions';
 import _ from 'lodash';
+import { route } from 'preact-router';
 
 class AddProduct extends Component{
     componentDidMount(){
@@ -20,11 +21,53 @@ class AddProduct extends Component{
             Name: '',
             Status: '',
             Code: '',
+            Width: 0,
+            Length: 0,
+            Height: 0,
+            Weight: 0,
             Description: '',
             AllBranch: "0",
             BranchIds: []
         },
-        branchData:[]
+        branchData:[],
+        successRegister: false,
+        failRegister: false
+    }
+
+    loading = () => {
+        document.getElementById("loadingScreen").hidden = false;
+    }
+
+    hideLoading = () => {
+        document.getElementById("loadingScreen").hidden = true;
+    }
+
+    successCallBack = () => {
+        this.setState({successRegister: true});
+    }
+
+    failCallBack = () =>{
+        this.setState({failRegister: true});
+    }
+
+    registerResultChecking(){
+        if(this.state.successRegister){
+            alert("Registration Success");
+            
+            route('/manager/product/list');
+            this.hideLoading();
+        }
+        else if(this.state.failRegister){
+            alert("Registration Fail");
+            this.hideLoading();
+        }
+        else{
+
+        }
+    }
+
+    goBackToProductList = () =>{
+        route('/manager/product/list');
     }
 
     handleInput(term){
@@ -93,8 +136,8 @@ class AddProduct extends Component{
                 BranchIds: this.state.branchData
             }});
             if(this.state.user.Name && this.state.user.Code && this.state.user.Description && this.state.user.Status){
-                console.log(this.state.user);
-                this.props.addProduct(this.state.user);
+                this.loading();
+                this.props.addProduct(this.state.user,this.successCallBack,this.failCallBack);
             }
         }
         else{
@@ -104,28 +147,14 @@ class AddProduct extends Component{
                 BranchIds: this.state.branchData
             }});
             if(this.state.user.Name && this.state.user.Code && this.state.user.Description && this.state.user.Status){
-                console.log(this.state.user);
-                this.props.addProduct(this.state.user);
+                this.loading();
+                this.props.addProduct(this.state.user,this.successCallBack,this.failCallBack);
             }
         }
     }
 
     render({dataReducer},{user,branchData}){
-        /* console.log(dataReducer)
-        var a = ["car", "bike", "scooter"];
-        var b = a.map(function(entry) {
-            var singleObj = {}
-            singleObj['haihai'] = 'vehicle';
-            singleObj['haha'] = entry;
-            return singleObj;
-        });
-        console.log(b);
-        var index = a.indexOf("bike");
-        console.log(index);
-        if(index !== -1){
-            var c = b.splice(index,1);
-            console.log(b);
-        } */
+        this.registerResultChecking();
         return(
             <div>
                 <LayoutGrid>
@@ -133,7 +162,7 @@ class AddProduct extends Component{
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='10'>
                             <Card className={style.content_body}>
-                                <a className={style.page_title}>Add Branch</a>
+                                <a className={style.page_title}>Add Product</a>
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <div className={style.input_group}>
                                         <label>Name</label><br/>
@@ -148,6 +177,22 @@ class AddProduct extends Component{
                                         <input value={user.Code} name="Code" type='text' onChange={ event => this.handleInput(event.target)}/>
                                     </div>
                                     <div className={style.input_group}>
+                                        <label>Width</label><br/>
+                                        <input value={user.Width} name="Width" type='number' onChange={ event => this.handleInput(event.target)}/>
+                                    </div>
+                                    <div className={style.input_group}>
+                                        <label>Length</label><br/>
+                                        <input value={user.Length} name="Length" type='number' onChange={ event => this.handleInput(event.target)}/>
+                                    </div>
+                                    <div className={style.input_group}>
+                                        <label>Height</label><br/>
+                                        <input value={user.Height} name="Height" type='number' onChange={ event => this.handleInput(event.target)}/>
+                                    </div>
+                                    <div className={style.input_group}>
+                                        <label>Weight</label><br/>
+                                        <input value={user.Weight} name="Weight" type='number' onChange={ event => this.handleInput(event.target)}/>
+                                    </div>
+                                    <div className={style.input_group}>
                                         <label>Description</label><br/>
                                         <input value={user.Description} name="Description" type='text' onChange={ event => this.handleInput(event.target)}/>
                                     </div>
@@ -156,7 +201,7 @@ class AddProduct extends Component{
                                         {this.loadBranchOptions()}
                                     </fieldset>
                                     <div>
-                                        <button onClick={this.goBackToView} className={style.back_button}>Back</button>
+                                        <button onClick={this.goBackToProductList} className={style.back_button}>Back</button>
                                         <button type="submit" className={style.add_button}>Add</button>
                                     </div>
                                 </form>

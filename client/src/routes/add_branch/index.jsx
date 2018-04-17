@@ -69,13 +69,13 @@ class AddBranch extends Component{
             else{
                 if(!this.props.dataReducer.addBranchResponse.Error){
                     alert("Adding Branch Success");
+                    window.location.reload();
                     route('/branches');
-                    console.log(this.props.dataReducer);
                     this.hideLoading();
                 }
                 else{
+                    alert("Adding Branch Fail");
                     this.setState({responseCheck: false});
-                    console.log(this.props.dataReducer);
                     this.hideLoading();
                 }
             }

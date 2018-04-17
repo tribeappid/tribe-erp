@@ -128,29 +128,7 @@ class Header extends Component {
 		console.log(target);
 	}
 
-	loadingBranchData(){
-		if(this.props.dataReducer.branchList.length!=0){
-			var data = _.map(this.props.dataReducer.branchList, branchList=>{
-				return(
-					<div onClick={this.checkingEvent} branchId={branchList._id} className={style.subMenuItem}>
-						{branchList.name}
-					</div>
-				)
-			})
-			return data;
-		}
-		else{
-			return null;
-		}
-	}
-
 	render({dataReducer}, {}) {
-		
-		if(dataReducer.branchList.length !=0){
-			_.map(dataReducer.branchList, branchList=>{
-				
-			})
-		}
 		return (
 			<div>
 				<Toolbar>
@@ -183,7 +161,7 @@ class Header extends Component {
 								Accounting
 							</List.LinkItem>
 							<div className={this.state.dropdown.accounting.clicked ? '' : style.hided}>
-								{this.loadingBranchData()}
+								Contoh<br/><br/><br/>
 							</div>
 							<List.LinkItem onClick={this.goToBranches}>
 								<Icon>edit</Icon>

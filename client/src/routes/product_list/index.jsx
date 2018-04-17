@@ -45,7 +45,6 @@ class ProductList extends Component{
     }
 
     goToViewProductData = () => {
-        console.log(event.target.__preactattr_.entityId);
         route(`/manager/product/view/${event.target.__preactattr_.entityId}`);
     }
 
@@ -91,7 +90,7 @@ class ProductList extends Component{
             }
         }
         else{
-            console.log("Loading....");
+
         }
     }
 
@@ -114,7 +113,6 @@ class ProductList extends Component{
     }
 
     render({dataReducer},{currentSelectedOptions,searchTerm}){
-        console.log(dataReducer);
         this.gettingProductData();
         return(
             <div>
