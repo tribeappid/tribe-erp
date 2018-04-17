@@ -187,3 +187,110 @@ var addProduct = exports.addProduct = function(req, res, override, callback){
     //});
 };
 
+var updateProduct = exports.updateProduct = function(req, res, override, callback){
+    //authorizationHelper.authorize(req, res, [__ENTERPRISE_ADMIN_AUTH, __ENTERPRISE_SYS_ADMIN_AUTH, __ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.ProductId
+            ) {
+                var queryParms = {};
+                if (req.body.ProductId) queryParms._id = req.body.ProductId;
+
+                //Editing Object
+                var updateParms = {};
+                updateParms.$unset = {};
+
+                //default values
+                updateParms.last_update = dateTimeHelper.utcNow();
+
+                //key values
+                if (req.body.Name) updateParms.name = req.body.Name;
+                if (req.body.Description) updateParms.description = req.body.Description;
+                if (req.body.Type) updateParms.type = req.body.Type;
+                if (req.body.PublishDate) updateParms.publish_date = req.body.PublishDate;
+                if (req.body.EnterpriseId) updateParms.enterprise = req.body.EnterpriseId;
+                if (req.body.Length) updateParms.length = req.body.Length;
+                if (req.body.Width) updateParms.width = req.body.Width;
+                if (req.body.Height) updateParms.height = req.body.Height;
+                if (req.body.Weight) updateParms.weight = req.body.Weight;
+                if (req.body.Code) updateParms.code = req.body.Code;
+
+                if (req.body.AllBranch == "1")
+                {
+                    updateParms.branches = [];
+                    updateParms.all_branch = true;
+                }
+                else if (req.body.BranchIds)
+                {
+                    updateParms.all_branch = false;
+                    updateParms.branches = req.body.BranchIds;
+                }
+                else if (req.body.BranchId)
+                {
+                    updateParms.all_branch = false;
+                    updateParms.branches = req.body.BranchId;
+                }                
+
+                //final check on unset to prevent errors
+                if (_.isEmpty(updateParms.$unset)) {
+                    delete updateParms.$unset;
+                }
+
+                var updateProductObj = null;
+                var entityModel = mongoose.model('product');
+                async.waterfall([
+                        function(updateProductCallback){
+                            //update entity
+                            entityModel.update(
+                                queryParms
+                                , updateParms
+                                , { multi: true }
+                                , function(err, data){
+                                    if (!err && data){
+                                        updateProductObj = data;
+                                        updateProductCallback();
+                                    }else{
+                                        updateProductCallback(err);
+                                    }
+                                });
+                        }
+
+                ], function (err) {
+                    if (err){
+                        apiHelper.updateRes(req, res, err, null, null, callback);
+                    }else{
+                        var numberAffected = null;
+                        if (updateProductCallback) numberAffected = updateProductCallback.nModified;
+                        apiHelper.updateRes(req, res, null, updateProductCallback, numberAffected, callback);
+                    }
+            });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameters", null, null, null, null);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not found", null, null, null, null);
+        }
+    //});
+};
+
+var deleteProduct = exports.deleteProduct = function(req, res, override, callback){
+    //authorizationHelper.authorize(req, res, [__ADMIN_AUTH, __SYS_ADMIN_AUTH], null, null, override, function(authorized){
+        if (1) {
+            if (
+                req.body.ProductId
+            ) {
+                var queryParms = {};
+                if (req.body.ProductId) queryParms._id = req.body.ProductId;
+
+                var productModel = mongoose.model('product');
+                productModel.remove(queryParms).exec(function (err, numberRemoved) {
+                    apiHelper.deleteRes(req, res, err, numberRemoved, callback);
+                });
+            } else {
+                apiHelper.apiResponse(req, res, true, 500, "Missing Parameter", null, null, null, callback);
+            }
+        } else {
+            apiHelper.apiResponse(req, res, true, 401, "Not Authorized", null, null, null, callback);
+        }
+    //});
+};
