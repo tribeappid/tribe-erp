@@ -138,6 +138,7 @@ var addProduct = exports.addProduct = function(req, res, override, callback){
                 
                 if (req.body.ProductId) addParms._id = req.body.ProductId;
                 if (req.body.Status) addParms.status = req.body.Status;
+                if (req.body.Description) addParms.description = req.body.Description;
                 if (req.body.Type) addParms.type = req.body.Type;
                 if (req.body.CreateDate) addParms.create_date = req.body.CreateDate;
                 if (req.body.LastUpdate) addParms.last_update = req.body.LastUpdate;
