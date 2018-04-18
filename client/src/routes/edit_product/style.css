@@ -6,7 +6,7 @@
     font-size: 25px;
     font-weight: bold;
     color: gray;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .open_folder{
@@ -22,11 +22,6 @@
     cursor: pointer;
 }
 
-.input_group input[type=checkbox]{
-    width: 100px !important;
-    height: 100px !important;
-}
-
 .input_group input{
     font-size: 15px;
     border: 1px solid #cccccc;
@@ -35,6 +30,12 @@
     margin-bottom: 25px;
     padding: 8px 12px;
     width: 100%;
+}
+
+.input_group label{
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
 }
 
 .input_group select{
@@ -46,37 +47,7 @@
     padding: 8px 12px;
     background: white;
     width: 100%;
-}
 
-.input_group label{
-    font-size: 18px;
-    font-weight: bold;
-    color: gray;
-}
-
-.check_groupbox{
-    padding: 5px;
-}
-
-.check_groupbox input{
-    width: 15px;
-    height: 15px;
-}
-
-.check_groupbox label{
-    padding-left: 10px;
-}
-
-fieldset{
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-legend{
-    font-size: 18px;
-    font-weight: bold;
-    color: gray;
 }
 
 .back_button{
@@ -98,4 +69,17 @@ legend{
     border-radius: 5px;
     width: 20%;
     padding: 10px;
+}
+
+.imageHolder{
+    padding: 10px;
+    width: 160px;
+    border-radius: 160px;
+    height: 160px;
+    margin-bottom: 5px;
+}
+
+.imageHidden{
+    width: 0;
+    height: 0;
 }

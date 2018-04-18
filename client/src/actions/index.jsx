@@ -17,6 +17,8 @@ export const UPDATE_BRANCH = 'update_branch';
 export const GET_PRODUCT_DATA_BRANCH_ID = 'get_product_data_branch_id';
 export const GET_PRODUCT_DETAIL = 'get_product_detail';
 export const ADD_PRODUCT = 'add_product';
+export const DELETE_PRODUCT = 'delete_product';
+export const UPDATE_PRODUCT = 'update_product';
 
 const ROOT_URL = 'http://localhost:3000/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
@@ -254,6 +256,54 @@ export function addProduct(user,successCallback,failCallback){
 
     return {
         type: ADD_PRODUCT,
+        payload: req
+    }
+}
+
+export function deleteProduct(user,successCallback){
+    const req = axios.post(`${ROOT_URL}products/delete`,user).then(
+        response =>{
+            if(!response.data.Error){
+                return successCallback();
+            }
+        }
+    ).catch(
+        error =>{
+            if(error.response.data.Error){
+                return ()=>{
+                    alert("Fail");
+                    document.getElementById("loadingScreen").hidden = true;
+                }
+            }
+        }
+    );
+
+    return{
+        type: DELETE_PRODUCT,
+        payload: req
+    }
+}
+
+export function updateProduct(user,successCallback,failCallback){
+    const req = axios.post(`${ROOT_URL}products/update`,user).then(
+        response=>{
+            if(!response.data.Error){
+                return successCallback();
+            }
+        }
+    ).catch(
+        error=>{
+            if(error.response.data.Error){
+                return ()=>{
+                    alert("Fail");
+                    document.getElementById("loadingScreen").hidden = true;
+                }
+            }
+        }
+    );
+
+    return{
+        type: UPDATE_PRODUCT,
         payload: req
     }
 }

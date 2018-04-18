@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import style from './style';
 import { connect } from 'preact-redux';
-import { getBranchList,getProductDataBranch, getProductAll } from '../../actions';
+import { getBranchList,getProductDataBranch, getProductAll, deleteProduct } from '../../actions';
 import _ from 'lodash';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Icon from 'preact-material-components/Icon';
@@ -19,21 +19,46 @@ class ProductList extends Component{
     }
 
     state={
+        user:{
+            ProductId: ''
+        },
         currentSelectedOptions: 0,
         changingData: true,
         alreadyGetTheData: false,
-        searchTerm: ''
+        searchTerm: '',
+        deleteSucces: false
     }
 
     dialogRef = dialog => (this.dialog = dialog);
 
+    loading = () =>{
+        document.getElementById("loadingScreen").hidden = false;
+    }
+
+    hideLoading = () =>{
+        document.getElementById("loadingScreen").hidden = true;
+    }
+
     openSettings = () => {
-        this.dialog.MDComponent.root_.__preactattr_.branchId= event.target.__preactattr_.branchId;
+        this.dialog.MDComponent.root_.__preactattr_.productId= event.target.__preactattr_.productId;
         this.dialog.MDComponent.show();
     }
 
     deletingProduct = () =>{
-        console.log("Yess");
+        this.loading();
+        const target = this.dialog.MDComponent.root_.__preactattr_.productId;
+        this.setState({
+            user:{
+                ProductId: target
+            }
+        });
+        console.log(this.state.user);
+        console.log(target);
+        this.props.deleteProduct(this.state.user,this.successCallBack);
+    }
+
+    successCallBack = () =>{
+        this.setState({deleteSucces: true});
     }
 
     handleOptions(){
@@ -45,7 +70,7 @@ class ProductList extends Component{
     }
 
     goToViewProductData = () => {
-        route(`/manager/product/view/${event.target.__preactattr_.entityId}`);
+        route(`/manager/product/view/${event.target.__preactattr_.productId}`);
     }
 
     renderOptions(){
@@ -72,8 +97,8 @@ class ProductList extends Component{
                                 <td className={style.data_table}>Kosong</td>
                                 <td className={style.data_table}>Kosong</td>
                                 <td className={style.data_table}>
-                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow} onClick={this.goToViewProductData}>visibility</Icon>
-                                    <Icon entityId={productData._id} className={style.icon_design} id={dataRow++} onClick={this.openSettings}>delete</Icon>
+                                    <Icon productId={productData._id} className={style.icon_design} id={dataRow} onClick={this.goToViewProductData}>visibility</Icon>
+                                    <Icon productId={productData._id} className={style.icon_design} id={dataRow++} onClick={this.openSettings}>delete</Icon>
                                 </td>
                             </tr>
                         )
@@ -112,8 +137,16 @@ class ProductList extends Component{
         this.setState({searchTerm: term.value});
     }
 
+    checkingDeleteProcess(){
+        if(this.state.deleteSucces){
+            alert("Deleting Successfull");
+            window.location.reload();
+        }
+    }
+    
     render({dataReducer},{currentSelectedOptions,searchTerm}){
         this.gettingProductData();
+        this.checkingDeleteProcess();
         return(
             <div>
                 <LayoutGrid>
@@ -190,4 +223,4 @@ function mapStateToProps(dataReducer){
     return { dataReducer };
 }
 
-export default connect(mapStateToProps,{getBranchList,getProductDataBranch, getProductAll})(ProductList);
+export default connect(mapStateToProps,{getBranchList,getProductDataBranch, getProductAll,deleteProduct})(ProductList);

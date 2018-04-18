@@ -108,3 +108,18 @@
 .last_content{
     margin-bottom: 5%;
 }
+
+legend{
+    padding: 5px 0px !important;
+    font-weight:bold !important;
+    font-size:16px !important;
+    color:#444 !important;
+}
+
+fieldset{
+    width: 100%;
+}
+
+.branchData{
+    padding: 10px;
+}

@@ -26,6 +26,7 @@ import LoadingScreen from './loading_screen';
 import EditBranch from '../routes/edit_branch';
 import ProductList from '../routes/product_list';
 import AddProduct from '../routes/add_product';
+import EditProduct from '../routes/edit_product';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -68,6 +69,7 @@ export default class App extends Component {
 					<ProductList path='/manager/product/list'/>
 					<ItemProductView path='/manager/product/view/:id'/>
 					<AddProduct path='/manager/product/add'/>
+					<EditProduct path='/manager/product/edit/:id'/>
 				</Router>
 			</div>
 			</Provider>

@@ -1,21 +1,20 @@
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import { Component, h } from 'preact';
 import style from './style';
+import { connect } from 'preact-redux';
+import { route } from 'preact-router';
+import _ from 'lodash';
+import { getProductDataDetail } from '../../actions';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Card from 'preact-material-components/Card';
 import Icon from 'preact-material-components/Icon';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/LayoutGrid/style';
 import 'preact-material-components/Icon/style';
-import { getBranchList, addProduct } from '../../actions';
-import _ from 'lodash';
-import { route } from 'preact-router';
 
-class AddProduct extends Component{
+class EditProduct extends Component{
     componentDidMount(){
-        this.props.getBranchList();
+        this.props.getProductDataDetail(this.props.ownProps.id);
     }
-
     state={
         user:{
             Name: '',
@@ -30,54 +29,22 @@ class AddProduct extends Component{
             BranchIds: []
         },
         branchData:[],
-        successRegister: false,
-        failRegister: false
-    }
-
-    loading = () => {
-        document.getElementById("loadingScreen").hidden = false;
-    }
-
-    hideLoading = () => {
-        document.getElementById("loadingScreen").hidden = true;
-    }
-
-    successCallBack = () => {
-        this.setState({successRegister: true});
-    }
-
-    failCallBack = () =>{
-        this.setState({failRegister: true});
-    }
-
-    registerResultChecking(){
-        if(this.state.successRegister){
-            alert("Registration Success");
-            window.location.reload();
-            route('/manager/product/list');
-            this.hideLoading();
-        }
-        else if(this.state.failRegister){
-            alert("Registration Fail");
-            this.hideLoading();
-        }
-        else{
-
-        }
-    }
-
-    goBackToProductList = () =>{
-        route('/manager/product/list');
+        defaultSelected: 0,
+        successEdit: false,
+        failEdit: false,
+        isDataLoaded: false,
+        branchOptionsLoaded: false
     }
 
     handleInput(term){
-        const target = term.__preactattr_.name;
+		const target = term.__preactattr_.name;
         const newUser = this.state.user;
 		this.setState({
 			user:{
 				...newUser,
 				[target]: term.value
-			}
+            },
+            isNeedToUpload: true
         });
     }
 
@@ -89,51 +56,6 @@ class AddProduct extends Component{
                 Status: ( event.target.selectedIndex == 0 ? "Available" : "Non-Available")
             }
         })
-        console.log(this.state.user);
-    }
-
-    checkedData(){
-        if(this.state.branchData.length!=0){
-            if(event.target.checked){
-                var data = this.state.branchData;
-                data.push(event.target.__preactattr_.id);
-                this.setState({branchData: data});
-            }
-            else{
-                var data = this.state.branchData;
-                var index = data.indexOf(event.target.__preactattr_.id);
-                if(index!==-1){
-                    data.splice(index,1);
-                }
-                this.setState({branchData: data});
-            }
-        }
-        else{
-            var data=this.state.branchData;
-            data.push(event.target.__preactattr_.id);
-            this.setState({branchData: data});
-        }
-    }
-
-    loadBranchOptions(){
-        if(this.props.dataReducer.branchList.length!=0){
-            var data = _.map(this.props.dataReducer.branchList, branchList=>{
-                return(
-                    <div className={style.check_groupbox}>
-                        <input id={branchList._id} type="checkbox" name={branchList.name} value={branchList.name} onClick={this.checkedData.bind(this)}/>
-                        <label for={branchList._id}>{branchList.name}</label>
-                    </div>
-                )
-            });
-            return data;
-        }
-        else{
-            return(
-                <div>
-                    Loading .....
-                </div>
-            )
-        }
     }
 
     handleSubmit(){
@@ -163,8 +85,101 @@ class AddProduct extends Component{
         }
     }
 
-    render({dataReducer},{user,branchData}){
-        this.registerResultChecking();
+    successCallBack = ()=>{
+        this.setState({successEdit: true});
+    }
+
+    failCallBack = ()=>{
+        this.setState({failEdit: true});
+    }
+
+    allData(){
+        if(this.props.dataReducer.branchList.length!=0){
+            if(this.state.branchOptionsLoaded){
+                console.log(this.props.dataReducer);
+                console.log("sampai sini");
+            }
+        }
+    }
+
+    specificData(){
+        console.log("masuk sini");
+    }
+
+    settingData(){
+        if(!this.state.isDataLoaded){
+            if(this.props.dataReducer.productDataDetail.length!=0){
+                const data = this.props.dataReducer.productDataDetail[0];
+                this.setState({
+                    isDataLoaded: true,
+                    user:{
+                        Name: data.name,
+                        Status: data.status,
+                        Code: data.code,
+                        Width: data.width,
+                        Length: data.length,
+                        Height: data.height,
+                        Weight: data.weight,
+                        Description: data.description,
+                        AllBranch: (data.all_branch ? "1" : "0"),
+                    },
+                    branchData: (data.all_branch ? this.allData() : this.specificData())
+                })
+            }
+        }
+    }
+    
+    loadBranchOptions(){
+        if(this.props.dataReducer.branchList.length!=0){
+            var data = _.map(this.props.dataReducer.branchList, branchList=>{
+                return(
+                    <div className={style.check_groupbox}>
+                        <input id={branchList._id} type="checkbox" name={branchList.name} value={branchList.name} onClick={this.checkedData.bind(this)}/>
+                        <label for={branchList._id}>{branchList.name}</label>
+                    </div>
+                )
+            });
+            return data;
+        }
+        else{
+            return(
+                <div>
+                    Loading .....
+                </div>
+            )
+        }
+    }
+
+    checkedData(){
+        if(this.state.branchData.length!=0){
+            if(event.target.checked){
+                var data = this.state.branchData;
+                data.push(event.target.__preactattr_.id);
+                this.setState({branchData: data});
+            }
+            else{
+                var data = this.state.branchData;
+                var index = data.indexOf(event.target.__preactattr_.id);
+                if(index!==-1){
+                    data.splice(index,1);
+                }
+                this.setState({branchData: data});
+            }
+        }
+        else{
+            var data=this.state.branchData;
+            data.push(event.target.__preactattr_.id);
+            this.setState({branchData: data});
+        }
+    }
+
+    goBackToView = () => {
+        route(`/manager/product/view/${this.props.ownProps.id}`);
+    }
+
+    render({dataReducer},{user}){
+        console.log(dataReducer);
+        //this.settingData();
         return(
             <div>
                 <LayoutGrid>
@@ -172,7 +187,7 @@ class AddProduct extends Component{
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='10'>
                             <Card className={style.content_body}>
-                                <a className={style.page_title}>Add Product</a>
+                                <a className={style.page_title}>Update Product</a>
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <div className={style.input_group}>
                                         <label>Name</label><br/>
@@ -180,7 +195,7 @@ class AddProduct extends Component{
                                     </div>
                                     <div className={style.input_group}>
                                         <label>Status</label><br/>
-                                        <select onChange={this.optionHandle.bind(this)}>
+                                        <select selectedIndex={user.Status=="Available" ? 0 : 1} onChange={this.optionHandle.bind(this)}>
                                                 <option>Available</option>
                                                 <option>Non-Available</option>
                                         </select>
@@ -214,7 +229,7 @@ class AddProduct extends Component{
                                         {this.loadBranchOptions()}
                                     </fieldset>
                                     <div>
-                                        <button onClick={this.goBackToProductList} className={style.back_button}>Back</button>
+                                        <button onClick={this.goBackToView} className={style.back_button}>Back</button>
                                         <button type="submit" className={style.add_button}>Add</button>
                                     </div>
                                 </form>
@@ -229,7 +244,7 @@ class AddProduct extends Component{
 }
 
 function mapStateToProps(dataReducer,ownProps){
-    return { dataReducer, ownProps };
+    return { dataReducer, ownProps};
 }
 
-export default connect(mapStateToProps,{getBranchList,addProduct})(AddProduct);
+export default connect(mapStateToProps,{getProductDataDetail})(EditProduct);

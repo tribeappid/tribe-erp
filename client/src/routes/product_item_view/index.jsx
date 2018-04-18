@@ -9,6 +9,7 @@ import { connect } from 'preact-redux';
 import style from './style.css'
 import { getProductDataDetail } from '../../actions';
 import { route } from 'preact-router';
+import _ from 'lodash';
 
 class ItemProductView extends Component{
     componentDidMount(){
@@ -21,6 +22,21 @@ class ItemProductView extends Component{
 
     goBackToProductList = () => {
         route('/manager/product/list');
+    }
+
+    loadingBranchList(){
+        const data = _.map(this.props.dataReducer.productDataDetail[0].branches, branches=>{
+            return(
+                <div className={style.branchData}>
+                    {branches.name}
+                </div>
+            )
+        })
+        return data;
+    }
+
+    goToEditProduct=()=>{
+        route(`/manager/product/edit/${this.props.ownProps.id}`);
     }
 
     render({dataReducer}, {isDataIsReady}){
@@ -42,7 +58,7 @@ class ItemProductView extends Component{
                                             <a className={style.page_info}>View Product</a>
                                         </LayoutGrid.Cell>
                                         <LayoutGrid.Cell cols='6'>
-                                            <button onClick={''} className={style.edit_button}>
+                                            <button onClick={this.goToEditProduct} className={style.edit_button}>
                                                     <Icon>edit</Icon>
                                                     <a>Edit</a>
                                             </button>
@@ -120,6 +136,14 @@ class ItemProductView extends Component{
                                             <div className={style.second_content_row}>{isDataIsReady ? dataReducer.productDataDetail[0].description : 'Loading....'}</div>
                                         </LayoutGrid.Cell>
                                     </LayoutGrid.Inner>
+                                    <LayoutGrid.Inner className={style.last_content}>
+                                        <LayoutGrid.Cell cols='12'>
+                                            <fieldset>
+                                                <legend>Branch List</legend>
+                                                {isDataIsReady ? this.loadingBranchList() : ''}
+                                            </fieldset>
+                                        </LayoutGrid.Cell>
+                                    </LayoutGrid.Inner>
                                     <button onClick={this.goBackToProductList} className={style.button_back}>Back</button>
                                 </div>
                             </Card>
@@ -136,44 +160,3 @@ function mapStateToProps( dataReducer, ownProps ){
 }
 
 export default connect(mapStateToProps,{getProductDataDetail})(ItemProductView);
-{/*
-class ProgramTable extends Component{
-    render({}, {}){
-        return(
-            <div className={style.program_table}>
-                <table>
-                    <tr>
-                        <th>Programmes ##</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Subject</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Math</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Curriculum</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>Level A</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                    <div className={style.divider_table}/>
-                    <tr>
-                        <td>
-                            <LayoutGrid.Inner>
-                                <LayoutGrid.Cell cols='3'><div className={style.row_title}>Level</div></LayoutGrid.Cell>
-                                <LayoutGrid.Cell cols='9'><div>JC 2</div></LayoutGrid.Cell>
-                            </LayoutGrid.Inner>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        )
-    }
-}*/
-}
