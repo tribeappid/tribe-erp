@@ -25,14 +25,28 @@ class ItemProductView extends Component{
     }
 
     loadingBranchList(){
-        const data = _.map(this.props.dataReducer.productDataDetail[0].branches, branches=>{
-            return(
-                <div className={style.branchData}>
-                    {branches.name}
-                </div>
-            )
-        })
-        return data;
+        console.log(this.props.dataReducer.productDataDetail[0]);
+        if(!this.props.dataReducer.productDataDetail[0].all_branch){
+            const data = _.map(this.props.dataReducer.productDataDetail[0].branches, branches=>{
+                return(
+                    <div className={style.branchData}>
+                        {branches.name}
+                    </div>
+                )
+            })
+            return data;
+        }
+        else{
+            console.log(this.props.dataReducer.branchList);
+            const data = _.map(this.props.dataReducer.branchList, branchList=>{
+                return(
+                    <div className={style.branchData}>
+                        {branchList.name}
+                    </div>
+                )
+            })
+            return data;
+        }
     }
 
     goToEditProduct=()=>{

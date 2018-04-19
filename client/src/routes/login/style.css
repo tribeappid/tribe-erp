@@ -8,3 +8,7 @@
     visibility: hidden;
     height: 0px;
 }
+
+body{
+    background: #1abc9c;
+}

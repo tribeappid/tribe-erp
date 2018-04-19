@@ -130,7 +130,7 @@ class Header extends Component {
 
 	render({dataReducer}, {}) {
 		return (
-			<div>
+			<div id="headerToolbar">
 				<Toolbar>
 					<Toolbar.Row>
 						<Toolbar.Section align-start>

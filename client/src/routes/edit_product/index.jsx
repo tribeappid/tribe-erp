@@ -3,7 +3,7 @@ import style from './style';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import _ from 'lodash';
-import { getProductDataDetail } from '../../actions';
+import { getProductDataDetail, updateProduct } from '../../actions';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import Card from 'preact-material-components/Card';
 import Icon from 'preact-material-components/Icon';
@@ -17,6 +17,7 @@ class EditProduct extends Component{
     }
     state={
         user:{
+            ProductId: '',
             Name: '',
             Status: 'Available',
             Code: '',
@@ -28,12 +29,20 @@ class EditProduct extends Component{
             AllBranch: "0",
             BranchIds: []
         },
-        branchData:[],
+        branchDataChecked: [],
         defaultSelected: 0,
         successEdit: false,
         failEdit: false,
         isDataLoaded: false,
         branchOptionsLoaded: false
+    }
+
+    loading(){
+        document.getElementById("loadingScreen").hidden = false;
+    }
+
+    hideLoading(){
+        document.getElementById("loadingScreen").hidden = true;
     }
 
     handleInput(term){
@@ -60,27 +69,30 @@ class EditProduct extends Component{
 
     handleSubmit(){
         event.preventDefault();
-        if(this.state.branchData.length == this.props.dataReducer.branchList.length){
+        if(this.state.branchDataChecked.length == this.props.dataReducer.branchList.length){
             const oldData = this.state.user;
             this.setState({user:{
                 ...oldData,
                 AllBranch: "1",
-                BranchIds: this.state.branchData
+                BranchIds: this.state.branchDataChecked,
+                ProductId: this.props.ownProps.id
             }});
             if(this.state.user.Name && this.state.user.Code && this.state.user.Description && this.state.user.Status){
                 this.loading();
-                this.props.addProduct(this.state.user,this.successCallBack,this.failCallBack);
+                this.props.updateProduct(this.state.user,this.successCallBack,this.failCallBack);
             }
         }
         else{
             const oldData= this.state.user;
             this.setState({user:{
                 ...oldData,
-                BranchIds: this.state.branchData
+                AllBranch: "0",
+                BranchIds: this.state.branchDataChecked,
+                ProductId: this.props.ownProps.id
             }});
             if(this.state.user.Name && this.state.user.Code && this.state.user.Description && this.state.user.Status){
                 this.loading();
-                this.props.addProduct(this.state.user,this.successCallBack,this.failCallBack);
+                this.props.updateProduct(this.state.user,this.successCallBack,this.failCallBack);
             }
         }
     }
@@ -95,36 +107,46 @@ class EditProduct extends Component{
 
     allData(){
         if(this.props.dataReducer.branchList.length!=0){
-            if(this.state.branchOptionsLoaded){
-                console.log(this.props.dataReducer);
-                console.log("sampai sini");
-            }
+            var data = [];
+            _.map(this.props.dataReducer.branchList,branchList=>{
+                document.getElementById(branchList._id).checked = true;
+                data.push(branchList._id);
+            })
+            return data;
         }
     }
 
     specificData(){
-        console.log("masuk sini");
+        var data= [];
+        _.map(this.props.dataReducer.productDataDetail[0].branches,branches=>{
+            document.getElementById(branches._id).checked = true;
+            data.push(branches._id);
+        })
+        return data;
     }
 
     settingData(){
         if(!this.state.isDataLoaded){
-            if(this.props.dataReducer.productDataDetail.length!=0){
-                const data = this.props.dataReducer.productDataDetail[0];
-                this.setState({
-                    isDataLoaded: true,
-                    user:{
-                        Name: data.name,
-                        Status: data.status,
-                        Code: data.code,
-                        Width: data.width,
-                        Length: data.length,
-                        Height: data.height,
-                        Weight: data.weight,
-                        Description: data.description,
-                        AllBranch: (data.all_branch ? "1" : "0"),
-                    },
-                    branchData: (data.all_branch ? this.allData() : this.specificData())
-                })
+            if(this.state.branchOptionsLoaded){
+                if(this.props.dataReducer.productDataDetail.length!=0){
+                    console.log(this.props.dataReducer.productDataDetail);
+                    var data = this.props.dataReducer.productDataDetail[0];
+                    this.setState({
+                        isDataLoaded: true,
+                        user:{
+                            Name: data.name,
+                            Status: data.status,
+                            Code: data.code,
+                            Width: data.width,
+                            Length: data.length,
+                            Height: data.height,
+                            Weight: data.weight,
+                            Description: data.description,
+                            AllBranch: (data.all_branch ? "1" : "0"),
+                        },
+                        branchDataChecked: (data.all_branch ? this.allData() : this.specificData())
+                    })
+                }
             }
         }
     }
@@ -139,6 +161,9 @@ class EditProduct extends Component{
                     </div>
                 )
             });
+            if(!this.state.branchOptionsLoaded){
+                this.setState({branchOptionsLoaded: true});
+            }
             return data;
         }
         else{
@@ -151,25 +176,26 @@ class EditProduct extends Component{
     }
 
     checkedData(){
-        if(this.state.branchData.length!=0){
+        console.log(this.state);
+        if(this.state.branchDataChecked.length != 0){
             if(event.target.checked){
-                var data = this.state.branchData;
+                var data = this.state.branchDataChecked;
                 data.push(event.target.__preactattr_.id);
-                this.setState({branchData: data});
+                this.setState({branchDataChecked: data});
             }
             else{
-                var data = this.state.branchData;
+                var data = this.state.branchDataChecked;
                 var index = data.indexOf(event.target.__preactattr_.id);
                 if(index!==-1){
                     data.splice(index,1);
                 }
-                this.setState({branchData: data});
+                this.setState({branchDataChecked: data});
             }
         }
         else{
-            var data=this.state.branchData;
+            var data=this.state.branchDataChecked;
             data.push(event.target.__preactattr_.id);
-            this.setState({branchData: data});
+            this.setState({branchDataChecked: data});
         }
     }
 
@@ -177,9 +203,18 @@ class EditProduct extends Component{
         route(`/manager/product/view/${this.props.ownProps.id}`);
     }
 
-    render({dataReducer},{user}){
-        console.log(dataReducer);
-        //this.settingData();
+    checkingUpdateResult(){
+        if(this.state.successEdit){
+            alert("Registration Success");
+            route(`/manager/product/view/${this.props.ownProps.id}`);
+            this.hideLoading();
+        }
+    }
+
+    render({dataReducer},{user,branchDataChecked}){
+        console.log(user);
+        this.settingData();
+        this.checkingUpdateResult();
         return(
             <div>
                 <LayoutGrid>
@@ -247,4 +282,4 @@ function mapStateToProps(dataReducer,ownProps){
     return { dataReducer, ownProps};
 }
 
-export default connect(mapStateToProps,{getProductDataDetail})(EditProduct);
+export default connect(mapStateToProps,{getProductDataDetail, updateProduct})(EditProduct);

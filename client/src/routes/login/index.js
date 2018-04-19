@@ -31,6 +31,7 @@ class Login extends Component {
 				[target]: term.value
 			}
 		});
+		console.log(this.state.user);
 	}
 
 	validateEmail(email){
@@ -53,15 +54,55 @@ class Login extends Component {
 	}
 
 	render({ finance },{ user, submitted }){
+		document.getElementById("headerToolbar").hidden = true;
 		return (
 			<div>
-				<LayoutGrid align="center">
+				<LayoutGrid>
 					<LayoutGrid.Inner>
-						<LayoutGrid.Cell cols="4" />
-						<LayoutGrid.Cell cols="3">
+						<LayoutGrid.Cell desktopCols="3" tabletCols="2" phoneCols="4"/>
+						<LayoutGrid.Cell desktopCols="6" tabletCols="4" phoneCols="4">
+							<div align="center">Lambang</div>
+							<div align="center">Hai Hai</div>
 							<Elevation z={2}>
 								<Card>
-									<Card.Primary className="mdc-theme--secondary-bg">
+									<a align="center">Login</a>
+									<div>
+										<label>Email</label><br/>
+										<input type="text" placeholder="Email"/>
+									</div>
+									<div>
+										<label>Password</label><br/>
+										<input type="text" placeholder="Password"/>
+									</div>
+									<div>
+										<div style={`float: left;`}>
+											<input id="checkbox" type="checkbox"/>
+											<label for="checkbox">checkbox</label>
+										</div>
+										<div style={`float: right`}>
+											<a>Forget Password</a>
+										</div>
+									</div>
+									<button>Sign In</button>
+								</Card>
+							</Elevation>
+						</LayoutGrid.Cell>
+						<LayoutGrid.Cell desktopcols="3" tabletCols="2" phoneCols="4"/>
+					</LayoutGrid.Inner>
+				</LayoutGrid>
+			</div>
+		);
+	}
+}
+
+function mapStateToProps(finance){
+	return { finance };
+}
+
+export default connect( mapStateToProps, { login })(Login);
+
+{
+	/* <Card.Primary className="mdc-theme--secondary-bg">
 										<Card.Title className="mdc-typography--headline mdc-theme--text-primary-on-secondary">Login</Card.Title>
 									</Card.Primary>
 									<Card.Media className="mdc-typography--title">
@@ -81,19 +122,5 @@ class Login extends Component {
 											</div>
 										</form>
 									</Card.Media>
-								</Card>
-							</Elevation>
-						</LayoutGrid.Cell>
-						<LayoutGrid.Cell cols="4" />
-					</LayoutGrid.Inner>
-				</LayoutGrid>
-			</div>
-		);
-	}
+	*/
 }
-
-function mapStateToProps(finance){
-	return { finance };
-}
-
-export default connect( mapStateToProps, { login })(Login);
