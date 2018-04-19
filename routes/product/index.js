@@ -75,7 +75,7 @@ router.post('/update', function(req, res, callback){
             if (req.body.ProductId)
             {
                 var updateProductReq = _.clone(req);
-                productController.updateBranch(updateProductReq, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
+                productController.updateProduct(updateProductReq, res, true, function(resGetEntityErr, resGetEntity, resGetEntityRowsReturned, resGetEntityTotalRows){
                     if (!resGetEntityErr){
                         apiHelper.apiRes(req, res, null, null, resGetEntity, null, null, null);
                     }else{
