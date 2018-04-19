@@ -260,8 +260,8 @@ var updateProduct = exports.updateProduct = function(req, res, override, callbac
                         apiHelper.updateRes(req, res, err, null, null, callback);
                     }else{
                         var numberAffected = null;
-                        if (updateProductCallback) numberAffected = updateProductCallback.nModified;
-                        apiHelper.updateRes(req, res, null, updateProductCallback, numberAffected, callback);
+                        if (updateProductObj) numberAffected = updateProductObj.nModified;
+                        apiHelper.updateRes(req, res, null, updateProductObj, numberAffected, callback);
                     }
             });
             } else {
