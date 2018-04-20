@@ -12,3 +12,64 @@
 body{
     background: #1abc9c;
 }
+
+.title{
+    font-size: 30px;
+    font-weight: 800;
+    margin: 20px 0px 20px 0px;
+}
+
+.input_group input{
+    width: 90%;
+    padding: 10px;
+    margin: 4px 5% 20px 5%;
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    font-size: 14px;
+}
+
+.input_group label{
+    padding-left: 4%;
+    font-size: 18px;
+    font-weight: 700;
+    color: gray;
+}
+
+.checkbox_group{
+    padding-left: 5%;
+    margin-bottom: 20px;
+}
+
+.checkbox_group input{
+    width: 15px;
+    height: 15px;
+}
+
+.link_word{
+    padding-right: 5%;
+    font-weight: bold;
+}
+
+.link_word:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sign_in_btn{
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #999999;
+    width: 90%;
+    background: #11b919;
+    padding: 7px 5%;
+    margin: 0px 5% 20px 5%;
+}
+
+.name{
+    margin: 30px 0px;
+    font-size: 40px;
+    font-weight: 1000;
+    color: #108069
+}

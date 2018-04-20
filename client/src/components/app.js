@@ -56,7 +56,6 @@ export default class App extends Component {
 					<Accounting path="/accounting"/>
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
-					<Login path="/purchase/management" />
 					<StaffManage path="/staff/management"/>
 					<StaffManageView path='/staff/management/view/profile/:id'/>
 					<AddStaff path='/staff/management/add'/>

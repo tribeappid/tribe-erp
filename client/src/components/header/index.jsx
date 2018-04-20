@@ -102,7 +102,6 @@ class Header extends Component {
 	goToStaffManage = this.linkTo('/staff/management');
 	goToProductManager = this.linkTo('/manager/product');
 	goToSalesManage = this.linkTo('/sales/management');
-	goToPurchaseManage = this.linkTo('/purchase/management');
 	goToAccounting = this.linkTo('/accounting');
 	goToBranches = this.linkTo('/branches');
 	goToProductList = this.linkTo('/manager/product/list');
@@ -183,10 +182,6 @@ class Header extends Component {
 									Go To Product List
 								</div>
 							</div>
-							<List.LinkItem onClick={this.goToPurchaseManage}>
-								<Icon>edit</Icon>
-								Purchase Management
-							</List.LinkItem>
 							<List.LinkItem onClick={this.goToSalesManage}>
 								<Icon>edit</Icon>
 								Sales Management

@@ -31,7 +31,6 @@ class Login extends Component {
 				[target]: term.value
 			}
 		});
-		console.log(this.state.user);
 	}
 
 	validateEmail(email){
@@ -61,29 +60,31 @@ class Login extends Component {
 					<LayoutGrid.Inner>
 						<LayoutGrid.Cell desktopCols="3" tabletCols="2" phoneCols="4"/>
 						<LayoutGrid.Cell desktopCols="6" tabletCols="4" phoneCols="4">
-							<div align="center">Lambang</div>
-							<div align="center">Hai Hai</div>
+							<div align="center">
+								<img style={`width: 110px;height:140px;`} src="http://localhost:3000/images/tribe_logo.png"/>
+							</div>
+							<div className={style.name} align="center">TRIBE APP</div>
 							<Elevation z={2}>
-								<Card>
-									<a align="center">Login</a>
-									<div>
+								<Card style={`border-radius: 10px;`}>
+									<a className={style.title} align="center">LOGIN</a>
+									<div className={style.input_group}>
 										<label>Email</label><br/>
-										<input type="text" placeholder="Email"/>
+										<input name="AuthenticationString" value={user.AuthenticationString} onChange={ event => this.handleInput(event.target)} type="text" placeholder="Email"/>
 									</div>
-									<div>
+									<div className={style.input_group}>
 										<label>Password</label><br/>
-										<input type="text" placeholder="Password"/>
+										<input name="Password"value={user.Password} onChange={ event => this.handleInput(event.target)} type="text" placeholder="Password"/>
 									</div>
 									<div>
-										<div style={`float: left;`}>
+										<div className={style.checkbox_group} style={`float: left;`}>
 											<input id="checkbox" type="checkbox"/>
-											<label for="checkbox">checkbox</label>
+											<label for="checkbox">Remember Me</label>
 										</div>
-										<div style={`float: right`}>
+										<div className={style.link_word} style={`float: right`}>
 											<a>Forget Password</a>
 										</div>
 									</div>
-									<button>Sign In</button>
+									<button className={style.sign_in_btn}>SIGN IN</button>
 								</Card>
 							</Elevation>
 						</LayoutGrid.Cell>
