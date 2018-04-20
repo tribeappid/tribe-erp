@@ -56,12 +56,12 @@ class Login extends Component {
 		document.getElementById("headerToolbar").hidden = true;
 		return (
 			<div>
-				<LayoutGrid>
+				<LayoutGrid style={`width: 100%;height: 100%;padding:0px!important;background: #1abc9c;`}>
 					<LayoutGrid.Inner>
 						<LayoutGrid.Cell desktopCols="3" tabletCols="2" phoneCols="4"/>
 						<LayoutGrid.Cell desktopCols="6" tabletCols="4" phoneCols="4">
 							<div align="center">
-								<img style={`width: 110px;height:140px;`} src="http://localhost:3000/images/tribe_logo.png"/>
+								<img style={`width: 110px;height:150px;margin-top:20px;`} src="http://localhost:3000/images/tribe_logo.png"/>
 							</div>
 							<div className={style.name} align="center">TRIBE APP</div>
 							<Elevation z={2}>

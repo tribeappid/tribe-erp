@@ -1,6 +1,6 @@
 {
-  "name": "client",
-  "short_name": "client",
+  "name": "Tribe Erp",
+  "short_name": "Tribe Erp",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
