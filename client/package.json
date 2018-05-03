@@ -10,7 +10,11 @@
     "dev": "preact watch",
     "lint": "eslint src"
   },
-  "proxy": "http://localhost:3000/",
+  "proxy": {
+    "/api/*": {
+	"target": "http://localhost:3000/"
+    }
+  },
   "eslintConfig": {
     "extends": "eslint-config-synacor",
     "rules": {
