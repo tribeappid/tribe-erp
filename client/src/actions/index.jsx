@@ -33,8 +33,19 @@ export function getFinances(){
     };
 }
 
-export function login(user){
-    const req = axios.post(`${ROOT_URL}accounts/login`, user);
+export function login(user,successCallback,failCallback){
+    const req = axios.post(`${ROOT_URL}accounts/login`, user).then(response =>{
+        if(response.data.Error){
+            failCallback()
+        }
+        else{
+            successCallback()
+        }
+        console.log(response.data.Error)
+        return response
+    }).catch(error =>{
+        console.log(error)
+    });
 
     return{
         type: LOGIN,

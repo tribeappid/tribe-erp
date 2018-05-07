@@ -16,14 +16,9 @@ import 'preact-material-components/Menu/style.css';
 import 'preact-material-components/Icon/style.css';
 import style from './style';
 import { connect } from 'preact-redux';
-import { getBranchList } from '../../actions';
 import _ from 'lodash';
 
 class Header extends Component {
-	componentDidMount(){
-		this.props.getBranchList();
-	}
-
 	state={
 		dropdown:{
 			accounting:{
@@ -98,7 +93,6 @@ class Header extends Component {
 		this.closeProfileDetail();
 	};
 
-	goToDashboard = this.linkTo('/');
 	goToStaffManage = this.linkTo('/staff/management');
 	goToProductManager = this.linkTo('/manager/product');
 	goToSalesManage = this.linkTo('/sales/management');
@@ -166,10 +160,6 @@ class Header extends Component {
 								<Icon>edit</Icon>
 								Branches
 							</List.LinkItem>
-							<List.LinkItem onClick={this.goToDashboard}>
-								<Icon>home</Icon>
-								Dashboard
-							</List.LinkItem>
 							<List.LinkItem name="product" onClick={this.dropDownToggle.bind(this)}>
 								<Icon>account_circle</Icon>
 								Product Manager
@@ -213,4 +203,4 @@ function mapStateToProps(dataReducer){
 	return {dataReducer};
 }
 
-export default connect(mapStateToProps,{getBranchList})(Header);
+export default connect(mapStateToProps,"")(Header);
