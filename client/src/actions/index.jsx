@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { api_server } from '../../config';
 
 export const FINANCE = 'finances';
 export const LOGIN = 'login';
@@ -20,7 +21,7 @@ export const ADD_PRODUCT = 'add_product';
 export const DELETE_PRODUCT = 'delete_product';
 export const UPDATE_PRODUCT = 'update_product';
 
-const ROOT_URL = '/api/';
+const ROOT_URL = api_server;
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
 
 export function getFinances(){

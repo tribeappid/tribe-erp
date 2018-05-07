@@ -8,6 +8,7 @@ import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Icon/style.css';
 import { connect } from 'preact-redux';
 import { getAccountData, getPicture } from '../../actions';
+import { api_server } from '../../../config';
 import _ from 'lodash';
 import style from './style.css'
 
@@ -97,7 +98,7 @@ class StaffManageView extends Component{
     }
 
     render({dataReducer, ownProps}, {profileInfo}){
-        const ROOT_URL = 'http://localhost:3000/';
+        const ROOT_URL = api_server;
         this.dataChecking();
         return(
             <div>

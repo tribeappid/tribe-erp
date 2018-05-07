@@ -7,6 +7,7 @@ import Card from 'preact-material-components/Card';
 import 'preact-material-components/Card/style';
 import 'preact-material-components/LayoutGrid/style';
 import { route } from 'preact-router';
+import { api_server } from '../../../config';
 
 class EditStaff extends Component{
     componentDidMount(){
@@ -212,7 +213,7 @@ class EditStaff extends Component{
     render({dataReducer,ownProps},{user}){
         this.loadProfileData();
         this.checkingResponse();
-        const ROOT_URL = 'http://localhost:3000/';
+        const ROOT_URL = api_server;
         return(
             <div>
                 <div>

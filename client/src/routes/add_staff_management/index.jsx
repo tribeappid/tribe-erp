@@ -9,6 +9,7 @@ import 'preact-material-components/Icon/style';
 import style from './style.css';
 import { connect } from 'preact-redux';
 import { register, uploadPicture } from '../../actions';
+import { api_server } from '../../../config';
 
 class AddStaff extends Component{
     state={
@@ -189,7 +190,7 @@ class AddStaff extends Component{
     }
 
     render({dataReducer},{user, submitted, responseCheck, background}){
-        const ROOT_URL = 'http://localhost:3000/';
+        const ROOT_URL = api_server;
         this.checkResponsed();
         this.uploadPictureResponse();
         return(
