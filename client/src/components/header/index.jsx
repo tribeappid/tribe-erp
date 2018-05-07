@@ -139,7 +139,7 @@ class Header extends Component {
 							</List.LinkItem>
 							<List.LinkItem className={style.mainMenu} name="product" onClick={this.dropDownToggle.bind(this)}>
 								<Icon>account_circle</Icon>
-								Product Manager
+								Product Management
 							</List.LinkItem>
 							<div className={this.state.dropdown.product.clicked ? '' : style.hided}>
 								<div className={this.state.dropdown.product.clicked ? style.subMenuItems : ''} onClick={this.goToProductList}>
