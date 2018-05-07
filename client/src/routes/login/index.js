@@ -69,7 +69,6 @@ class Login extends Component {
 
 	loginResult(){
 		if(this.state.loginSuccess){
-			alert("Login Success");
 			document.getElementById("headerToolbar").hidden = false;
 			document.getElementById("mainBackground").background = `#ffffff`;
 			route('/staff/management');

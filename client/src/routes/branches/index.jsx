@@ -118,7 +118,7 @@ class Branches extends Component{
                     <LayoutGrid.Inner>
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='10'>
-                            <div className={style.search_bar}>Search : <input value={this.state.searchTerm} onChange={event => this.handleInput(event.target)} type='text'/></div>
+                            <div className={style.search_bar}><input placeholder="Search" value={this.state.searchTerm} onChange={ event => this.handleInput(event.target) } type='text'/></div>
                         </LayoutGrid.Cell>
                         <LayoutGrid.Cell cols='1'/>
                         <LayoutGrid.Cell cols='1'/>

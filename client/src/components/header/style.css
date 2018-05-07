@@ -66,3 +66,7 @@
 .mainMenu i{
     padding-right: 10px;
 }
+
+.mainMenu{
+    cursor: pointer;
+}

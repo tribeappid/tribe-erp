@@ -42,10 +42,6 @@ class Header extends Component {
 		this.drawer.MDComponent.open = false;
 	}
 
-	closeProfileDetail(){
-		this.menu.MDComponent.open = false;
-	}
-
 	openDetail(){
 		this.setState({
 			btn_open: ( this.state.btn_open ? false : true )
@@ -63,7 +59,6 @@ class Header extends Component {
 
 	dropDownToggle(){
 		const existData = this.state.temp;
-		this.menu.MDComponent.open = false;
 		this.setState({
 			dropdown:{
 				...existData,
@@ -91,9 +86,9 @@ class Header extends Component {
 	linkTo = path => () => {
 		route(path);
 		this.closeDrawer();
-		this.closeProfileDetail();
 	};
 
+	goToLogin = this.linkTo('/');
 	goToStaffManage = this.linkTo('/staff/management');
 	goToProductManager = this.linkTo('/manager/product');
 	goToSalesManage = this.linkTo('/sales/management');
@@ -133,25 +128,13 @@ class Header extends Component {
 							</Toolbar.Icon>
 							<Toolbar.Title>Tribe-Erp</Toolbar.Title>
 						</Toolbar.Section>
-						<Toolbar.Section align-end onClick={this.openSettings}>
-							<Toolbar.Icon>settings</Toolbar.Icon>
-						</Toolbar.Section>
 					</Toolbar.Row>
 				</Toolbar>
 				<Drawer.TemporaryDrawer className={style.navbar_drawer} ref={this.drawerRef}>
-					<Menu.Anchor>
-         				<div className={style.profile_toggle} onClick={this.openProfileDetail}>
-						 	<div><Icon>home</Icon></div>
-							<div><a>Click for menu</a></div>
-          				</div>
-          				<Menu className={style.profile_detail} ref={this.menuRef}>
-            				Detail
-          				</Menu>
-        			</Menu.Anchor>
 					<Drawer.TemporaryDrawerContent className={style.menu_list}>
 						<List>
 							<List.LinkItem className={style.mainMenu} onClick={this.goToBranches}>
-								<Icon>edit</Icon>
+								<Icon>home</Icon>
 								Branches
 							</List.LinkItem>
 							<List.LinkItem className={style.mainMenu} name="product" onClick={this.dropDownToggle.bind(this)}>
@@ -159,33 +142,22 @@ class Header extends Component {
 								Product Manager
 							</List.LinkItem>
 							<div className={this.state.dropdown.product.clicked ? '' : style.hided}>
-								<div className={this.state.dropdown.product.clicked ? style.subMenuItems : ''} onClick={this.goToProductManager}>
-									<Icon>home</Icon>
-									<div className={style.subMenuItem}>Go To Product View</div>
-								</div>
 								<div className={this.state.dropdown.product.clicked ? style.subMenuItems : ''} onClick={this.goToProductList}>
 									<Icon>home</Icon>
-									<div className={style.subMenuItem}>Go To Product List</div>
+									<div className={style.subMenuItem}>Product List</div>
 								</div>
 							</div>
 							<List.LinkItem className={style.mainMenu} onClick={this.goToStaffManage}>
 								<Icon>list</Icon>
 								Staff Management
 							</List.LinkItem>
+							<List.LinkItem className={style.mainMenu} onClick={this.goToLogin}>
+								<Icon>exit_to_app</Icon>
+								Logout
+							</List.LinkItem>
 						</List>
 					</Drawer.TemporaryDrawerContent>
 				</Drawer.TemporaryDrawer>
-				<Dialog ref={this.dialogRef}>
-					<Dialog.Header>Settings</Dialog.Header>
-					<Dialog.Body>
-						<div>
-							Enable dark theme <Switch onClick={this.toggleDarkTheme} />
-						</div>
-					</Dialog.Body>
-					<Dialog.Footer>
-						<Dialog.FooterButton accept>okay</Dialog.FooterButton>
-					</Dialog.Footer>
-				</Dialog>
 			</div>
 		);
 	}
