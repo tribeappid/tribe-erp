@@ -41,7 +41,7 @@ export function login(user,successCallback,failCallback){
         else{
             successCallback()
         }
-        console.log(response.data.Error)
+        console.log(response.data)
         return response
     }).catch(error =>{
         console.log(error)

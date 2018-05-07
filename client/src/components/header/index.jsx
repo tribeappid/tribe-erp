@@ -53,7 +53,8 @@ class Header extends Component {
 	}
 
 	openProfileDetail = () => {
-		this.menu.MDComponent.open = true;                         
+		console.log(this.menu.MDComponent.open);
+		this.menu.MDComponent.open = !(this.menu.MDComponent.open);
 		const closeDropDown = this.state.temp;
 		this.setState({
 			dropdown: closeDropDown
@@ -149,34 +150,25 @@ class Header extends Component {
         			</Menu.Anchor>
 					<Drawer.TemporaryDrawerContent className={style.menu_list}>
 						<List>
-							<List.LinkItem name="accounting" onClick={this.dropDownToggle.bind(this)}>
-								<Icon>edit</Icon>
-								Accounting
-							</List.LinkItem>
-							<div className={this.state.dropdown.accounting.clicked ? '' : style.hided}>
-								Contoh<br/><br/><br/>
-							</div>
-							<List.LinkItem onClick={this.goToBranches}>
+							<List.LinkItem className={style.mainMenu} onClick={this.goToBranches}>
 								<Icon>edit</Icon>
 								Branches
 							</List.LinkItem>
-							<List.LinkItem name="product" onClick={this.dropDownToggle.bind(this)}>
+							<List.LinkItem className={style.mainMenu} name="product" onClick={this.dropDownToggle.bind(this)}>
 								<Icon>account_circle</Icon>
 								Product Manager
 							</List.LinkItem>
 							<div className={this.state.dropdown.product.clicked ? '' : style.hided}>
-								<div onClick={this.goToProductManager}>
-									Go To Product View
+								<div className={this.state.dropdown.product.clicked ? style.subMenuItems : ''} onClick={this.goToProductManager}>
+									<Icon>home</Icon>
+									<div className={style.subMenuItem}>Go To Product View</div>
 								</div>
-								<div onClick={this.goToProductList}>
-									Go To Product List
+								<div className={this.state.dropdown.product.clicked ? style.subMenuItems : ''} onClick={this.goToProductList}>
+									<Icon>home</Icon>
+									<div className={style.subMenuItem}>Go To Product List</div>
 								</div>
 							</div>
-							<List.LinkItem onClick={this.goToSalesManage}>
-								<Icon>edit</Icon>
-								Sales Management
-							</List.LinkItem>
-							<List.LinkItem onClick={this.goToStaffManage}>
+							<List.LinkItem className={style.mainMenu} onClick={this.goToStaffManage}>
 								<Icon>list</Icon>
 								Staff Management
 							</List.LinkItem>

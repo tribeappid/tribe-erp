@@ -67,6 +67,8 @@ class Login extends Component {
 	loginResult(){
 		if(this.state.loginSuccess){
 			alert("Login Success");
+			document.getElementById("headerToolbar").hidden = false;
+			document.getElementById("mainBackground").background = `#ffffff`;
 			route('/staff/management');
 			document.getElementById("loadingScreen").hidden = true;
 		}
@@ -82,7 +84,7 @@ class Login extends Component {
 		this.loginResult();
 		return (
 			<div>
-				<LayoutGrid style={`width: 100%;height: 100%;padding:0px!important;background: #1abc9c;`}>
+				<LayoutGrid id="mainBackground" style={`width: 100%;height: 100%;padding:0px!important;background: #1abc9c;`}>
 					<LayoutGrid.Inner>
 						<LayoutGrid.Cell desktopCols="3" tabletCols="2" phoneCols="4"/>
 						<LayoutGrid.Cell desktopCols="6" tabletCols="4" phoneCols="4">

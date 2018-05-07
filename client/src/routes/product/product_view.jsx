@@ -17,18 +17,16 @@ export default class ProductView extends Component{
         return(
             <LayoutGrid.Cell className={style.kotak} desktopCols="3" tabletCols="4" phoneCols="4">
                 <Card>
-                    <Card.Primary className={style.zero}>
-                        <Card.MediaItem className={style.panjang}><img  src={imgUrl} style={`width: 100%;height:100%;`}/></Card.MediaItem>
-                        <Card.Title large className={style.title}>{productName}</Card.Title>
-                        <Card.Media className={style.sub}>
-                            <TextField className={style.tempat} textarea value={description}>
-                                
-                            </TextField>
-                        </Card.Media>
-                    </Card.Primary>
-                    <Card.Actions>
-                        <Card.Action>MORE</Card.Action>
-                    </Card.Actions>
+                    <img style={`height:150px;`} src={imgUrl}/>
+                    <div style={`padding: 10px;`}>
+                        <div className={style.title}><a>Judul</a></div>
+                        <div className={style.sub}>
+                            <a className={style.tempat}>{description}</a>
+                        </div>
+                        <div style={`margin: 10px 0px;`}>
+                            <button className={style.moreButton}>MORE</button>
+                        </div>
+                    </div>
                 </Card>
             </LayoutGrid.Cell>
         )

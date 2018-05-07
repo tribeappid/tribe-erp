@@ -7,23 +7,34 @@
     padding: 0px;
 }
 
-.title{
-    margin: 10px 14px 0px 14px;
-    padding: 0px !important;
+.title a{
+    margin-left:15px;
+    padding: 10px !important;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 10px;
     color: lightskyblue;
+    font-size: 20px;
 }
 
 .sub{
+    margin: 10px 0px;
     color: grey;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.tempat textarea{
-    border: 0px !important;
+.tempat{
+    margin: 10px 0px !important;
+}
+
+.moreButton{
+    float: right;
+    padding: 5px 8px;
+    background: greenyellow;
+    border: 1px solid grey;
+    border-radius: 2px;
+    font-weight: bold;
 }
