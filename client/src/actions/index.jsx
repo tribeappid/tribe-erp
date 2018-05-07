@@ -20,7 +20,7 @@ export const ADD_PRODUCT = 'add_product';
 export const DELETE_PRODUCT = 'delete_product';
 export const UPDATE_PRODUCT = 'update_product';
 
-const ROOT_URL = 'http://localhost:3000/';
+const ROOT_URL = '/api/';
 const ENTERPRISE_ID = '43GSMTI3-5KBX0YYP-EQNZ4DSZ';
 
 export function getFinances(){
