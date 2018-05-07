@@ -57,9 +57,12 @@ class Login extends Component {
 		event.preventDefault();
 		this.setState({submitted: true});
 		if(this.state.user.AuthenticationString && this.state.user.Password){
-			if(this.validateEmail(this.state.user.AuthenticationString) && this.state.user.Password){
+			if(this.validateEmail(this.state.user.AuthenticationString)){
 				this.props.login(this.state.user,this.successCallback.bind(this),this.failCallback.bind(this));
 				document.getElementById("loadingScreen").hidden = false;
+			}
+			else{
+				alert("Wrong Email Format");
 			}
 		}
 	}

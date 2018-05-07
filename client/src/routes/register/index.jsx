@@ -64,6 +64,9 @@ class Register extends Component{
 			if(this.validateEmail(this.state.user.Username)){
 				this.props.register(this.state.user);
 			}
+			else{
+				alert("Wrong Email Format");
+			}
 		}
 	}
 
